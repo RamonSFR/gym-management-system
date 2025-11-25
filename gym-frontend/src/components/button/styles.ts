@@ -12,6 +12,11 @@ export const Btn = styled.button`
     outline: none;
     border-radius: 6px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color .15s ease;
 
     &:hover {
         background-color: ${c.darkPurple};

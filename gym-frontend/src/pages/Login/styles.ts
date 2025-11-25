@@ -5,6 +5,7 @@ export const Title = styled.h1`
   font-size: 4rem;
   color: ${c.lightPurple};
   margin-bottom: 2rem;
+  text-shadow: -4px 4px 6px ${c.darkPurple};
 `
 
 export const Container = styled.div`
@@ -23,10 +24,12 @@ export const Form = styled.form`
   gap: 1rem;
   padding: 16px;
   background-color: ${c.tertiary};
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
 
-  h3 {
-    text-align: center;
-    color: ${c.darkPurple};
+  .login-icon {
+    font-size: 3rem;
+    color: ${c.lightPurple};
+    align-self: center;
   }
 
   .input-group {
@@ -41,20 +44,24 @@ export const Form = styled.form`
     }
 
     input {
+      border-radius: 4px;
       width: 100%;
       padding: 8px;
       outline: none;
+      border: 1px solid ${c.darkPurple};
     }
   }
 
   p {
     text-align: center;
-    font-size: .75rem;
+    font-size: 0.75rem;
+    color: ${c.primary};
+    font-weight: 300;
 
     span {
-        color: ${c.lightPurple};
-        font-weight: bold;
-        cursor: pointer;
+      color: ${c.lightPurple};
+      font-weight: bold;
+      cursor: pointer;
     }
   }
 `
