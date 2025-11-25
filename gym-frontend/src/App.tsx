@@ -1,8 +1,12 @@
+import Login from "./pages/Login"
+import GlobalStyles from "./pages/Styles/GlobalStyles"
+
 function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
+      <GlobalStyles />
+      <Login />
     </>
   )
 }
