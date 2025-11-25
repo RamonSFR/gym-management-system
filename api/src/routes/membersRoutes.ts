@@ -4,7 +4,8 @@ import { validateBody, validateParams } from '../middlewares/validation'
 import {
   createMemberSchema,
   idParamSchema,
-  updateMemberSchema
+  updateMemberSchema,
+  loginSchema
 } from '../schemas/validation'
 
 const membersRoutes = Router()
@@ -67,23 +68,7 @@ membersRoutes.get(
  *     summary: Create a new member
  *     tags: [Members]
  *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required: [name, membership, cpf]
- *             properties:
- *               name:
- *                 type: string
- *                 example: "Jane Member"
- *               membership:
- *                 type: string
- *                 enum: [silver, platinum, gold]
- *                 example: "gold"
- *               cpf:
- *                 type: string
- *                 example: "98765432100"
+ *       $ref: '#/components/requestBodies/MemberInput'
  *     responses:
  *       201:
  *         description: Member created successfully
@@ -102,6 +87,45 @@ membersRoutes.post(
   '/members',
   validateBody(createMemberSchema),
   controller.addNewMember
+)
+
+/**
+ * @swagger
+ * /members/login:
+ *   post:
+ *     summary: Member login
+ *     tags: [Members]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, password]
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: "member@example.com"
+ *               password:
+ *                 type: string
+ *                 example: "yourpassword"
+ *     responses:
+ *       200:
+ *         description: Authenticated member object (password omitted)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Member'
+ *       401:
+ *         description: Invalid credentials
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
+membersRoutes.post(
+  '/members/login',
+  validateBody(loginSchema),
+  controller.getMemberByLogin
 )
 
 /**
@@ -145,22 +169,7 @@ membersRoutes.delete(
  *           type: integer
  *         description: Member ID
  *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 example: "Jane Updated Member"
- *               membership:
- *                 type: string
- *                 enum: [silver, platinum, gold]
- *                 example: "platinum"
- *               cpf:
- *                 type: string
- *                 example: "98765432101"
+ *       $ref: '#/components/schemas/MemberUpdate'
  *     responses:
  *       200:
  *         description: Member updated successfully

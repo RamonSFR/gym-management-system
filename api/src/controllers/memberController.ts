@@ -100,3 +100,17 @@ export const updateMember = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error.message })
   }
 }
+
+export const getMemberByLogin = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body
+    const member = await service.getByLogin(email, password)
+    if (!member) {
+      return res.status(404).json({ message: 'Invalid credentials' })
+    }
+    const { password: _pw, ...safeMember } = member as any
+    return res.json(safeMember)
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message })
+  }
+}

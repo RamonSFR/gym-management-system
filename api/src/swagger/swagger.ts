@@ -23,24 +23,20 @@ const swaggerDefinition: SwaggerDefinition = {
     schemas: {
       Employee: {
         type: 'object',
-        required: ['name', 'role', 'cpf', 'wage'],
+        required: ['name', 'role', 'cpf', 'wage', 'email'],
         properties: {
           id: {
             type: 'integer',
             description: 'Auto-generated unique identifier',
             readOnly: true
           },
-          name: {
+          name: { type: 'string', description: 'Employee full name' },
+          role: { type: 'string', description: 'Employee role/position' },
+          cpf: { type: 'string', description: 'Employee CPF (unique)' },
+          email: {
             type: 'string',
-            description: 'Employee full name'
-          },
-          role: {
-            type: 'string',
-            description: 'Employee role/position'
-          },
-          cpf: {
-            type: 'string',
-            description: 'Employee CPF (unique)'
+            format: 'email',
+            description: 'Employee email (unique)'
           },
           wage: {
             type: 'number',
@@ -61,33 +57,30 @@ const swaggerDefinition: SwaggerDefinition = {
           },
           workouts: {
             type: 'array',
-            items: {
-              $ref: '#/components/schemas/Workout'
-            }
+            items: { $ref: '#/components/schemas/Workout' }
           }
         }
       },
       Member: {
         type: 'object',
-        required: ['name', 'membership', 'cpf'],
+        required: ['name', 'membership', 'cpf', 'email'],
         properties: {
           id: {
             type: 'integer',
             description: 'Auto-generated unique identifier',
             readOnly: true
           },
-          name: {
-            type: 'string',
-            description: 'Member full name'
-          },
+          name: { type: 'string', description: 'Member full name' },
           membership: {
             type: 'string',
             enum: ['silver', 'platinum', 'gold'],
             description: 'Membership tier'
           },
-          cpf: {
+          cpf: { type: 'string', description: 'Member CPF (unique)' },
+          email: {
             type: 'string',
-            description: 'Member CPF (unique)'
+            format: 'email',
+            description: 'Member email (unique)'
           },
           createdAt: {
             type: 'string',
@@ -103,9 +96,7 @@ const swaggerDefinition: SwaggerDefinition = {
           },
           workouts: {
             type: 'array',
-            items: {
-              $ref: '#/components/schemas/Workout'
-            }
+            items: { $ref: '#/components/schemas/Workout' }
           }
         }
       },
@@ -120,19 +111,14 @@ const swaggerDefinition: SwaggerDefinition = {
           },
           exercises: {
             type: 'array',
-            items: {
-              $ref: '#/components/schemas/Exercise'
-            },
+            items: { $ref: '#/components/schemas/Exercise' },
             description: 'Array of exercises in the workout'
           },
           personalId: {
             type: 'integer',
             description: 'ID of the personal trainer (Employee)'
           },
-          memberId: {
-            type: 'integer',
-            description: 'ID of the member'
-          },
+          memberId: { type: 'integer', description: 'ID of the member' },
           createdAt: {
             type: 'string',
             format: 'date-time',
@@ -145,12 +131,8 @@ const swaggerDefinition: SwaggerDefinition = {
             description: 'Last update timestamp',
             readOnly: true
           },
-          personal: {
-            $ref: '#/components/schemas/Employee'
-          },
-          member: {
-            $ref: '#/components/schemas/Member'
-          }
+          personal: { $ref: '#/components/schemas/Employee' },
+          member: { $ref: '#/components/schemas/Member' }
         }
       },
       Exercise: {
@@ -179,11 +161,70 @@ const swaggerDefinition: SwaggerDefinition = {
       Error: {
         type: 'object',
         properties: {
-          message: {
-            type: 'string',
-            description: 'Error message'
-          }
+          message: { type: 'string', description: 'Error message' }
         }
+      },
+      EmployeeInput: {
+        type: 'object',
+        required: ['name', 'role', 'cpf', 'wage', 'email', 'password'],
+        properties: {
+          name: { type: 'string' },
+          role: { type: 'string' },
+          cpf: { type: 'string' },
+          wage: { type: 'number', format: 'float' },
+          email: { type: 'string', format: 'email' },
+          password: { type: 'string' }
+        }
+      },
+      MemberInput: {
+        type: 'object',
+        required: ['name', 'membership', 'cpf', 'email', 'password'],
+        properties: {
+          name: { type: 'string' },
+          membership: { type: 'string', enum: ['silver', 'platinum', 'gold'] },
+          cpf: { type: 'string' },
+          email: { type: 'string', format: 'email' },
+          password: { type: 'string' }
+        }
+      },
+      EmployeeUpdate: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          role: { type: 'string' },
+          cpf: { type: 'string' },
+          wage: { type: 'number', format: 'float' },
+          email: { type: 'string', format: 'email' },
+          password: { type: 'string' }
+        }
+      },
+      MemberUpdate: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          membership: { type: 'string', enum: ['silver', 'platinum', 'gold'] },
+          cpf: { type: 'string' },
+          email: { type: 'string', format: 'email' },
+          password: { type: 'string' }
+        }
+      }
+    },
+    requestBodies: {
+      EmployeeInput: {
+        content: {
+          'application/json': {
+            schema: { $ref: '#/components/schemas/EmployeeInput' }
+          }
+        },
+        required: true
+      },
+      MemberInput: {
+        content: {
+          'application/json': {
+            schema: { $ref: '#/components/schemas/MemberInput' }
+          }
+        },
+        required: true
       }
     },
     responses: {

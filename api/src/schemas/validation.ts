@@ -13,7 +13,25 @@ export const createEmployeeSchema = z.object({
     .string()
     .length(11, 'CPF must have exactly 11 characters')
     .regex(/^\d+$/, 'CPF must contain only numbers'),
-  wage: z.number().min(1, 'Wage must be a positive number greater than zero')
+  wage: z.number().min(1, 'Wage must be a positive number greater than zero'),
+  email: z
+    .string()
+    .email({ message: 'Email must have a valid format' })
+    .max(255, 'Email must have at most 255 characters'),
+  password: z
+    .string()
+    .min(4, 'Password must have at least 4 characters')
+    .max(100, 'Password must have at most 100 characters')
+})
+
+export const loginSecretarioSchema = z.object({
+  email: z
+    .email({ message: 'Email deve ter um formato válido' })
+    .max(255, 'Email deve ter no máximo 255 caracteres'),
+  password: z
+    .string()
+    .min(4, 'Senha deve ter pelo menos 6 caracteres')
+    .max(100, 'Senha deve ter no máximo 100 caracteres')
 })
 
 export const updateEmployeeSchema = z
@@ -61,7 +79,37 @@ export const createMemberSchema = z.object({
   cpf: z
     .string()
     .length(11, 'CPF must have exactly 11 characters')
-    .regex(/^\d+$/, 'CPF must contain only numbers')
+    .regex(/^\d+$/, 'CPF must contain only numbers'),
+  email: z
+    .string()
+    .email({ message: 'Email must have a valid format' })
+    .max(255, 'Email must have at most 255 characters'),
+  password: z
+    .string()
+    .min(4, 'Password must have at least 4 characters')
+    .max(100, 'Password must have at most 100 characters')  
+})
+
+export const loginMemberSchema = z.object({
+  email: z
+    .email({ message: 'Email deve ter um formato válido' })
+    .max(255, 'Email deve ter no máximo 255 caracteres'),
+  password: z
+    .string()
+    .min(4, 'Senha deve ter pelo menos 6 caracteres')
+    .max(100, 'Senha deve ter no máximo 100 caracteres')
+})
+
+// generic login schema
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .email({ message: 'Email must have a valid format' })
+    .max(255, 'Email must have at most 255 characters'),
+  password: z
+    .string()
+    .min(4, 'Password must have at least 4 characters')
+    .max(100, 'Password must have at most 100 characters')
 })
 
 export const updateMemberSchema = z

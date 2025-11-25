@@ -85,3 +85,17 @@ export const updateEmployee = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error.message })
   }
 }
+
+export const getEmployeeByLogin = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body
+    const employee = await service.getByLogin(email, password)
+    if (!employee) {
+      return res.status(404).json({ message: 'Invalid credentials' })
+    }
+    const { password: _pw, ...safeEmployee } = employee as any
+    return res.json(safeEmployee)
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message })
+  }
+}

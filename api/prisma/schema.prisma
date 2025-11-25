@@ -17,6 +17,8 @@ datasource db {
 model Employee {
   id        Int      @id @default(autoincrement())
   name      String
+  email     String   @unique
+  password  String
   role      String
   cpf       String   @unique
   wage      Float
@@ -30,6 +32,8 @@ model Employee {
 model Member {
   id  Int @id @default(autoincrement())
   name String
+  email String @unique
+  password String
   membership String
   cpf String @unique
   createdAt DateTime @default(now())
