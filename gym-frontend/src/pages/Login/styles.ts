@@ -65,3 +65,32 @@ export const Form = styled.form`
     }
   }
 `
+
+export const ButtonsSwitch = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+
+  .member-button {
+    border-radius: 8px 0 0 8px;
+  }
+
+  .employee-button {
+    border-radius: 0 8px 8px 0;
+  }
+
+  .is-active {
+    background-color: ${c.lightPurple};
+    color: ${c.tertiary};
+  }
+
+  button {
+    width: 40%;
+    padding: 4px 6px;
+    border: 1px solid ${c.lightPurple};
+    outline: none;
+    background-color: #dadadaff;
+    cursor: pointer;
+  }
+`
