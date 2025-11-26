@@ -24,7 +24,7 @@ export const createEmployeeSchema = z.object({
     .max(100, 'Password must have at most 100 characters')
 })
 
-export const loginSecretarioSchema = z.object({
+export const loginEmployeeSchema = z.object({
   email: z
     .email({ message: 'Email deve ter um formato válido' })
     .max(255, 'Email deve ter no máximo 255 caracteres'),
@@ -87,7 +87,7 @@ export const createMemberSchema = z.object({
   password: z
     .string()
     .min(4, 'Password must have at least 4 characters')
-    .max(100, 'Password must have at most 100 characters')  
+    .max(100, 'Password must have at most 100 characters')
 })
 
 export const loginMemberSchema = z.object({
@@ -100,7 +100,6 @@ export const loginMemberSchema = z.object({
     .max(100, 'Senha deve ter no máximo 100 caracteres')
 })
 
-// generic login schema
 export const loginSchema = z.object({
   email: z
     .string()
