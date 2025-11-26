@@ -1,24 +1,19 @@
 import { z } from 'zod'
 
-export const ExerciseSchema = z.object({
-  name: z.string().min(1),
-  reps: z.number().int().min(1),
-  interval: z.number().int().min(1)
+export const createWorkoutSchema = z.object({
+    exercises: z.array(
+        z.object({
+            name: z.string().min(2).max(100),
+            sets: z.number().min(1),
+            reps: z.number().min(1)
+        })
+    )
 })
 
-export const WorkoutSchema = z.object({
-  id: z.number().int(),
-  exercises: z.array(ExerciseSchema),
-  personalId: z.number().int().nullable().optional(),
-  memberId: z.number().int().nullable().optional(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime()
+export const updateWorkoutSchema = createWorkoutSchema.extend({
+    id: z.number()
 })
 
-export const WorkoutsSchema = z.array(WorkoutSchema)
+export type CreateWorkoutInput = z.infer<typeof createWorkoutSchema>
+export type UpdateWorkoutInput = z.infer<typeof updateWorkoutSchema>
 
-export type Exercise = z.infer<typeof ExerciseSchema>
-export type Workout = z.infer<typeof WorkoutSchema>
-export type Workouts = z.infer<typeof WorkoutsSchema>
-
-export default WorkoutsSchema

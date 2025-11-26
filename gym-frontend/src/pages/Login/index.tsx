@@ -1,19 +1,96 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
 import Button from '../../components/button'
 
+import { employeeLogin, memberLogin } from '../../services/loginService'
+import { validateLogin } from '../../schemas/validation'
+
 import * as S from './styles'
 
 const Login = () => {
+  const navigate = useNavigate()
   const [isEmployee, setIsEmployee] = useState(false)
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [successMsg, setSuccessMsg] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    alert("Login submitted")
-  }
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault()
+      console.log('Submitting form data:', formData)
+
+      const validation = validateLogin(formData)
+
+      if (!validation.success) {
+        setErrors(validation.errors)
+        return
+      }
+
+      setIsLoading(true)
+      setErrorMsg('')
+      setSuccessMsg('')
+
+      if (isEmployee) {
+        try {
+          const employee: Employee = await employeeLogin(
+            formData.email,
+            formData.password
+          )
+
+          alert("Login successful!")
+          setSuccessMsg(`Welcome, ${employee.name}!`)
+          setTimeout(() => {
+            navigate('/home')
+          }, 2000)
+
+        } catch (error) {
+          console.error('Login failed:', error)
+          setErrorMsg('Error during login. Please check your credentials and try again.')
+        } finally {
+          setIsLoading(false)
+        }
+        return
+      }
+
+
+      try {
+        const member: Member = await memberLogin(
+          formData.email,
+          formData.password
+        )
+
+        alert("Login successful!")
+        setSuccessMsg(`Welcome, ${member.name}!`)
+        setTimeout(() => {
+          navigate('/home')
+        }, 2000)
+
+      } catch (error) {
+        console.error('Login failed:', error)
+        setErrorMsg('Error during login. Please check your credentials and try again.')
+      } finally {
+        setIsLoading(false)
+      }
+    },
+    [formData, navigate, isEmployee]
+  )
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target
+      setFormData((prev) => ({ ...prev, [name]: value }))
+    },
+    []
+  )
 
   return (
     <S.Container>
@@ -38,13 +115,13 @@ const Login = () => {
         </S.ButtonsSwitch>
         <div className="input-group">
           <label htmlFor="email">Email</label>
-          <input type="email" />
+          <input onChange={handleInputChange} name="email" type="email" />
         </div>
         <div className="input-group">
           <label htmlFor="password">Password</label>
-          <input type="password" />
+          <input onChange={handleInputChange} name="password" type="password" />
         </div>
-        <Button type='submit'>
+        <Button type="submit">
           <>
             Login
             <FontAwesomeIcon icon={faArrowRightToBracket} />
