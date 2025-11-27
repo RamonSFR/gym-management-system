@@ -10,7 +10,16 @@ type Props = {
 }
 
 const Button = ({ children, type = 'button', onClick, disabled }: Props) => {
-  return <S.Btn className={disabled ? 'disabled' : ''} type={type} onClick={onClick} disabled={disabled}>{children}</S.Btn>
+  return (
+    <S.Btn
+      className={disabled ? 'disabled' : ''}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
+    </S.Btn>
+  )
 }
 
 export default Button
