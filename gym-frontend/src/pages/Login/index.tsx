@@ -11,6 +11,8 @@ import { validateLogin } from '../../schemas/validation'
 
 import * as S from './styles'
 
+const REDIRECT_DELAY = 2000
+
 const Login = () => {
   const navigate = useNavigate()
   const [isEmployee, setIsEmployee] = useState(false)
@@ -50,7 +52,7 @@ const Login = () => {
           setSuccessMsg(`Welcome, ${employee.name}!`)
           setTimeout(() => {
             navigate('/home')
-          }, 2000)
+          }, REDIRECT_DELAY)
 
         } catch (error) {
           console.error('Login failed:', error)
@@ -72,7 +74,7 @@ const Login = () => {
         setSuccessMsg(`Welcome, ${member.name}!`)
         setTimeout(() => {
           navigate('/home')
-        }, 2000)
+        }, REDIRECT_DELAY)
 
       } catch (error) {
         console.error('Login failed:', error)
@@ -115,11 +117,11 @@ const Login = () => {
         </S.ButtonsSwitch>
         <div className="input-group">
           <label htmlFor="email">Email</label>
-          <input onChange={handleInputChange} name="email" type="email" />
+          <input disabled={isLoading} onChange={handleInputChange} name="email" type="email" />
         </div>
         <div className="input-group">
           <label htmlFor="password">Password</label>
-          <input onChange={handleInputChange} name="password" type="password" />
+          <input disabled={isLoading} onChange={handleInputChange} name="password" type="password" />
         </div>
         <Button type="submit">
           <>

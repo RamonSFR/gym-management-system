@@ -5,7 +5,11 @@ import * as service from '../services/employeeService'
 export const getAllEmployees = async (req: Request, res: Response) => {
   try {
     const employees = await service.getAll()
-    return res.json(employees)
+    const safe = employees.map((e: any) => {
+      const { password: _pw, ...rest } = e as any
+      return rest
+    })
+    return res.json(safe)
   } catch (error: any) {
     return res.status(500).json({ message: error.message })
   }
@@ -16,7 +20,10 @@ export const getEmployeeById = async (req: Request, res: Response) => {
     const employee = await service.getById(Number(req.params.id))
     return !employee
       ? res.status(404).json({ message: 'Employee not found' })
-      : res.json(employee)
+      : (() => {
+          const { password: _pw, ...rest } = employee as any
+          return res.json(rest)
+        })()
   } catch (error: any) {
     return res.status(500).json({ message: error.message })
   }
@@ -36,7 +43,8 @@ export const addNewEmployee = async (req: Request, res: Response) => {
     }
 
     const newEmployee = await service.add(req.body)
-    return res.status(201).json(newEmployee)
+    const { password: _pw, ...safe } = newEmployee as any
+    return res.status(201).json(safe)
   } catch (error: any) {
     if (error.code === 'P2002')
       return res.status(409).json({
@@ -74,7 +82,8 @@ export const updateEmployee = async (req: Request, res: Response) => {
       Number(req.params.id),
       req.body
     )
-    return res.json(toUpdateEmployee)
+    const { password: _pw, ...safe } = toUpdateEmployee as any
+    return res.json(safe)
   } catch (error: any) {
     if (error.code === 'P2025')
       return res.status(404).json({ message: 'Employee not found' })

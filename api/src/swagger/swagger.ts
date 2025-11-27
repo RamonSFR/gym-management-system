@@ -173,7 +173,7 @@ const swaggerDefinition: SwaggerDefinition = {
           cpf: { type: 'string' },
           wage: { type: 'number', format: 'float' },
           email: { type: 'string', format: 'email' },
-          password: { type: 'string' }
+          password: { type: 'string', writeOnly: true }
         }
       },
       MemberInput: {
@@ -184,7 +184,7 @@ const swaggerDefinition: SwaggerDefinition = {
           membership: { type: 'string', enum: ['silver', 'platinum', 'gold'] },
           cpf: { type: 'string' },
           email: { type: 'string', format: 'email' },
-          password: { type: 'string' }
+          password: { type: 'string', writeOnly: true }
         }
       },
       EmployeeUpdate: {
@@ -195,7 +195,7 @@ const swaggerDefinition: SwaggerDefinition = {
           cpf: { type: 'string' },
           wage: { type: 'number', format: 'float' },
           email: { type: 'string', format: 'email' },
-          password: { type: 'string' }
+          password: { type: 'string', writeOnly: true }
         }
       },
       MemberUpdate: {
@@ -205,7 +205,7 @@ const swaggerDefinition: SwaggerDefinition = {
           membership: { type: 'string', enum: ['silver', 'platinum', 'gold'] },
           cpf: { type: 'string' },
           email: { type: 'string', format: 'email' },
-          password: { type: 'string' }
+          password: { type: 'string', writeOnly: true }
         }
       }
     },

@@ -5,7 +5,11 @@ import * as service from '../services/memberService'
 export const getAllMembers = async (req: Request, res: Response) => {
   try {
     const members = await service.getAll()
-    return res.json(members)
+    const safe = members.map((m: any) => {
+      const { password: _pw, ...rest } = m as any
+      return rest
+    })
+    return res.json(safe)
   } catch (error: any) {
     return res.status(500).json({ message: error.message })
   }
@@ -16,7 +20,10 @@ export const getMemberById = async (req: Request, res: Response) => {
     const member = await service.getById(Number(req.params.id))
     return !member
       ? res.status(404).json({ message: 'Member not found' })
-      : res.json(member)
+      : (() => {
+          const { password: _pw, ...rest } = member as any
+          return res.json(rest)
+        })()
   } catch (error: any) {
     return res.status(500).json({ message: error.message })
   }
@@ -45,7 +52,8 @@ export const addNewMember = async (req: Request, res: Response) => {
     }
 
     const newMember = await service.add(req.body)
-    return res.status(201).json(newMember)
+    const { password: _pw, ...safe } = newMember as any
+    return res.status(201).json(safe)
   } catch (error: any) {
     if (error.code === 'p2002')
       return res
@@ -89,7 +97,8 @@ export const updateMember = async (req: Request, res: Response) => {
     }
 
     const updatedMember = await service.update(Number(req.params.id), req.body)
-    return res.status(200).json(updatedMember)
+    const { password: _pw, ...safe } = updatedMember as any
+    return res.status(200).json(safe)
   } catch (error: any) {
     if (error.code === 'P2025')
       return res.status(404).json({ message: 'Member not found' })
