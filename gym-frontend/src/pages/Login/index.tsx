@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,6 +11,7 @@ import { employeeLogin, memberLogin } from '../../services/loginService'
 import { validateLogin } from '../../schemas/validation'
 
 import * as S from './styles'
+import Alert from '../../components/Alert'
 
 const REDIRECT_DELAY = 2500
 
@@ -25,6 +26,29 @@ const Login = () => {
   const [successMsg, setSuccessMsg] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [alerts, setAlerts] = useState<Array<{ type: 'success' | 'error', message: string }>>([])
+
+  useEffect(() => {
+    const timers: number[] = []
+
+    if (successMsg) {
+      const t = window.setTimeout(() => {
+        setAlerts((prev) => [...prev, { type: 'success', message: successMsg }])
+      }, 0)
+      timers.push(t)
+    }
+
+    if (errorMsg) {
+      const t = window.setTimeout(() => {
+        setAlerts((prev) => [...prev, { type: 'error', message: errorMsg }])
+      }, 0)
+      timers.push(t)
+    }
+
+    return () => {
+      timers.forEach(clearTimeout)
+    }
+  }, [successMsg, errorMsg])
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -35,6 +59,8 @@ const Login = () => {
 
       if (!validation.success) {
         setErrors(validation.errors)
+        const firstKey = Object.keys(validation.errors)[0]
+        if (firstKey) setErrorMsg(validation.errors[firstKey])
         return
       }
 
@@ -59,9 +85,7 @@ const Login = () => {
         } catch (error) {
           setIsLoading(false)
           console.error('Login failed:', error)
-          setErrorMsg(
-            'Please check your credentials and try again.'
-          )
+          setErrorMsg('Please check your credentials and try again.')
           return
         }
       }
@@ -81,9 +105,7 @@ const Login = () => {
         }, REDIRECT_DELAY)
       } catch (error) {
         console.error('Login failed:', error)
-        setErrorMsg(
-          'Please check your credentials and try again.'
-        )
+        setErrorMsg('Please check your credentials and try again.')
         setIsLoading(false)
         return
       }
@@ -101,6 +123,11 @@ const Login = () => {
 
   return (
     <S.Container>
+
+      {alerts.map((alert, index) => (
+        <Alert key={index} type={alert.type}>{alert.message}</Alert>
+      ))}
+
       <S.Title>GYM</S.Title>
       <S.Form onSubmit={handleSubmit}>
         <FontAwesomeIcon className="login-icon" icon={faCircleUser} />
@@ -142,7 +169,6 @@ const Login = () => {
             value={formData.password}
           />
         </div>
-        <p className='error'>{errorMsg}</p>
         <Button disabled={isLoading} type="submit">
           {isLoading ? (
             <ClipLoader color="#ffffff" size={20} />
@@ -153,15 +179,6 @@ const Login = () => {
             </>
           )}
         </Button>
-        <p>
-          {isEmployee ? (
-            ''
-          ) : (
-            <>
-              doesn't have an account yet? <span>create account</span>
-            </>
-          )}
-        </p>
       </S.Form>
     </S.Container>
   )

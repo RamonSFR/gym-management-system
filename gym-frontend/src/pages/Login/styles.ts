@@ -67,10 +67,6 @@ export const Form = styled.form`
       font-weight: bold;
       cursor: pointer;
     }
-
-    &.error {
-      color: #ff4d62ff;
-    }
   }
 `
 
