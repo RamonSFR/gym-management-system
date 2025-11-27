@@ -21,4 +21,9 @@ export const Btn = styled.button`
     &:hover {
         background-color: ${c.darkPurple};
     }
+
+    &.disabled {
+        background-color: ${c.darkPurple};
+        cursor: not-allowed;
+    }
 `

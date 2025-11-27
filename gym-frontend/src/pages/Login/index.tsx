@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +12,7 @@ import { validateLogin } from '../../schemas/validation'
 
 import * as S from './styles'
 
-const REDIRECT_DELAY = 2000
+const REDIRECT_DELAY = 2500
 
 const Login = () => {
   const navigate = useNavigate()
@@ -48,21 +49,22 @@ const Login = () => {
             formData.password
           )
 
-          alert("Login successful!")
+          setErrors({})
           setSuccessMsg(`Welcome, ${employee.name}!`)
           setTimeout(() => {
+            setIsLoading(false)
             navigate('/home')
           }, REDIRECT_DELAY)
-
+          return
         } catch (error) {
-          console.error('Login failed:', error)
-          setErrorMsg('Error during login. Please check your credentials and try again.')
-        } finally {
           setIsLoading(false)
+          console.error('Login failed:', error)
+          setErrorMsg(
+            'Please check your credentials and try again.'
+          )
+          return
         }
-        return
       }
-
 
       try {
         const member: Member = await memberLogin(
@@ -70,17 +72,20 @@ const Login = () => {
           formData.password
         )
 
-        alert("Login successful!")
+        setErrors({})
         setSuccessMsg(`Welcome, ${member.name}!`)
         setTimeout(() => {
           navigate('/home')
+          setIsLoading(false)
+          return
         }, REDIRECT_DELAY)
-
       } catch (error) {
         console.error('Login failed:', error)
-        setErrorMsg('Error during login. Please check your credentials and try again.')
-      } finally {
+        setErrorMsg(
+          'Please check your credentials and try again.'
+        )
         setIsLoading(false)
+        return
       }
     },
     [formData, navigate, isEmployee]
@@ -117,17 +122,36 @@ const Login = () => {
         </S.ButtonsSwitch>
         <div className="input-group">
           <label htmlFor="email">Email</label>
-          <input disabled={isLoading} onChange={handleInputChange} name="email" type="email" />
+          <input
+            className={errors.email ? 'error' : ''}
+            disabled={isLoading}
+            onChange={handleInputChange}
+            name="email"
+            type="email"
+            value={formData.email}
+          />
         </div>
         <div className="input-group">
           <label htmlFor="password">Password</label>
-          <input disabled={isLoading} onChange={handleInputChange} name="password" type="password" />
+          <input
+            className={errors.password ? 'error' : ''}
+            disabled={isLoading}
+            onChange={handleInputChange}
+            name="password"
+            type="password"
+            value={formData.password}
+          />
         </div>
-        <Button type="submit">
-          <>
-            Login
-            <FontAwesomeIcon icon={faArrowRightToBracket} />
-          </>
+        <p className='error'>{errorMsg}</p>
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? (
+            <ClipLoader color="#ffffff" size={20} />
+          ) : (
+            <>
+              Login
+              <FontAwesomeIcon icon={faArrowRightToBracket} />
+            </>
+          )}
         </Button>
         <p>
           {isEmployee ? (

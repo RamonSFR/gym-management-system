@@ -49,6 +49,10 @@ export const Form = styled.form`
       padding: 8px;
       outline: none;
       border: 1px solid ${c.darkPurple};
+
+      &.error {
+        border: 1px solid #ff4d62ff;
+      }
     }
   }
 
@@ -62,6 +66,10 @@ export const Form = styled.form`
       color: ${c.lightPurple};
       font-weight: bold;
       cursor: pointer;
+    }
+
+    &.error {
+      color: #ff4d62ff;
     }
   }
 `

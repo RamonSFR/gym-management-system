@@ -6,10 +6,11 @@ type Props = {
   children: string | JSX.Element
   type?: 'button' | 'submit' | 'reset'
   onClick?: () => void
+  disabled?: boolean
 }
 
-const Button = ({ children, type = 'button', onClick }: Props) => {
-  return <S.Btn type={type} onClick={onClick}>{children}</S.Btn>
+const Button = ({ children, type = 'button', onClick, disabled }: Props) => {
+  return <S.Btn className={disabled ? 'disabled' : ''} type={type} onClick={onClick} disabled={disabled}>{children}</S.Btn>
 }
 
 export default Button
