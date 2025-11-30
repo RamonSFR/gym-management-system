@@ -26,7 +26,9 @@ const Login = () => {
   const [successMsg, setSuccessMsg] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [alerts, setAlerts] = useState<Array<{ type: 'success' | 'error', message: string }>>([])
+  const [alerts, setAlerts] = useState<
+    Array<{ type: 'success' | 'error'; message: string }>
+  >([])
 
   useEffect(() => {
     const timers: number[] = []
@@ -123,9 +125,10 @@ const Login = () => {
 
   return (
     <S.Container>
-
       {alerts.map((alert, index) => (
-        <Alert key={index} type={alert.type}>{alert.message}</Alert>
+        <Alert key={index} type={alert.type}>
+          {alert.message}
+        </Alert>
       ))}
 
       <S.Title>GYM</S.Title>

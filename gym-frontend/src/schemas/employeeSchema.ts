@@ -15,7 +15,7 @@ export const createEmployeeSchema = z.object({
 })
 
 export const updateEmployeeSchema = createEmployeeSchema.extend({
-    id: z.number()
+  id: z.number()
 })
 
 export type CreateEmployeeInput = z.infer<typeof createEmployeeSchema>
