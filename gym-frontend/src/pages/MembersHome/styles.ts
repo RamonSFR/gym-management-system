@@ -21,10 +21,31 @@ export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
+  row-gap: 32px;
 `
 
 export const Card = styled.div`
+  cursor: pointer;
   max-width: 272px;
   background-color: ${c.primary};
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    object-fit: cover;
+    width: 272px;
+    height: 150px;
+  }
+
+  .card-info {
+    padding: 12px 8px;
+  }
 `
