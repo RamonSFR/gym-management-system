@@ -45,6 +45,8 @@ model Member {
 
 model Workout {
   id Int @id @default(autoincrement())
+  name String
+  description String?
   exercises Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
