@@ -23,6 +23,8 @@ type Member = {
 
 type Workout = {
     id: number
+    name: string
+    description?: string
     exercises: Exercise[]
     personalId: number
     memberId: number
