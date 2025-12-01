@@ -6,7 +6,7 @@ import MembersHome from './pages/MembersHome'
 const AppRoutes = () => (
     <Routes>
         <Route path='/' element={<Login />} />
-        <Route path='/members' element={<MembersHome />} />
+        <Route path='/members/:id' element={<MembersHome />} />
     </Routes>
 )
 
