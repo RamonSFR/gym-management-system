@@ -72,8 +72,16 @@ workoutRoutes.get(
  *         application/json:
  *           schema:
  *             type: object
- *             required: [exercises, personalId, memberId]
+ *             required: [name, exercises, personalId, memberId]
  *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Workout name
+ *                 example: "Full Body Blast"
+ *               description:
+ *                 type: string
+ *                 description: Workout description
+ *                 example: "A mixed routine focusing on strength and conditioning"
  *               exercises:
  *                 type: array
  *                 items:
@@ -160,6 +168,12 @@ workoutRoutes.delete(
  *           schema:
  *             type: object
  *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Workout name
+ *               description:
+ *                 type: string
+ *                 description: Workout description
  *               exercises:
  *                 type: array
  *                 items:

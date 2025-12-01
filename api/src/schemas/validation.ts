@@ -151,6 +151,14 @@ const exerciseSchema = z.object({
 })
 
 export const createWorkoutSchema = z.object({
+  name: z
+    .string()
+    .min(1, 'Workout name is required')
+    .max(100, 'Workout name must be at most 100 characters'),
+  description: z
+    .string()
+    .max(1000, 'Description must be at most 1000 characters')
+    .optional(),
   exercises: z
     .array(exerciseSchema)
     .min(1, 'Workout must have at least 1 exercise')
@@ -167,6 +175,15 @@ export const createWorkoutSchema = z.object({
 
 export const updateWorkoutSchema = z
   .object({
+    name: z
+      .string()
+      .min(1, 'Workout name must have at least 1 character')
+      .max(100, 'Workout name must be at most 100 characters')
+      .optional(),
+    description: z
+      .string()
+      .max(1000, 'Description must be at most 1000 characters')
+      .optional(),
     exercises: z
       .array(exerciseSchema)
       .min(1, 'Workout must have at least 1 exercise')

@@ -1,6 +1,7 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
@@ -99,7 +100,7 @@ const Login = () => {
         setErrors({})
         setSuccessMsg(`Welcome, ${member.name}!`)
         setTimeout(() => {
-          navigate('/home')
+          navigate(`/members/${member.id}`)
           setIsLoading(false)
           return
         }, REDIRECT_DELAY)
