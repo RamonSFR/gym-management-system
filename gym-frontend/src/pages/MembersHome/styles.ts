@@ -22,6 +22,13 @@ export const CardContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
   row-gap: 32px;
+
+  h5 {
+    text-align: center;
+    color: #e4e4e4e4;
+    font-weight: 900;
+    font-size: 1.5rem;
+  }
 `
 
 export const Card = styled.div`

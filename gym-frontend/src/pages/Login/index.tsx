@@ -1,6 +1,7 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
+import { useAuth } from '../../Contexts/AuthProvider'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
@@ -18,6 +19,7 @@ const REDIRECT_DELAY = 2500
 
 const Login = () => {
   const navigate = useNavigate()
+  const { signin } = useAuth()
   const [isEmployee, setIsEmployee] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -27,7 +29,9 @@ const Login = () => {
   const [successMsg, setSuccessMsg] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [alerts, setAlerts] = useState<Array<{ type: 'success' | 'error', message: string }>>([])
+  const [alerts, setAlerts] = useState<
+    Array<{ type: 'success' | 'error'; message: string }>
+  >([])
 
   useEffect(() => {
     const timers: number[] = []
@@ -79,6 +83,8 @@ const Login = () => {
           setErrors({})
           setSuccessMsg(`Welcome, ${employee.name}!`)
           setTimeout(() => {
+            // centralize signin
+            signin(employee)
             setIsLoading(false)
             navigate('/home')
           }, REDIRECT_DELAY)
@@ -100,6 +106,8 @@ const Login = () => {
         setErrors({})
         setSuccessMsg(`Welcome, ${member.name}!`)
         setTimeout(() => {
+          // centralize signin
+          signin(member)
           navigate(`/members/${member.id}`)
           setIsLoading(false)
           return
@@ -111,7 +119,7 @@ const Login = () => {
         return
       }
     },
-    [formData, navigate, isEmployee]
+    [formData, navigate, isEmployee, signin]
   )
 
   const handleInputChange = useCallback(
@@ -124,9 +132,10 @@ const Login = () => {
 
   return (
     <S.Container>
-
       {alerts.map((alert, index) => (
-        <Alert key={index} type={alert.type}>{alert.message}</Alert>
+        <Alert key={index} type={alert.type}>
+          {alert.message}
+        </Alert>
       ))}
 
       <S.Title>GYM</S.Title>

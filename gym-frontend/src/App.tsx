@@ -2,13 +2,16 @@ import { BrowserRouter } from 'react-router-dom'
 
 import GlobalStyles from './pages/Styles/GlobalStyles'
 import AppRoutes from './routes'
+import AuthProvider from './Contexts/AuthProvider'
 
 function App() {
   return (
-    <BrowserRouter>
-      <GlobalStyles />
-      <AppRoutes />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <GlobalStyles />
+        <AppRoutes />
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
