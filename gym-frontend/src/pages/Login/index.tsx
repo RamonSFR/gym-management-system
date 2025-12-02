@@ -83,10 +83,9 @@ const Login = () => {
           setErrors({})
           setSuccessMsg(`Welcome, ${employee.name}!`)
           setTimeout(() => {
-            // centralize signin
             signin(employee)
             setIsLoading(false)
-            navigate('/home')
+            navigate(`/employees/${employee.id}`)
           }, REDIRECT_DELAY)
           return
         } catch (error) {
@@ -106,7 +105,6 @@ const Login = () => {
         setErrors({})
         setSuccessMsg(`Welcome, ${member.name}!`)
         setTimeout(() => {
-          // centralize signin
           signin(member)
           navigate(`/members/${member.id}`)
           setIsLoading(false)
