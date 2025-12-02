@@ -63,7 +63,11 @@ export const addNewWorkout = async (req: Request, res: Response) => {
       })
     }
 
-    if (!req.body.name || typeof req.body.name !== 'string' || req.body.name.trim().length === 0) {
+    if (
+      !req.body.name ||
+      typeof req.body.name !== 'string' ||
+      req.body.name.trim().length === 0
+    ) {
       return res.status(400).json({ message: 'Workout name is required' })
     }
 
@@ -113,8 +117,13 @@ export const updateWorkout = async (req: Request, res: Response) => {
       })
     }
 
-    if (req.body.name && (typeof req.body.name !== 'string' || req.body.name.trim().length === 0)) {
-      return res.status(400).json({ message: 'Workout name must be a non-empty string' })
+    if (
+      req.body.name &&
+      (typeof req.body.name !== 'string' || req.body.name.trim().length === 0)
+    ) {
+      return res
+        .status(400)
+        .json({ message: 'Workout name must be a non-empty string' })
     }
 
     if (req.body.description && typeof req.body.description !== 'string') {

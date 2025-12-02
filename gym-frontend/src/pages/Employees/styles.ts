@@ -44,7 +44,7 @@ export const ListItem = styled.div`
   border-radius: 8px;
   margin-bottom: 12px;
   background-color: #fafafa;
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -77,7 +77,7 @@ export const DetailsSection = styled.div`
   border-radius: 0 0 8px 8px;
   margin-bottom: 12px;
   animation: slideDown 0.3s ease-out;
-  
+
   @keyframes slideDown {
     from {
       opacity: 0;
@@ -89,7 +89,7 @@ export const DetailsSection = styled.div`
       max-height: 500px;
     }
   }
-  
+
   div {
     padding: 8px 0;
     color: ${C.primary};
@@ -99,14 +99,14 @@ export const DetailsSection = styled.div`
 
 export const DetailField = styled.div`
   margin-bottom: 12px;
-  
+
   label {
     display: block;
     font-weight: 600;
     margin-bottom: 4px;
     color: ${C.primary};
   }
-  
+
   input {
     width: 100%;
     padding: 8px;

@@ -160,10 +160,12 @@ const MembersHome: React.FC = () => {
                 <b>Made by:</b> {personalName ?? 'Loading...'}
               </li>
               <li>
-                <b>Created at:</b> {formatDateToDDMMYYYY(selectedWorkout.createdAt)}
+                <b>Created at:</b>{' '}
+                {formatDateToDDMMYYYY(selectedWorkout.createdAt)}
               </li>
               <li>
-                <b>Last updated:</b> {formatDateToDDMMYYYY(selectedWorkout.updatedAt)}
+                <b>Last updated:</b>{' '}
+                {formatDateToDDMMYYYY(selectedWorkout.updatedAt)}
               </li>
             </ul>
           </S.ModalContent>
