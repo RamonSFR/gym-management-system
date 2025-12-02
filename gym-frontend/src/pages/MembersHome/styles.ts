@@ -111,4 +111,10 @@ export const ModalContent = styled.div`
       gap: 8px;
     }
   }
+
+  .info-list {
+    margin-top: 16px;
+    font-size: 12px;
+    font-weight: 350;
+  }
 `
