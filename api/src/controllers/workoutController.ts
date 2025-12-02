@@ -63,6 +63,14 @@ export const addNewWorkout = async (req: Request, res: Response) => {
       })
     }
 
+    if (!req.body.name || typeof req.body.name !== 'string' || req.body.name.trim().length === 0) {
+      return res.status(400).json({ message: 'Workout name is required' })
+    }
+
+    if (req.body.description && typeof req.body.description !== 'string') {
+      return res.status(400).json({ message: 'Description must be a string' })
+    }
+
     const workout = await service.add(req.body)
     return res.status(201).json(workout)
   } catch (error: any) {
@@ -103,6 +111,14 @@ export const updateWorkout = async (req: Request, res: Response) => {
         message:
           'Exercises must be an array of objects with name (string), reps (number > 0), and interval (number > 0) properties'
       })
+    }
+
+    if (req.body.name && (typeof req.body.name !== 'string' || req.body.name.trim().length === 0)) {
+      return res.status(400).json({ message: 'Workout name must be a non-empty string' })
+    }
+
+    if (req.body.description && typeof req.body.description !== 'string') {
+      return res.status(400).json({ message: 'Description must be a string' })
     }
 
     const workout = await service.update(Number(req.params.id), req.body)

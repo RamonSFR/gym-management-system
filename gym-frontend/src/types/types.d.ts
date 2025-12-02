@@ -22,12 +22,14 @@ type Member = {
 }
 
 type Workout = {
-  id: number
-  exercises: Exercise[]
-  personalId: number
-  memberId: number
-  createdAt: string
-  updatedAt: string
+    id: number
+    name: string
+    description?: string
+    exercises: Exercise[]
+    personalId: number
+    memberId: number
+    createdAt: string
+    updatedAt: string
 }
 
 type Exercise = {

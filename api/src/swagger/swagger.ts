@@ -102,13 +102,15 @@ const swaggerDefinition: SwaggerDefinition = {
       },
       Workout: {
         type: 'object',
-        required: ['exercises', 'personalId', 'memberId'],
+        required: ['exercises', 'personalId', 'memberId', 'name'],
         properties: {
           id: {
             type: 'integer',
             description: 'Auto-generated unique identifier',
             readOnly: true
           },
+          name: { type: 'string', description: 'Workout name' },
+          description: { type: 'string', description: 'Workout description' },
           exercises: {
             type: 'array',
             items: { $ref: '#/components/schemas/Exercise' },
@@ -207,6 +209,33 @@ const swaggerDefinition: SwaggerDefinition = {
           email: { type: 'string', format: 'email' },
           password: { type: 'string', writeOnly: true }
         }
+      },
+      WorkoutInput: {
+        type: 'object',
+        required: ['name', 'exercises', 'personalId', 'memberId'],
+        properties: {
+          name: { type: 'string' },
+          description: { type: 'string' },
+          exercises: {
+            type: 'array',
+            items: { $ref: '#/components/schemas/Exercise' }
+          },
+          personalId: { type: 'integer' },
+          memberId: { type: 'integer' }
+        }
+      },
+      WorkoutUpdate: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          description: { type: 'string' },
+          exercises: {
+            type: 'array',
+            items: { $ref: '#/components/schemas/Exercise' }
+          },
+          personalId: { type: 'integer' },
+          memberId: { type: 'integer' }
+        }
       }
     },
     requestBodies: {
@@ -222,6 +251,22 @@ const swaggerDefinition: SwaggerDefinition = {
         content: {
           'application/json': {
             schema: { $ref: '#/components/schemas/MemberInput' }
+          }
+        },
+        required: true
+      },
+      WorkoutInput: {
+        content: {
+          'application/json': {
+            schema: { $ref: '#/components/schemas/WorkoutInput' }
+          }
+        },
+        required: true
+      },
+      WorkoutUpdate: {
+        content: {
+          'application/json': {
+            schema: { $ref: '#/components/schemas/WorkoutUpdate' }
           }
         },
         required: true

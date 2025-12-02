@@ -1,11 +1,13 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
+import { useAuth } from '../../Contexts/AuthProvider'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
-import Button from '../../components/button'
+import Button from '../../components/Button'
 
 import { employeeLogin, memberLogin } from '../../services/loginService'
 import { validateLogin } from '../../schemas/validation'
@@ -17,6 +19,7 @@ const REDIRECT_DELAY = 2500
 
 const Login = () => {
   const navigate = useNavigate()
+  const { signin } = useAuth()
   const [isEmployee, setIsEmployee] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -80,6 +83,8 @@ const Login = () => {
           setErrors({})
           setSuccessMsg(`Welcome, ${employee.name}!`)
           setTimeout(() => {
+            // centralize signin
+            signin(employee)
             setIsLoading(false)
             navigate('/home')
           }, REDIRECT_DELAY)
@@ -101,7 +106,9 @@ const Login = () => {
         setErrors({})
         setSuccessMsg(`Welcome, ${member.name}!`)
         setTimeout(() => {
-          navigate('/home')
+          // centralize signin
+          signin(member)
+          navigate(`/members/${member.id}`)
           setIsLoading(false)
           return
         }, REDIRECT_DELAY)
@@ -112,7 +119,7 @@ const Login = () => {
         return
       }
     },
-    [formData, navigate, isEmployee]
+    [formData, navigate, isEmployee, signin]
   )
 
   const handleInputChange = useCallback(
