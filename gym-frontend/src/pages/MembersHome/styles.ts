@@ -37,7 +37,9 @@ export const Card = styled.div`
   background-color: ${c.primary};
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-5px);
@@ -54,5 +56,59 @@ export const Card = styled.div`
 
   .card-info {
     padding: 12px 8px;
+  }
+`
+
+export const ModalContent = styled.div`
+  position: relative;
+  background-color: ${c.secondary};
+  padding: 32px;
+  border-radius: 8px;
+  z-index: 1001;
+
+  .fa-xmark {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  h4 {
+    font-weight: 900;
+    font-size: 24px;
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .label {
+    margin: 16px 0;
+  }
+
+  .exercise-list {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .exercise-card {
+    display: flex;
+    flex-direction: column;
+    background-color: ${c.primary};
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    text-align: center;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
   }
 `

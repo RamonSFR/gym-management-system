@@ -6,6 +6,9 @@ import { getMemberById } from '../../services/memberService'
 import { useAuth } from '../../Contexts/AuthProvider'
 
 import * as S from './styles'
+import Modal from '../../components/Modal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const MembersHome: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -14,6 +17,8 @@ const MembersHome: React.FC = () => {
 
   const [member, setMember] = useState<Member | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null)
+  const modalActive = !!selectedWorkout
 
   const images = [
     'https://linkspaces.co.uk/wp-content/uploads/2024/05/gb-botanica-gym-link-spaces-slough.jpg',
@@ -28,13 +33,11 @@ const MembersHome: React.FC = () => {
     const mid = Number(id)
     if (Number.isNaN(mid)) return
 
-    // require authenticated user
     if (!user) {
       navigate('/')
       return
     }
 
-    // members can only access their own page; employees (have role) can view any
     const isEmployee = !!(user as Employee).role
     if (!isEmployee) {
       const loggedMemberId = Number((user as Member).id)
@@ -52,7 +55,6 @@ const MembersHome: React.FC = () => {
           return
         }
 
-        // re-validate against auth user to avoid URL tampering after fetch
         const isEmpNow = !!(user as Employee).role
         if (!isEmpNow) {
           const loggedId = Number((user as Member).id)
@@ -77,7 +79,7 @@ const MembersHome: React.FC = () => {
       return <h5>Sorry, you don't have any workouts yet</h5>
 
     return (member.workouts || []).map((w) => (
-      <S.Card key={w.id}>
+      <S.Card onClick={() => setSelectedWorkout(w)} key={w.id}>
         <img src={images[w.id % images.length]} alt={w.name} />
         <div className="card-info">
           <h4>{w.name}</h4>
@@ -89,6 +91,38 @@ const MembersHome: React.FC = () => {
 
   return (
     <S.Container>
+      {modalActive ? (
+        <Modal is_active={modalActive} onClick={() => setSelectedWorkout(null)}>
+          <S.ModalContent>
+            <FontAwesomeIcon
+              className="fa-xmark"
+              icon={faXmark}
+              onClick={() => setSelectedWorkout(null)}
+            />
+
+            <div>
+              <h4>{selectedWorkout.name}</h4>
+              <span>{selectedWorkout.description}</span>
+            </div>
+
+            <p className="label">Exercises:</p>
+            <div className="exercise-list">
+              {selectedWorkout.exercises.map((ex, index) => (
+                <div className="exercise-card" key={index}>
+                  <ul>
+                    <li><span>{ex.name}</span></li>
+                    <li>Reps: <strong>{ex.reps}</strong></li>
+                    <li>Rest Interval: <strong>{ex.interval}s</strong></li>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </S.ModalContent>
+        </Modal>
+      ) : (
+        ''
+      )}
+
       <h1>
         Welcome <span>{member?.name}</span>
       </h1>

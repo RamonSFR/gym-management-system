@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
-import Button from '../../components/button'
+import Button from '../../components/Button'
 
 import { employeeLogin, memberLogin } from '../../services/loginService'
 import { validateLogin } from '../../schemas/validation'
