@@ -23,10 +23,19 @@ const EmployeeHome = () => {
       return
     }
 
-    // If logged user is not an admin/has no special role, ensure they only access their own page
-    const isAdmin = !!(user as Employee).role
+    type AuthUser = Partial<Employee> & Partial<Member> & { role?: string }
+    const asAuthUser = user as AuthUser | null
+    const isEmployeeUser =
+      !!asAuthUser && typeof asAuthUser.role !== 'undefined'
+    if (!isEmployeeUser) {
+      navigate('/')
+      return
+    }
+
+    const role = String(asAuthUser?.role || '')
+    const isAdmin = role.toLowerCase() === 'admin'
     if (!isAdmin) {
-      const loggedId = Number((user as Employee).id)
+      const loggedId = Number(asAuthUser?.id)
       if (Number.isNaN(loggedId) || loggedId !== mid) {
         navigate('/')
         return
@@ -49,6 +58,8 @@ const EmployeeHome = () => {
       .finally(() => setTimeout(() => setIsLoading(false), 0))
   }, [id, navigate, user])
 
+  if (!employee) return null
+
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}>
@@ -57,7 +68,7 @@ const EmployeeHome = () => {
     )
   }
 
-  return <h1>Hello {employee?.name}</h1>
+  return <h1>Hello {employee.name}</h1>
 }
 
 export default EmployeeHome

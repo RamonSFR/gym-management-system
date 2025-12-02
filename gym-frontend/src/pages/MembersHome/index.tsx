@@ -103,7 +103,6 @@ const MembersHome: React.FC = () => {
     }
   }
 
-  // when a workout is selected, fetch the trainer name and store it in state
   useEffect(() => {
     if (!selectedWorkout) {
       setTimeout(() => setPersonalName(null), 0)
@@ -120,6 +119,8 @@ const MembersHome: React.FC = () => {
       mounted = false
     }
   }, [selectedWorkout])
+
+  if (!member) return null
 
   return (
     <S.Container>
@@ -175,7 +176,7 @@ const MembersHome: React.FC = () => {
       )}
 
       <h1>
-        Welcome <span>{member?.name}</span>
+        Welcome <span>{member.name}</span>
       </h1>
       <h3>My Workouts:</h3>
 
