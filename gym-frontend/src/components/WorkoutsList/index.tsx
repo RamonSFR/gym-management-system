@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Button from '../Button'
+import SearchBar from '../SearchBar'
 import Modal from '../Modal'
 import Alert from '../Alert'
 
@@ -22,6 +23,7 @@ import * as S from './styles'
 
 const WorkoutsList = () => {
   const [members, setMembers] = useState<Member[] | null>(null)
+  const [query, setQuery] = useState('')
   const [selectedMember, setSelectedMember] = useState<Member | null>(null)
   const [memberWorkouts, setMemberWorkouts] = useState<Workout[] | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -50,6 +52,16 @@ const WorkoutsList = () => {
       mounted = false
     }
   }, [])
+
+  const filtered = (members || []).filter((m) => {
+    const q = query.toLowerCase()
+    return (
+      String(m.name).toLowerCase().includes(q) ||
+      String(m.email).toLowerCase().includes(q) ||
+      String(m.cpf).toLowerCase().includes(q) ||
+      String(m.membership).toLowerCase().includes(q)
+    )
+  })
 
   const openMember = async (m: Member) => {
     setSelectedMember(m)
@@ -209,8 +221,13 @@ const WorkoutsList = () => {
       <S.layout>
         <S.Left>
           <h3>Members:</h3>
+          <SearchBar
+            placeholder="Search members..."
+            value={query}
+            onChange={setQuery}
+          />
           <S.MembersContainer>
-            {(members || []).map((m) => (
+            {filtered.map((m) => (
               <S.MemberCard key={m.id} onClick={() => openMember(m)}>
                 <ul>
                   <li>
