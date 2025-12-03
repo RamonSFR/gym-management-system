@@ -51,7 +51,6 @@ const MembersHome: React.FC = () => {
 
     const isEmployeeUser = typeof asAuthUser.role !== 'undefined'
     if (isEmployeeUser) {
-      // only admin employees can view arbitrary members
       const role = String(asAuthUser.role || '')
       const isAdmin = role.toLowerCase() === 'admin'
       if (!isAdmin) {
@@ -210,11 +209,9 @@ const MembersHome: React.FC = () => {
 
       <S.CardContainer>
         {isLoading ? (
-          <div
-            style={{ display: 'flex', justifyContent: 'center', padding: 40 }}
-          >
+          <S.LoaderWrapper>
             <BounceLoader color="#36d7b7" />
-          </div>
+          </S.LoaderWrapper>
         ) : (
           <>{renderWorkouts()}</>
         )}
