@@ -7,6 +7,7 @@ import { useAuth } from '../../Contexts/AuthProvider'
 import Aside from '../../components/Aside'
 import MembersList from '../../components/MembersList'
 import EmployeesList from '../../components/EmployeesList'
+import WorkoutsList from '../../components/WorkoutsList'
 
 import * as S from './styles'
 import { validateUpdateEmployee } from '../../schemas/validation'
@@ -19,7 +20,9 @@ const EmployeeHome = () => {
 
   const [employee, setEmployee] = useState<Employee | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [view, setView] = useState<'members' | 'employees' | 'info'>('members')
+  const [view, setView] = useState<
+    'members' | 'employees' | 'info' | 'workouts'
+  >('members')
 
   useEffect(() => {
     if (!id) return
@@ -146,7 +149,9 @@ const EmployeeHome = () => {
         ) {
           msg = cast.response.data.message
         }
-      } catch {}
+      } catch {
+        // ignore
+      }
       setAlerts((prev) => [...prev, { type: 'error', message: String(msg) }])
     } finally {
       setIsSaving(false)
@@ -169,6 +174,7 @@ const EmployeeHome = () => {
         ))}
         {view === 'members' && <MembersList />}
         {view === 'employees' && <EmployeesList />}
+        {view === 'workouts' && <WorkoutsList />}
         {view === 'info' && (
           <S.AccountContainer>
             <h2>Account</h2>

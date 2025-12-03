@@ -3,7 +3,8 @@ import {
   faAddressBook,
   faCircleInfo,
   faCircleUser,
-  faList
+  faList,
+  faDumbbell
 } from '@fortawesome/free-solid-svg-icons'
 
 import * as S from './styles'
@@ -11,12 +12,13 @@ import * as S from './styles'
 interface Props {
   name: string
   role: string
-  current?: 'members' | 'employees' | 'info'
-  onNavigate?: (v: 'members' | 'employees' | 'info') => void
+  current?: 'members' | 'employees' | 'info' | 'workouts'
+  onNavigate?: (v: 'members' | 'employees' | 'info' | 'workouts') => void
 }
 
 const Aside = (props: Props) => {
-  const go = (v: 'members' | 'employees' | 'info') => props.onNavigate?.(v)
+  const go = (v: 'members' | 'employees' | 'info' | 'workouts') =>
+    props.onNavigate?.(v)
   const cur = props.current
   return (
     <S.AsideContainer>
@@ -43,6 +45,13 @@ const Aside = (props: Props) => {
         >
           <FontAwesomeIcon icon={faAddressBook} />
           Employees List
+        </button>
+        <button
+          className={cur === 'workouts' ? 'isActive' : ''}
+          onClick={() => go('workouts')}
+        >
+          <FontAwesomeIcon icon={faDumbbell} />
+          Workouts
         </button>
         <button
           className={cur === 'info' ? 'isActive' : ''}

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import { colors as c } from '../../Styles/GlobalStyles'
 
 export const Container = styled.div`
@@ -7,7 +6,7 @@ export const Container = styled.div`
   height: 100%;
   background-color: ${c.tertiary};
   border-radius: 16px;
-  padding: 32px;
+  padding: 24px;
 
   h2 {
     color: ${c.lightPurple};
@@ -16,30 +15,36 @@ export const Container = styled.div`
   }
 `
 
+export const layout = styled.div`
+  display: flex;
+  gap: 16px;
+`
+
+export const Left = styled.div`
+  width: 50%;
+`
+
+export const Right = styled.div`
+  flex: 1;
+`
+
 export const labels = styled.ul`
-  width: 100%;
-  margin-bottom: 16px;
-  font-weight: 700;
   list-style: none;
   padding: 0;
-  margin: 0 0 16px 0;
+  margin: 0 0 8px 0;
   display: grid;
-  grid-template-columns: 60px 2fr 160px 2fr 140px 140px;
-  align-items: center;
+  grid-template-columns: 60px 2fr 1fr 140px;
   gap: 12px;
-  color: ${c.darkPurple};
-  li p {
-    margin: 0;
-  }
+  font-weight: 700;
 `
 
 export const MembersContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
-  max-height: 55vh;
+  max-height: calc(100vh - 360px);
   overflow-y: scroll;
+  margin: 16px 0;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -53,16 +58,11 @@ export const MemberCard = styled.div`
   background-color: #fff;
   border: 2px solid ${c.darkPurple};
   border-radius: 8px;
+  cursor: pointer;
 
   ul li {
-    display: grid;
-    grid-template-columns: 60px 2fr 160px 2fr 140px 140px;
-    align-items: center;
-    gap: 12px;
-  }
-
-  p {
-    margin: 0;
+    display: flex;
+    justify-content: space-between;
   }
 `
 
@@ -71,16 +71,36 @@ export const Actions = styled.div`
   gap: 8px;
 `
 
+export const WorkoutsList = styled.div`
+  max-width: 55vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
+
+export const WorkoutCard = styled.div`
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid ${c.darkPurple};
+
+  display: flex;
+  justify-content: space-between;
+`
+
 export const ModalWrapper = styled.div`
-  width: 520px;
+  width: 640px;
   padding: 16px;
   background: #fff;
   border-radius: 8px;
-
-  h3 {
-    color: ${c.darkPurple};
-    margin-bottom: 16px;
-  }
 `
 
 export const FormGrid = styled.div`
@@ -88,16 +108,17 @@ export const FormGrid = styled.div`
   gap: 8px;
 
   input {
-    padding: 8px 16px;
-    border: 2px solid ${c.darkPurple};
-    border-radius: 8px;
-    outline: none;
-    font-size: 16px;
+    padding: 8px 12px;
+    border: 1px solid ${c.darkPurple};
+    border-radius: 6px;
   }
+`
 
-  input.isError {
-    border-color: #ff4d4f;
-  }
+export const ExerciseRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 80px 80px auto;
+  gap: 8px;
+  margin-bottom: 8px;
 `
 
 export const ButtonRow = styled.div`

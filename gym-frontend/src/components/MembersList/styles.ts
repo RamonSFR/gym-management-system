@@ -40,6 +40,12 @@ export const MembersContainer = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 16px;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const MemberCard = styled.div`

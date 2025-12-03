@@ -4,8 +4,8 @@ export const createWorkoutSchema = z.object({
   exercises: z.array(
     z.object({
       name: z.string().min(2).max(100),
-      sets: z.number().min(1),
-      reps: z.number().min(1)
+      reps: z.number().min(1),
+      interval: z.number().min(1)
     })
   )
 })
