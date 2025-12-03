@@ -9,31 +9,48 @@ import {
 import * as S from './styles'
 
 interface Props {
-    name: string
-    role: string
+  name: string
+  role: string
+  current?: 'members' | 'employees' | 'info'
+  onNavigate?: (v: 'members' | 'employees' | 'info') => void
 }
 
 const Aside = (props: Props) => {
+  const go = (v: 'members' | 'employees' | 'info') => props.onNavigate?.(v)
+  const cur = props.current
   return (
     <S.AsideContainer>
-      <div className='user-info'>
-        <FontAwesomeIcon className='user-icon' icon={faCircleUser} color='#e4e4e4'/>
-              <h2>{props.name}</h2>
-              <h3>{props.role}</h3>
+      <div className="user-info">
+        <FontAwesomeIcon
+          className="user-icon"
+          icon={faCircleUser}
+          color="#e4e4e4"
+        />
+        <h2>{props.name}</h2>
+        <h3>{props.role}</h3>
       </div>
       <S.Nav>
-        <a href="">
+        <button
+          className={cur === 'members' ? 'isActive' : ''}
+          onClick={() => go('members')}
+        >
           <FontAwesomeIcon icon={faList} />
           Members List
-        </a>
-        <a href="">
+        </button>
+        <button
+          className={cur === 'employees' ? 'isActive' : ''}
+          onClick={() => go('employees')}
+        >
           <FontAwesomeIcon icon={faAddressBook} />
           Employees List
-        </a>
-        <a href="">
+        </button>
+        <button
+          className={cur === 'info' ? 'isActive' : ''}
+          onClick={() => go('info')}
+        >
           <FontAwesomeIcon icon={faCircleInfo} />
           Account Info
-        </a>
+        </button>
       </S.Nav>
     </S.AsideContainer>
   )

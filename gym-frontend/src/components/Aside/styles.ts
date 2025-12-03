@@ -25,9 +25,9 @@ export const AsideContainer = styled.aside`
     }
 
     h3 {
-        color: #e4e4e4e4;
-        font-weight: 500;
-        font-size: 16px;
+      color: #e4e4e4e4;
+      font-weight: 500;
+      font-size: 16px;
     }
   }
 `
@@ -36,11 +36,14 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
 
-  a {
+  button {
+    border: none;
+    outline: none;
     display: flex;
     align-items: center;
+    font-size: 16px;
     gap: 8px;
-
+    font-weight: 500;
     border-radius: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.255);
     width: 100%;
@@ -50,6 +53,11 @@ export const Nav = styled.nav`
 
     &:hover {
       cursor: pointer;
+    }
+
+    &.isActive {
+      background-color: ${c.lightPurple};
+      color: ${c.primary};
     }
   }
 `

@@ -1,40 +1,44 @@
 import { useEffect, useState } from 'react'
+import { useAuth } from '../../Contexts/AuthProvider'
 
 import Button from '../Button'
 import SearchBar from '../SearchBar'
 import Modal from '../Modal'
 
-
-import {
-  getMembers,
-  createMember,
-  updateMember,
-  deleteMember
-} from '../../services/memberService'
-
 import * as S from './styles'
 
-const MembersList = () => {
-  const [members, setMembers] = useState<Member[] | null>(null)
+import {
+  getEmployees,
+  createEmployee,
+  updateEmployee,
+  deleteEmployee
+} from '../../services/employeeService'
+
+const EmployeesList = () => {
+  const [employees, setEmployees] = useState<Employee[] | null>(null)
+  const { user } = useAuth()
   const [query, setQuery] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [editing, setEditing] = useState<Member | null>(null)
+  const [editing, setEditing] = useState<Employee | null>(null)
   const [form, setForm] = useState({
     name: '',
     email: '',
     cpf: '',
-    membership: 'silver',
+    role: 'staff',
+    wage: 0,
     password: ''
   })
+  type AuthUser = Partial<Employee> & Partial<Member> & { role?: string }
+  const asAuthUser = user as AuthUser | null
 
   useEffect(() => {
     let mounted = true
     ;(async () => {
       try {
-        const data = await getMembers()
-        if (mounted) setMembers(data)
+        const data = await getEmployees()
+        if (mounted) setEmployees(data)
       } catch (e) {
-        console.error('Failed to load members', e)
+        console.error('Failed to load employees', e)
       }
     })()
     return () => {
@@ -48,91 +52,99 @@ const MembersList = () => {
       name: '',
       email: '',
       cpf: '',
-      membership: 'silver',
+      role: 'staff',
+      wage: 0,
       password: ''
     })
     setIsModalOpen(true)
   }
 
-  const openEdit = (m: Member) => {
+  const openEdit = (m: Employee) => {
+    const currentId = Number(asAuthUser?.id)
+    if (!Number.isNaN(currentId) && currentId === m.id) return
     setEditing(m)
     setForm({
       name: m.name,
       email: m.email,
       cpf: m.cpf,
-      membership: m.membership,
+      role: m.role,
+      wage: m.wage,
       password: ''
     })
     setIsModalOpen(true)
   }
 
-  const handleChange = (k: string, v: string) =>
+  const handleChange = (k: string, v: string | number) =>
     setForm((s) => ({ ...s, [k]: v }))
 
   const handleSave = async () => {
     try {
       if (editing) {
-        const updated = await updateMember(editing.id, {
+        const updated = await updateEmployee(editing.id, {
           name: form.name,
           email: form.email,
-          membership: form.membership,
-          cpf: form.cpf
+          role: form.role,
+          cpf: form.cpf,
+          wage: Number(form.wage)
         })
-        setMembers((prev) =>
+        setEmployees((prev) =>
           prev
             ? prev.map((m) => (m.id === updated.id ? updated : m))
             : [updated]
         )
       } else {
-        const created = await createMember({
+        const created = await createEmployee({
           name: form.name,
           email: form.email,
           password: form.password,
-          membership: form.membership,
-          cpf: form.cpf
+          role: form.role,
+          cpf: form.cpf,
+          wage: Number(form.wage)
         })
-        setMembers((prev) => (prev ? [created, ...prev] : [created]))
+        setEmployees((prev) => (prev ? [created, ...prev] : [created]))
       }
       setIsModalOpen(false)
     } catch (err) {
       console.error('Save failed', err)
-      window.alert(
-        (err &&
-          (err as { response?: { data?: { message?: string } } }).response?.data
-            ?.message) ||
-          'Failed'
-      )
+      type ErrResp = { response?: { data?: { message?: string } } }
+      const msg = (err as ErrResp).response?.data?.message ?? 'Failed'
+      window.alert(msg)
     }
   }
 
   const handleDelete = async (id: number) => {
-    if (!confirm('Delete member?')) return
+    if (!confirm('Delete employee?')) return
     try {
-      await deleteMember(id)
-      setMembers((prev) => (prev ? prev.filter((m) => m.id !== id) : null))
+      await deleteEmployee(id)
+      setEmployees((prev) => (prev ? prev.filter((m) => m.id !== id) : null))
     } catch (e) {
       console.error('Delete failed', e)
       window.alert('Delete failed')
     }
   }
 
-  const filtered = (members || []).filter((m) => {
+  const filtered = (employees || []).filter((m) => {
     const q = query.toLowerCase()
     return (
       String(m.name).toLowerCase().includes(q) ||
       String(m.email).toLowerCase().includes(q) ||
       String(m.cpf).toLowerCase().includes(q) ||
-      String(m.membership).toLowerCase().includes(q)
+      String(m.role).toLowerCase().includes(q)
     )
   })
 
+  const currentId = Number(asAuthUser?.id)
+  const visible = filtered.filter(
+    (m) => !(Number.isNaN(currentId) ? false : m.id === currentId)
+  )
+
   return (
     <S.Container>
-      <h2>Members List:</h2>
+      <h2>Employees List:</h2>
       <SearchBar
-        placeholder="Search members..."
         value={query}
         onChange={setQuery}
+        placeholder="Search employees..."
       />
       <S.labels>
         <li>
@@ -148,14 +160,14 @@ const MembersList = () => {
           <p>Email:</p>
         </li>
         <li>
-          <p>Membership:</p>
+          <p>Role:</p>
         </li>
         <li>
           <p>Actions:</p>
         </li>
       </S.labels>
       <S.MembersContainer>
-        {filtered.map((m) => (
+        {visible.map((m) => (
           <S.MemberCard key={m.id}>
             <ul>
               <li>
@@ -163,7 +175,7 @@ const MembersList = () => {
                 <p>{m.name}</p>
                 <p>{m.cpf}</p>
                 <p>{m.email}</p>
-                <p>{m.membership}</p>
+                <p>{m.role}</p>
                 <S.Actions>
                   <Button onClick={() => openEdit(m)}>Edit</Button>
                   <Button onClick={() => handleDelete(m.id)}>Delete</Button>
@@ -177,7 +189,7 @@ const MembersList = () => {
 
       <Modal is_active={isModalOpen} onClick={() => setIsModalOpen(false)}>
         <S.ModalWrapper>
-          <h3>{editing ? 'Edit member' : 'New member'}</h3>
+          <h3>{editing ? 'Edit employee' : 'New employee'}</h3>
           <S.FormGrid>
             <input
               placeholder="Name"
@@ -201,14 +213,17 @@ const MembersList = () => {
               value={form.cpf}
               onChange={(e) => handleChange('cpf', e.target.value)}
             />
-            <select
-              value={form.membership}
-              onChange={(e) => handleChange('membership', e.target.value)}
-            >
-              <option value="silver">silver</option>
-              <option value="gold">gold</option>
-              <option value="platinum">platinum</option>
-            </select>
+            <input
+              placeholder="Role"
+              value={form.role}
+              onChange={(e) => handleChange('role', e.target.value)}
+            />
+            <input
+              placeholder="Wage"
+              type="number"
+              value={Number(form.wage ?? 0)}
+              onChange={(e) => handleChange('wage', Number(e.target.value))}
+            />
 
             <S.ButtonRow>
               <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
@@ -221,4 +236,4 @@ const MembersList = () => {
   )
 }
 
-export default MembersList
+export default EmployeesList

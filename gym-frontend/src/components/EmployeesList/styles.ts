@@ -86,14 +86,6 @@ export const FormGrid = styled.div`
     outline: none;
     font-size: 16px;
   }
-
-  select {
-    padding: 8px 16px;
-    border: 2px solid ${c.darkPurple};
-    border-radius: 8px;
-    outline: none;
-    font-size: 16px;
-  }
 `
 
 export const ButtonRow = styled.div`
