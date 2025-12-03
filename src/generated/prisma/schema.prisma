@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  role      String
+  cpf       String    @unique
+  wage      Float
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  workouts  Workout[]
+
+  @@map("employees")
+}
+
+model Member {
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String    @unique
+  password   String
+  membership String
+  cpf        String    @unique
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  workouts   Workout[]
+
+  @@map("members")
+}
+
+model Workout {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  exercises   Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  personalId  Int?
+  memberId    Int?
+
+  personal Employee? @relation(fields: [personalId], references: [id], onDelete: SetNull)
+  member   Member?   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@map("workout")
+}
