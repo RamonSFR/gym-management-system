@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon src/index.ts",
-    "start": "node dist/index.js"
+    "prisma:migration": "npx prisma migrate dev --name init",
+    "start": "npm run prisma:migration && node dist/index.js"
   },
   "repository": {
     "type": "git",
