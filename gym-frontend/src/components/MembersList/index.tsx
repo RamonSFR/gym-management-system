@@ -59,7 +59,7 @@ const MembersList = () => {
       membership: 'silver',
       password: ''
     })
-  setErrors({})
+    setErrors({})
     setIsModalOpen(true)
   }
 
@@ -72,7 +72,7 @@ const MembersList = () => {
       membership: m.membership,
       password: ''
     })
-  setErrors({})
+    setErrors({})
     setIsModalOpen(true)
   }
 
@@ -82,7 +82,6 @@ const MembersList = () => {
   const handleSave = async () => {
     try {
       if (editing) {
-        // validate update payload with zod
         const payload = {
           id: editing.id,
           name: form.name,
@@ -94,7 +93,10 @@ const MembersList = () => {
         if (!validation.success) {
           setErrors(validation.errors)
           const firstKey = Object.keys(validation.errors)[0]
-          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          setAlerts((prev) => [
+            ...prev,
+            { type: 'error', message: validation.errors[firstKey] }
+          ])
           return
         }
 
@@ -121,7 +123,10 @@ const MembersList = () => {
         if (!validation.success) {
           setErrors(validation.errors)
           const firstKey = Object.keys(validation.errors)[0]
-          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          setAlerts((prev) => [
+            ...prev,
+            { type: 'error', message: validation.errors[firstKey] }
+          ])
           return
         }
 

@@ -104,9 +104,12 @@ const EmployeeHome = () => {
       }
       const validation = validateUpdateEmployee(payload)
       if (!validation.success) {
-  setErrors(validation.errors)
-  const firstKey = Object.keys(validation.errors)[0]
-  setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+        setErrors(validation.errors)
+        const firstKey = Object.keys(validation.errors)[0]
+        setAlerts((prev) => [
+          ...prev,
+          { type: 'error', message: validation.errors[firstKey] }
+        ])
         setIsSaving(false)
         return
       }
@@ -132,7 +135,6 @@ const EmployeeHome = () => {
       console.error('Failed to update employee', err)
       let msg = 'Failed to update'
       try {
-        // try to read known shape safely
         const cast = err as unknown as {
           response?: { data?: { message?: string } }
         }
@@ -144,9 +146,7 @@ const EmployeeHome = () => {
         ) {
           msg = cast.response.data.message
         }
-      } catch {
-        // ignore and keep default
-      }
+      } catch {}
       setAlerts((prev) => [...prev, { type: 'error', message: String(msg) }])
     } finally {
       setIsSaving(false)

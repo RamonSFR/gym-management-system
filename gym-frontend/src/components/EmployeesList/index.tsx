@@ -34,7 +34,9 @@ const EmployeesList = () => {
     password: ''
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
-  const [alerts, setAlerts] = useState<Array<{ type: 'success' | 'error'; message: string }>>([])
+  const [alerts, setAlerts] = useState<
+    Array<{ type: 'success' | 'error'; message: string }>
+  >([])
   type AuthUser = Partial<Employee> & Partial<Member> & { role?: string }
   const asAuthUser = user as AuthUser | null
 
@@ -63,7 +65,7 @@ const EmployeesList = () => {
       wage: 0,
       password: ''
     })
-  setErrors({})
+    setErrors({})
     setIsModalOpen(true)
   }
 
@@ -79,7 +81,7 @@ const EmployeesList = () => {
       wage: m.wage,
       password: ''
     })
-  setErrors({})
+    setErrors({})
     setIsModalOpen(true)
   }
 
@@ -101,7 +103,10 @@ const EmployeesList = () => {
         if (!validation.success) {
           setErrors(validation.errors)
           const firstKey = Object.keys(validation.errors)[0]
-          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          setAlerts((prev) => [
+            ...prev,
+            { type: 'error', message: validation.errors[firstKey] }
+          ])
           return
         }
 
@@ -130,15 +135,18 @@ const EmployeesList = () => {
         if (!validation.success) {
           setErrors(validation.errors)
           const firstKey = Object.keys(validation.errors)[0]
-          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          setAlerts((prev) => [
+            ...prev,
+            { type: 'error', message: validation.errors[firstKey] }
+          ])
           return
         }
 
         const created = await createEmployee(createPayload)
         setEmployees((prev) => (prev ? [created, ...prev] : [created]))
       }
-  setErrors({})
-  setIsModalOpen(false)
+      setErrors({})
+      setIsModalOpen(false)
     } catch (err) {
       console.error('Save failed', err)
       type ErrResp = { response?: { data?: { message?: string } } }

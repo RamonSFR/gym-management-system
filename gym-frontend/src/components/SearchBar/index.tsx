@@ -6,11 +6,7 @@ type Props = {
   placeholder?: string
 }
 
-const SearchBar = ({
-  value = '',
-  onChange,
-  placeholder,
-}: Props) => {
+const SearchBar = ({ value = '', onChange, placeholder }: Props) => {
   return (
     <S.Search
       placeholder={placeholder}

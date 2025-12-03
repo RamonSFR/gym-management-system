@@ -14,8 +14,8 @@ const Error = () => {
 
   return (
     <S.Container>
-          <h1>404: Page Not found</h1>
-          <span>Redirecting back to login page...</span>
+      <h1>404: Page Not found</h1>
+      <span>Redirecting back to login page...</span>
     </S.Container>
   )
 }
