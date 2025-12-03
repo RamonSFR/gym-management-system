@@ -1,8 +1,9 @@
+
 /**
  * Client
- **/
+**/
 
-import * as runtime from './runtime/library.js'
+import * as runtime from './runtime/library.js';
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -11,19 +12,20 @@ import $Result = runtime.Types.Result
 
 export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
+
 /**
  * Model Employee
- *
+ * 
  */
 export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
 /**
  * Model Member
- *
+ * 
  */
 export type Member = $Result.DefaultSelection<Prisma.$MemberPayload>
 /**
  * Model Workout
- *
+ * 
  */
 export type Workout = $Result.DefaultSelection<Prisma.$WorkoutPayload>
 
@@ -43,16 +45,12 @@ export type Workout = $Result.DefaultSelection<Prisma.$WorkoutPayload>
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  const U = 'log' extends keyof ClientOptions
-    ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition>
-      ? Prisma.GetEvents<ClientOptions['log']>
-      : never
-    : never,
+  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
 
-  /**
+    /**
    * ##  Prisma Client ʲˢ
    *
    * Type-safe database client for TypeScript & Node.js
@@ -67,27 +65,20 @@ export class PrismaClient<
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(
-    optionsArg?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>
-  )
-  $on<V extends U>(
-    eventType: V,
-    callback: (
-      event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent
-    ) => void
-  ): PrismaClient
+  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
 
   /**
    * Connect with the database
    */
-  $connect(): $Utils.JsPromise<void>
+  $connect(): $Utils.JsPromise<void>;
 
   /**
    * Disconnect from the database
    */
-  $disconnect(): $Utils.JsPromise<void>
+  $disconnect(): $Utils.JsPromise<void>;
 
-  /**
+/**
    * Executes a prepared raw query and returns the number of affected rows.
    * @example
    * ```
@@ -96,10 +87,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -111,10 +99,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -125,10 +110,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -140,10 +122,8 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
+
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -155,66 +135,47 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   *
+   * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(
-    arg: [...P],
-    options?: { isolationLevel?: Prisma.TransactionIsolationLevel }
-  ): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
-  $transaction<R>(
-    fn: (
-      prisma: Omit<PrismaClient, runtime.ITXClientDenyList>
-    ) => $Utils.JsPromise<R>,
-    options?: {
-      maxWait?: number
-      timeout?: number
-      isolationLevel?: Prisma.TransactionIsolationLevel
-    }
-  ): $Utils.JsPromise<R>
+  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
 
-  $extends: $Extensions.ExtendsHook<
-    'extends',
-    Prisma.TypeMapCb<ClientOptions>,
-    ExtArgs,
-    $Utils.Call<
-      Prisma.TypeMapCb<ClientOptions>,
-      {
-        extArgs: ExtArgs
-      }
-    >
-  >
 
-  /**
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
+    extArgs: ExtArgs
+  }>>
+
+      /**
    * `prisma.employee`: Exposes CRUD operations for the **Employee** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Employees
-   * const employees = await prisma.employee.findMany()
-   * ```
-   */
-  get employee(): Prisma.EmployeeDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Employees
+    * const employees = await prisma.employee.findMany()
+    * ```
+    */
+  get employee(): Prisma.EmployeeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.member`: Exposes CRUD operations for the **Member** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Members
-   * const members = await prisma.member.findMany()
-   * ```
-   */
-  get member(): Prisma.MemberDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Members
+    * const members = await prisma.member.findMany()
+    * ```
+    */
+  get member(): Prisma.MemberDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.workout`: Exposes CRUD operations for the **Workout** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Workouts
-   * const workouts = await prisma.workout.findMany()
-   * ```
-   */
-  get workout(): Prisma.WorkoutDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Workouts
+    * const workouts = await prisma.workout.findMany()
+    * ```
+    */
+  get workout(): Prisma.WorkoutDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -245,6 +206,8 @@ export namespace Prisma {
   export import raw = runtime.raw
   export import Sql = runtime.Sql
 
+
+
   /**
    * Decimal.js
    */
@@ -261,8 +224,8 @@ export namespace Prisma {
   export type MetricHistogramBucket = runtime.MetricHistogramBucket
 
   /**
-   * Extensions
-   */
+  * Extensions
+  */
   export import Extension = $Extensions.UserArgs
   export import getExtensionContext = runtime.Extensions.getExtensionContext
   export import Args = $Public.Args
@@ -284,6 +247,7 @@ export namespace Prisma {
    * Utility Types
    */
 
+
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -298,36 +262,36 @@ export namespace Prisma {
    */
   namespace NullTypes {
     /**
-     * Type of `Prisma.DbNull`.
-     *
-     * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
-     *
-     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-     */
+    * Type of `Prisma.DbNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
     class DbNull {
       private DbNull: never
       private constructor()
     }
 
     /**
-     * Type of `Prisma.JsonNull`.
-     *
-     * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
-     *
-     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-     */
+    * Type of `Prisma.JsonNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
     class JsonNull {
       private JsonNull: never
       private constructor()
     }
 
     /**
-     * Type of `Prisma.AnyNull`.
-     *
-     * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
-     *
-     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-     */
+    * Type of `Prisma.AnyNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
     class AnyNull {
       private AnyNull: never
       private constructor()
@@ -368,24 +332,22 @@ export namespace Prisma {
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> =
-    T extends PromiseLike<infer U> ? U : T
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
 
   /**
    * Get the return type of a function which returns a Promise.
    */
-  export type PromiseReturnType<
-    T extends (...args: any) => $Utils.JsPromise<any>
-  > = PromiseType<ReturnType<T>>
+  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
 
   /**
    * From T, pick a set of properties whose keys are in the union K
    */
   type Prisma__Pick<T, K extends keyof T> = {
-    [P in K]: T[P]
-  }
+      [P in K]: T[P];
+  };
 
-  export type Enumerable<T> = T | Array<T>
+
+  export type Enumerable<T> = T | Array<T>;
 
   export type RequiredKeys<T> = {
     [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
@@ -402,8 +364,8 @@ export namespace Prisma {
    * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
    */
   export type Subset<T, U> = {
-    [key in keyof T]: key extends keyof U ? T[key] : never
-  }
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  };
 
   /**
    * SelectSubset
@@ -412,11 +374,12 @@ export namespace Prisma {
    */
   export type SelectSubset<T, U> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } & (T extends SelectAndInclude
-    ? 'Please either choose `select` or `include`.'
-    : T extends SelectAndOmit
-      ? 'Please either choose `select` or `omit`.'
-      : {})
+  } &
+    (T extends SelectAndInclude
+      ? 'Please either choose `select` or `include`.'
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
 
   /**
    * Subset + Intersection
@@ -424,35 +387,37 @@ export namespace Prisma {
    */
   export type SubsetIntersection<T, U, K> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } & K
+  } &
+    K
 
-  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
   /**
    * XOR is needed to have a real mutually exclusive union type
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
-  type XOR<T, U> = T extends object
-    ? U extends object
-      ? (Without<T, U> & U) | (Without<U, T> & T)
-      : U
-    : T
+  type XOR<T, U> =
+    T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
+    : U : T
+
 
   /**
    * Is T a Record?
    */
-  type IsObject<T extends any> =
-    T extends Array<any>
-      ? False
-      : T extends Date
-        ? False
-        : T extends Uint8Array
-          ? False
-          : T extends BigInt
-            ? False
-            : T extends object
-              ? True
-              : False
+  type IsObject<T extends any> = T extends Array<any>
+  ? False
+  : T extends Date
+  ? False
+  : T extends Uint8Array
+  ? False
+  : T extends BigInt
+  ? False
+  : T extends object
+  ? True
+  : False
+
 
   /**
    * If it's T[], return T
@@ -473,7 +438,11 @@ export namespace Prisma {
 
   type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
 
-  type _Either<O extends object, K extends Key, strict extends Boolean> = {
+  type _Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean
+  > = {
     1: EitherStrict<O, K>
     0: EitherLoose<O, K>
   }[strict]
@@ -498,69 +467,50 @@ export namespace Prisma {
     : never
 
   export type Overwrite<O extends object, O1 extends object> = {
-    [K in keyof O]: K extends keyof O1 ? O1[K] : O[K]
-  } & {}
+      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+  } & {};
 
-  type _Merge<U extends object> = IntersectOf<
-    Overwrite<
-      U,
-      {
-        [K in keyof U]-?: At<U, K>
-      }
-    >
-  >
+  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+      [K in keyof U]-?: At<U, K>;
+  }>>;
 
-  type Key = string | number | symbol
-  type AtBasic<O extends object, K extends Key> = K extends keyof O
-    ? O[K]
-    : never
-  type AtStrict<O extends object, K extends Key> = O[K & keyof O]
-  type AtLoose<O extends object, K extends Key> = O extends unknown
-    ? AtStrict<O, K>
-    : never
-  export type At<
-    O extends object,
-    K extends Key,
-    strict extends Boolean = 1
-  > = {
-    1: AtStrict<O, K>
-    0: AtLoose<O, K>
-  }[strict]
+  type Key = string | number | symbol;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+      1: AtStrict<O, K>;
+      0: AtLoose<O, K>;
+  }[strict];
 
-  export type ComputeRaw<A extends any> = A extends Function
-    ? A
-    : {
-        [K in keyof A]: A[K]
-      } & {}
+  export type ComputeRaw<A extends any> = A extends Function ? A : {
+    [K in keyof A]: A[K];
+  } & {};
 
   export type OptionalFlat<O> = {
-    [K in keyof O]?: O[K]
-  } & {}
+    [K in keyof O]?: O[K];
+  } & {};
 
   type _Record<K extends keyof any, T> = {
-    [P in K]: T
-  }
+    [P in K]: T;
+  };
 
   // cause typescript not to expand types and preserve names
-  type NoExpand<T> = T extends unknown ? T : never
+  type NoExpand<T> = T extends unknown ? T : never;
 
   // this type assumes the passed object is entirely optional
   type AtLeast<O extends object, K extends string> = NoExpand<
     O extends unknown
-      ?
-          | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-          | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O)
-      : never
-  >
+    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
+    : never>;
 
-  type _Strict<U, _U = U> = U extends unknown
-    ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>>
-    : never
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
 
-  export type Strict<U extends object> = ComputeRaw<_Strict<U>>
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
   /** End Helper Types for "Merge" **/
 
-  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
 
   /**
   A [[Boolean]]
@@ -585,8 +535,8 @@ export namespace Prisma {
   export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
     ? 0 // anything `never` is false
     : A1 extends A2
-      ? 1
-      : 0
+    ? 1
+    : 0
 
   export type Has<U extends Union, U1 extends Union> = Not<
     Extends<Exclude<U1, U>, U1>
@@ -605,19 +555,21 @@ export namespace Prisma {
 
   export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
-  type Cast<A, B> = A extends B ? A : B
+  type Cast<A, B> = A extends B ? A : B;
 
-  export const type: unique symbol
+  export const type: unique symbol;
+
+
 
   /**
    * Used by group by
    */
 
-  export type GetScalarType<T, O> = O extends object
-    ? {
-        [P in keyof T]: P extends keyof O ? O[P] : never
-      }
-    : never
+  export type GetScalarType<T, O> = O extends object ? {
+    [P in keyof T]: P extends keyof O
+      ? O[P]
+      : never
+  } : never
 
   type FieldPaths<
     T,
@@ -633,13 +585,11 @@ export namespace Prisma {
         // based on the brilliant idea of Pierre-Antoine Mills
         // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
         T[K] extends infer TK
-        ? GetHavingFields<
-            UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never
-          >
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
         : never
       : {} extends FieldPaths<T[K]>
-        ? never
-        : K
+      ? never
+      : K
   }[keyof T]
 
   /**
@@ -652,56 +602,42 @@ export namespace Prisma {
   /**
    * Like `Pick`, but additionally can also accept an array of keys
    */
-  type PickEnumerable<
-    T,
-    K extends Enumerable<keyof T> | keyof T
-  > = Prisma__Pick<T, MaybeTupleToUnion<K>>
+  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
 
   /**
    * Exclude all keys with underscores
    */
-  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}`
-    ? never
-    : T
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
 
   export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
 
-  type FieldRefInputType<Model, FieldType> = Model extends never
-    ? never
-    : FieldRef<Model, FieldType>
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
+
 
   export const ModelName: {
-    Employee: 'Employee'
-    Member: 'Member'
+    Employee: 'Employee',
+    Member: 'Member',
     Workout: 'Workout'
-  }
+  };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
+
 
   export type Datasources = {
     db?: Datasource
   }
 
-  interface TypeMapCb<ClientOptions = {}>
-    extends $Utils.Fn<
-      { extArgs: $Extensions.InternalArgs },
-      $Utils.Record<string, any>
-    > {
-    returns: Prisma.TypeMap<
-      this['params']['extArgs'],
-      ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}
-    >
+  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
   }
 
-  export type TypeMap<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {}
-  > = {
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
     globalOmitOptions: {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: 'employee' | 'member' | 'workout'
+      modelProps: "employee" | "member" | "workout"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -933,29 +869,25 @@ export namespace Prisma {
       payload: any
       operations: {
         $executeRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]]
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
           result: any
         }
         $executeRawUnsafe: {
-          args: [query: string, ...values: any[]]
+          args: [query: string, ...values: any[]],
           result: any
         }
         $queryRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]]
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
           result: any
         }
         $queryRawUnsafe: {
-          args: [query: string, ...values: any[]]
+          args: [query: string, ...values: any[]],
           result: any
         }
       }
     }
   }
-  export const defineExtension: $Extensions.ExtendsHook<
-    'define',
-    Prisma.TypeMapCb,
-    $Extensions.DefaultArgs
-  >
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
@@ -976,7 +908,7 @@ export namespace Prisma {
      * ```
      * // Shorthand for `emit: 'stdout'`
      * log: ['query', 'info', 'warn', 'error']
-     *
+     * 
      * // Emit as events only
      * log: [
      *   { emit: 'event', level: 'query' },
@@ -984,14 +916,14 @@ export namespace Prisma {
      *   { emit: 'event', level: 'warn' }
      *   { emit: 'event', level: 'error' }
      * ]
-     *
+     * 
      * / Emit as events and log to stdout
      * og: [
      *  { emit: 'stdout', level: 'query' },
      *  { emit: 'stdout', level: 'info' },
      *  { emit: 'stdout', level: 'warn' }
      *  { emit: 'stdout', level: 'error' }
-     *
+     * 
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
@@ -1012,7 +944,7 @@ export namespace Prisma {
     adapter?: runtime.SqlDriverAdapterFactory | null
     /**
      * Global configuration for omitting model fields by default.
-     *
+     * 
      * @example
      * ```
      * const prisma = new PrismaClient({
@@ -1039,14 +971,15 @@ export namespace Prisma {
     emit: 'stdout' | 'event'
   }
 
-  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never
+  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
 
   export type GetLogType<T> = CheckIsLogLevel<
     T extends LogDefinition ? T['level'] : T
-  >
+  >;
 
-  export type GetEvents<T extends any[]> =
-    T extends Array<LogLevel | LogDefinition> ? GetLogType<T[number]> : never
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
+    ? GetLogType<T[number]>
+    : never;
 
   export type QueryEvent = {
     timestamp: Date
@@ -1062,6 +995,7 @@ export namespace Prisma {
     target: string
   }
   /* End Types for Logging */
+
 
   export type PrismaAction =
     | 'findUnique'
@@ -1087,17 +1021,12 @@ export namespace Prisma {
     | 'groupBy'
 
   // tested in getLogLevel.test.ts
-  export function getLogLevel(
-    log: Array<LogLevel | LogDefinition>
-  ): LogLevel | undefined
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
 
   /**
    * `PrismaClient` proxy available in interactive transactions.
    */
-  export type TransactionClient = Omit<
-    Prisma.DefaultPrismaClient,
-    runtime.ITXClientDenyList
-  >
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>
 
   export type Datasource = {
     url?: string
@@ -1107,6 +1036,7 @@ export namespace Prisma {
    * Count Types
    */
 
+
   /**
    * Count Type EmployeeCountOutputType
    */
@@ -1115,9 +1045,7 @@ export namespace Prisma {
     workouts: number
   }
 
-  export type EmployeeCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workouts?: boolean | EmployeeCountOutputTypeCountWorkoutsArgs
   }
 
@@ -1125,9 +1053,7 @@ export namespace Prisma {
   /**
    * EmployeeCountOutputType without action
    */
-  export type EmployeeCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the EmployeeCountOutputType
      */
@@ -1137,11 +1063,10 @@ export namespace Prisma {
   /**
    * EmployeeCountOutputType without action
    */
-  export type EmployeeCountOutputTypeCountWorkoutsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeCountOutputTypeCountWorkoutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkoutWhereInput
   }
+
 
   /**
    * Count Type MemberCountOutputType
@@ -1151,9 +1076,7 @@ export namespace Prisma {
     workouts: number
   }
 
-  export type MemberCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workouts?: boolean | MemberCountOutputTypeCountWorkoutsArgs
   }
 
@@ -1161,9 +1084,7 @@ export namespace Prisma {
   /**
    * MemberCountOutputType without action
    */
-  export type MemberCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the MemberCountOutputType
      */
@@ -1173,11 +1094,10 @@ export namespace Prisma {
   /**
    * MemberCountOutputType without action
    */
-  export type MemberCountOutputTypeCountWorkoutsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberCountOutputTypeCountWorkoutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkoutWhereInput
   }
+
 
   /**
    * Models
@@ -1242,6 +1162,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type EmployeeAvgAggregateInputType = {
     id?: true
     wage?: true
@@ -1289,86 +1210,81 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type EmployeeAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Employee to aggregate.
      */
     where?: EmployeeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Employees to fetch.
      */
-    orderBy?:
-      | EmployeeOrderByWithRelationInput
-      | EmployeeOrderByWithRelationInput[]
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: EmployeeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Employees from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Employees.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned Employees
-     **/
+    **/
     _count?: true | EmployeeCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
-     **/
+    **/
     _avg?: EmployeeAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
-     **/
+    **/
     _sum?: EmployeeSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: EmployeeMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: EmployeeMaxAggregateInputType
   }
 
   export type GetEmployeeAggregateType<T extends EmployeeAggregateArgs> = {
-    [P in keyof T & keyof AggregateEmployee]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateEmployee]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEmployee[P]>
       : GetScalarType<T[P], AggregateEmployee[P]>
   }
 
-  export type EmployeeGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+
+
+
+  export type EmployeeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmployeeWhereInput
-    orderBy?:
-      | EmployeeOrderByWithAggregationInput
-      | EmployeeOrderByWithAggregationInput[]
+    orderBy?: EmployeeOrderByWithAggregationInput | EmployeeOrderByWithAggregationInput[]
     by: EmployeeScalarFieldEnum[] | EmployeeScalarFieldEnum
     having?: EmployeeScalarWhereWithAggregatesInput
     take?: number
@@ -1397,11 +1313,11 @@ export namespace Prisma {
     _max: EmployeeMaxAggregateOutputType | null
   }
 
-  type GetEmployeeGroupByPayload<T extends EmployeeGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<EmployeeGroupByOutputType, T['by']> & {
-          [P in keyof T & keyof EmployeeGroupByOutputType]: P extends '_count'
+  type GetEmployeeGroupByPayload<T extends EmployeeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmployeeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmployeeGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EmployeeGroupByOutputType[P]>
@@ -1410,58 +1326,44 @@ export namespace Prisma {
       >
     >
 
-  export type EmployeeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      email?: boolean
-      password?: boolean
-      role?: boolean
-      cpf?: boolean
-      wage?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-      workouts?: boolean | Employee$workoutsArgs<ExtArgs>
-      _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
-    },
-    ExtArgs['result']['employee']
-  >
 
-  export type EmployeeSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      email?: boolean
-      password?: boolean
-      role?: boolean
-      cpf?: boolean
-      wage?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-    },
-    ExtArgs['result']['employee']
-  >
+  export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    role?: boolean
+    cpf?: boolean
+    wage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workouts?: boolean | Employee$workoutsArgs<ExtArgs>
+    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["employee"]>
 
-  export type EmployeeSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      email?: boolean
-      password?: boolean
-      role?: boolean
-      cpf?: boolean
-      wage?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-    },
-    ExtArgs['result']['employee']
-  >
+  export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    role?: boolean
+    cpf?: boolean
+    wage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employee"]>
+
+  export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    role?: boolean
+    cpf?: boolean
+    wage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectScalar = {
     id?: boolean
@@ -1475,75 +1377,42 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type EmployeeOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetOmit<
-    | 'id'
-    | 'name'
-    | 'email'
-    | 'password'
-    | 'role'
-    | 'cpf'
-    | 'wage'
-    | 'createdAt'
-    | 'updatedAt',
-    ExtArgs['result']['employee']
-  >
-  export type EmployeeInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "cpf" | "wage" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
+  export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workouts?: boolean | Employee$workoutsArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type EmployeeIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {}
-  export type EmployeeIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {}
+  export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $EmployeePayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
-    name: 'Employee'
+  export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Employee"
     objects: {
       workouts: Prisma.$WorkoutPayload<ExtArgs>[]
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: number
-        name: string
-        email: string
-        password: string
-        role: string
-        cpf: string
-        wage: number
-        createdAt: Date
-        updatedAt: Date
-      },
-      ExtArgs['result']['employee']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      email: string
+      password: string
+      role: string
+      cpf: string
+      wage: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["employee"]>
     composites: {}
   }
 
-  type EmployeeGetPayload<
-    S extends boolean | null | undefined | EmployeeDefaultArgs
-  > = $Result.GetResult<Prisma.$EmployeePayload, S>
+  type EmployeeGetPayload<S extends boolean | null | undefined | EmployeeDefaultArgs> = $Result.GetResult<Prisma.$EmployeePayload, S>
 
-  type EmployeeCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = Omit<EmployeeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-    select?: EmployeeCountAggregateInputType | true
-  }
-
-  export interface EmployeeDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {}
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['Employee']
-      meta: { name: 'Employee' }
+  type EmployeeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmployeeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmployeeCountAggregateInputType | true
     }
+
+  export interface EmployeeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Employee'], meta: { name: 'Employee' } }
     /**
      * Find zero or one Employee that matches the filter.
      * @param {EmployeeFindUniqueArgs} args - Arguments to find a Employee
@@ -1555,19 +1424,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends EmployeeFindUniqueArgs>(
-      args: SelectSubset<T, EmployeeFindUniqueArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'findUnique',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findUnique<T extends EmployeeFindUniqueArgs>(args: SelectSubset<T, EmployeeFindUniqueArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Employee that matches the filter or throw an error with `error.code='P2025'`
@@ -1581,19 +1438,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends EmployeeFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, EmployeeFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findUniqueOrThrow<T extends EmployeeFindUniqueOrThrowArgs>(args: SelectSubset<T, EmployeeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Employee that matches the filter.
@@ -1608,19 +1453,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends EmployeeFindFirstArgs>(
-      args?: SelectSubset<T, EmployeeFindFirstArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'findFirst',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findFirst<T extends EmployeeFindFirstArgs>(args?: SelectSubset<T, EmployeeFindFirstArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Employee that matches the filter or
@@ -1636,19 +1469,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends EmployeeFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, EmployeeFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findFirstOrThrow<T extends EmployeeFindFirstOrThrowArgs>(args?: SelectSubset<T, EmployeeFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Employees that matches the filter.
@@ -1658,24 +1479,15 @@ export namespace Prisma {
      * @example
      * // Get all Employees
      * const employees = await prisma.employee.findMany()
-     *
+     * 
      * // Get first 10 Employees
      * const employees = await prisma.employee.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const employeeWithIdOnly = await prisma.employee.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends EmployeeFindManyArgs>(
-      args?: SelectSubset<T, EmployeeFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    >
+    findMany<T extends EmployeeFindManyArgs>(args?: SelectSubset<T, EmployeeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Employee.
@@ -1687,21 +1499,9 @@ export namespace Prisma {
      *     // ... data to create a Employee
      *   }
      * })
-     *
+     * 
      */
-    create<T extends EmployeeCreateArgs>(
-      args: SelectSubset<T, EmployeeCreateArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'create',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    create<T extends EmployeeCreateArgs>(args: SelectSubset<T, EmployeeCreateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Employees.
@@ -1713,11 +1513,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends EmployeeCreateManyArgs>(
-      args?: SelectSubset<T, EmployeeCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends EmployeeCreateManyArgs>(args?: SelectSubset<T, EmployeeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Employees and returns the data saved in the database.
@@ -1729,7 +1527,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many Employees and only return the `id`
      * const employeeWithIdOnly = await prisma.employee.createManyAndReturn({
      *   select: { id: true },
@@ -1739,18 +1537,9 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
-    createManyAndReturn<T extends EmployeeCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, EmployeeCreateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'createManyAndReturn',
-        GlobalOmitOptions
-      >
-    >
+    createManyAndReturn<T extends EmployeeCreateManyAndReturnArgs>(args?: SelectSubset<T, EmployeeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Employee.
@@ -1762,21 +1551,9 @@ export namespace Prisma {
      *     // ... filter to delete one Employee
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends EmployeeDeleteArgs>(
-      args: SelectSubset<T, EmployeeDeleteArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'delete',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    delete<T extends EmployeeDeleteArgs>(args: SelectSubset<T, EmployeeDeleteArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Employee.
@@ -1791,21 +1568,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends EmployeeUpdateArgs>(
-      args: SelectSubset<T, EmployeeUpdateArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'update',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    update<T extends EmployeeUpdateArgs>(args: SelectSubset<T, EmployeeUpdateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Employees.
@@ -1817,11 +1582,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends EmployeeDeleteManyArgs>(
-      args?: SelectSubset<T, EmployeeDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends EmployeeDeleteManyArgs>(args?: SelectSubset<T, EmployeeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Employees.
@@ -1838,11 +1601,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends EmployeeUpdateManyArgs>(
-      args: SelectSubset<T, EmployeeUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends EmployeeUpdateManyArgs>(args: SelectSubset<T, EmployeeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Employees and returns the data updated in the database.
@@ -1857,7 +1618,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more Employees and only return the `id`
      * const employeeWithIdOnly = await prisma.employee.updateManyAndReturn({
      *   select: { id: true },
@@ -1870,18 +1631,9 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
-    updateManyAndReturn<T extends EmployeeUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, EmployeeUpdateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'updateManyAndReturn',
-        GlobalOmitOptions
-      >
-    >
+    updateManyAndReturn<T extends EmployeeUpdateManyAndReturnArgs>(args: SelectSubset<T, EmployeeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Employee.
@@ -1900,19 +1652,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends EmployeeUpsertArgs>(
-      args: SelectSubset<T, EmployeeUpsertArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'upsert',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    upsert<T extends EmployeeUpsertArgs>(args: SelectSubset<T, EmployeeUpsertArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
 
     /**
      * Count the number of Employees.
@@ -1926,9 +1667,9 @@ export namespace Prisma {
      *     // ... the filter for the Employees we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends EmployeeCountArgs>(
-      args?: Subset<T, EmployeeCountArgs>
+      args?: Subset<T, EmployeeCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -1960,10 +1701,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends EmployeeAggregateArgs>(
-      args: Subset<T, EmployeeAggregateArgs>
-    ): Prisma.PrismaPromise<GetEmployeeAggregateType<T>>
+    **/
+    aggregate<T extends EmployeeAggregateArgs>(args: Subset<T, EmployeeAggregateArgs>): Prisma.PrismaPromise<GetEmployeeAggregateType<T>>
 
     /**
      * Group by Employee.
@@ -1981,8 +1720,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends EmployeeGroupByArgs,
       HasSelectOrTake extends Or<
@@ -1992,65 +1731,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: EmployeeGroupByArgs['orderBy'] }
         : { orderBy?: EmployeeGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-    >(
-      args: SubsetIntersection<T, EmployeeGroupByArgs, OrderByArg> & InputErrors
-    ): {} extends InputErrors
-      ? GetEmployeeGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the Employee model
-     */
-    readonly fields: EmployeeFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmployeeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmployeeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Employee model
+   */
+  readonly fields: EmployeeFieldRefs;
   }
 
   /**
@@ -2059,51 +1792,22 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__EmployeeClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {}
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    workouts<T extends Employee$workoutsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Employee$workoutsArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$WorkoutPayload<ExtArgs>,
-          T,
-          'findMany',
-          GlobalOmitOptions
-        >
-      | Null
-    >
+  export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workouts<T extends Employee$workoutsArgs<ExtArgs> = {}>(args?: Subset<T, Employee$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -2113,28 +1817,30 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the Employee model
    */
   interface EmployeeFieldRefs {
-    readonly id: FieldRef<'Employee', 'Int'>
-    readonly name: FieldRef<'Employee', 'String'>
-    readonly email: FieldRef<'Employee', 'String'>
-    readonly password: FieldRef<'Employee', 'String'>
-    readonly role: FieldRef<'Employee', 'String'>
-    readonly cpf: FieldRef<'Employee', 'String'>
-    readonly wage: FieldRef<'Employee', 'Float'>
-    readonly createdAt: FieldRef<'Employee', 'DateTime'>
-    readonly updatedAt: FieldRef<'Employee', 'DateTime'>
+    readonly id: FieldRef<"Employee", 'Int'>
+    readonly name: FieldRef<"Employee", 'String'>
+    readonly email: FieldRef<"Employee", 'String'>
+    readonly password: FieldRef<"Employee", 'String'>
+    readonly role: FieldRef<"Employee", 'String'>
+    readonly cpf: FieldRef<"Employee", 'String'>
+    readonly wage: FieldRef<"Employee", 'Float'>
+    readonly createdAt: FieldRef<"Employee", 'DateTime'>
+    readonly updatedAt: FieldRef<"Employee", 'DateTime'>
   }
+    
 
   // Custom InputTypes
   /**
    * Employee findUnique
    */
-  export type EmployeeFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2156,9 +1862,7 @@ export namespace Prisma {
   /**
    * Employee findUniqueOrThrow
    */
-  export type EmployeeFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2180,9 +1884,7 @@ export namespace Prisma {
   /**
    * Employee findFirst
    */
-  export type EmployeeFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2201,33 +1903,31 @@ export namespace Prisma {
     where?: EmployeeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Employees to fetch.
      */
-    orderBy?:
-      | EmployeeOrderByWithRelationInput
-      | EmployeeOrderByWithRelationInput[]
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Employees.
      */
     cursor?: EmployeeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Employees from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Employees.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Employees.
      */
     distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
@@ -2236,9 +1936,7 @@ export namespace Prisma {
   /**
    * Employee findFirstOrThrow
    */
-  export type EmployeeFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2257,33 +1955,31 @@ export namespace Prisma {
     where?: EmployeeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Employees to fetch.
      */
-    orderBy?:
-      | EmployeeOrderByWithRelationInput
-      | EmployeeOrderByWithRelationInput[]
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Employees.
      */
     cursor?: EmployeeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Employees from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Employees.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Employees.
      */
     distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
@@ -2292,9 +1988,7 @@ export namespace Prisma {
   /**
    * Employee findMany
    */
-  export type EmployeeFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2313,27 +2007,25 @@ export namespace Prisma {
     where?: EmployeeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Employees to fetch.
      */
-    orderBy?:
-      | EmployeeOrderByWithRelationInput
-      | EmployeeOrderByWithRelationInput[]
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing Employees.
      */
     cursor?: EmployeeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Employees from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Employees.
      */
     skip?: number
@@ -2343,9 +2035,7 @@ export namespace Prisma {
   /**
    * Employee create
    */
-  export type EmployeeCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2367,9 +2057,7 @@ export namespace Prisma {
   /**
    * Employee createMany
    */
-  export type EmployeeCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Employees.
      */
@@ -2380,9 +2068,7 @@ export namespace Prisma {
   /**
    * Employee createManyAndReturn
    */
-  export type EmployeeCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2401,9 +2087,7 @@ export namespace Prisma {
   /**
    * Employee update
    */
-  export type EmployeeUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2429,9 +2113,7 @@ export namespace Prisma {
   /**
    * Employee updateMany
    */
-  export type EmployeeUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Employees.
      */
@@ -2449,9 +2131,7 @@ export namespace Prisma {
   /**
    * Employee updateManyAndReturn
    */
-  export type EmployeeUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2477,9 +2157,7 @@ export namespace Prisma {
   /**
    * Employee upsert
    */
-  export type EmployeeUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2509,9 +2187,7 @@ export namespace Prisma {
   /**
    * Employee delete
    */
-  export type EmployeeDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2533,9 +2209,7 @@ export namespace Prisma {
   /**
    * Employee deleteMany
    */
-  export type EmployeeDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Employees to delete
      */
@@ -2549,9 +2223,7 @@ export namespace Prisma {
   /**
    * Employee.workouts
    */
-  export type Employee$workoutsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type Employee$workoutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -2565,9 +2237,7 @@ export namespace Prisma {
      */
     include?: WorkoutInclude<ExtArgs> | null
     where?: WorkoutWhereInput
-    orderBy?:
-      | WorkoutOrderByWithRelationInput
-      | WorkoutOrderByWithRelationInput[]
+    orderBy?: WorkoutOrderByWithRelationInput | WorkoutOrderByWithRelationInput[]
     cursor?: WorkoutWhereUniqueInput
     take?: number
     skip?: number
@@ -2577,9 +2247,7 @@ export namespace Prisma {
   /**
    * Employee without action
    */
-  export type EmployeeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type EmployeeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -2593,6 +2261,7 @@ export namespace Prisma {
      */
     include?: EmployeeInclude<ExtArgs> | null
   }
+
 
   /**
    * Model Member
@@ -2648,6 +2317,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type MemberAvgAggregateInputType = {
     id?: true
   }
@@ -2690,84 +2360,81 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type MemberAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Member to aggregate.
      */
     where?: MemberWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Members to fetch.
      */
     orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: MemberWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Members from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Members.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned Members
-     **/
+    **/
     _count?: true | MemberCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
-     **/
+    **/
     _avg?: MemberAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
-     **/
+    **/
     _sum?: MemberSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: MemberMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: MemberMaxAggregateInputType
   }
 
   export type GetMemberAggregateType<T extends MemberAggregateArgs> = {
-    [P in keyof T & keyof AggregateMember]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateMember]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateMember[P]>
       : GetScalarType<T[P], AggregateMember[P]>
   }
 
-  export type MemberGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+
+
+
+  export type MemberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MemberWhereInput
-    orderBy?:
-      | MemberOrderByWithAggregationInput
-      | MemberOrderByWithAggregationInput[]
+    orderBy?: MemberOrderByWithAggregationInput | MemberOrderByWithAggregationInput[]
     by: MemberScalarFieldEnum[] | MemberScalarFieldEnum
     having?: MemberScalarWhereWithAggregatesInput
     take?: number
@@ -2795,11 +2462,11 @@ export namespace Prisma {
     _max: MemberMaxAggregateOutputType | null
   }
 
-  type GetMemberGroupByPayload<T extends MemberGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<MemberGroupByOutputType, T['by']> & {
-          [P in keyof T & keyof MemberGroupByOutputType]: P extends '_count'
+  type GetMemberGroupByPayload<T extends MemberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MemberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MemberGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], MemberGroupByOutputType[P]>
@@ -2808,55 +2475,41 @@ export namespace Prisma {
       >
     >
 
-  export type MemberSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      email?: boolean
-      password?: boolean
-      membership?: boolean
-      cpf?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-      workouts?: boolean | Member$workoutsArgs<ExtArgs>
-      _count?: boolean | MemberCountOutputTypeDefaultArgs<ExtArgs>
-    },
-    ExtArgs['result']['member']
-  >
 
-  export type MemberSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      email?: boolean
-      password?: boolean
-      membership?: boolean
-      cpf?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-    },
-    ExtArgs['result']['member']
-  >
+  export type MemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    membership?: boolean
+    cpf?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workouts?: boolean | Member$workoutsArgs<ExtArgs>
+    _count?: boolean | MemberCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["member"]>
 
-  export type MemberSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      email?: boolean
-      password?: boolean
-      membership?: boolean
-      cpf?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-    },
-    ExtArgs['result']['member']
-  >
+  export type MemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    membership?: boolean
+    cpf?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["member"]>
+
+  export type MemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    membership?: boolean
+    cpf?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["member"]>
 
   export type MemberSelectScalar = {
     id?: boolean
@@ -2869,73 +2522,41 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type MemberOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetOmit<
-    | 'id'
-    | 'name'
-    | 'email'
-    | 'password'
-    | 'membership'
-    | 'cpf'
-    | 'createdAt'
-    | 'updatedAt',
-    ExtArgs['result']['member']
-  >
-  export type MemberInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "membership" | "cpf" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
+  export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workouts?: boolean | Member$workoutsArgs<ExtArgs>
     _count?: boolean | MemberCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type MemberIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {}
-  export type MemberIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {}
+  export type MemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type MemberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $MemberPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
-    name: 'Member'
+  export type $MemberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Member"
     objects: {
       workouts: Prisma.$WorkoutPayload<ExtArgs>[]
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: number
-        name: string
-        email: string
-        password: string
-        membership: string
-        cpf: string
-        createdAt: Date
-        updatedAt: Date
-      },
-      ExtArgs['result']['member']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      email: string
+      password: string
+      membership: string
+      cpf: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["member"]>
     composites: {}
   }
 
-  type MemberGetPayload<
-    S extends boolean | null | undefined | MemberDefaultArgs
-  > = $Result.GetResult<Prisma.$MemberPayload, S>
+  type MemberGetPayload<S extends boolean | null | undefined | MemberDefaultArgs> = $Result.GetResult<Prisma.$MemberPayload, S>
 
-  type MemberCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = Omit<MemberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-    select?: MemberCountAggregateInputType | true
-  }
-
-  export interface MemberDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {}
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['Member']
-      meta: { name: 'Member' }
+  type MemberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MemberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MemberCountAggregateInputType | true
     }
+
+  export interface MemberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Member'], meta: { name: 'Member' } }
     /**
      * Find zero or one Member that matches the filter.
      * @param {MemberFindUniqueArgs} args - Arguments to find a Member
@@ -2947,19 +2568,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends MemberFindUniqueArgs>(
-      args: SelectSubset<T, MemberFindUniqueArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'findUnique',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findUnique<T extends MemberFindUniqueArgs>(args: SelectSubset<T, MemberFindUniqueArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Member that matches the filter or throw an error with `error.code='P2025'`
@@ -2973,19 +2582,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MemberFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, MemberFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findUniqueOrThrow<T extends MemberFindUniqueOrThrowArgs>(args: SelectSubset<T, MemberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Member that matches the filter.
@@ -3000,19 +2597,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends MemberFindFirstArgs>(
-      args?: SelectSubset<T, MemberFindFirstArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'findFirst',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findFirst<T extends MemberFindFirstArgs>(args?: SelectSubset<T, MemberFindFirstArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Member that matches the filter or
@@ -3028,19 +2613,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends MemberFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, MemberFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findFirstOrThrow<T extends MemberFindFirstOrThrowArgs>(args?: SelectSubset<T, MemberFindFirstOrThrowArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Members that matches the filter.
@@ -3050,24 +2623,15 @@ export namespace Prisma {
      * @example
      * // Get all Members
      * const members = await prisma.member.findMany()
-     *
+     * 
      * // Get first 10 Members
      * const members = await prisma.member.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const memberWithIdOnly = await prisma.member.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends MemberFindManyArgs>(
-      args?: SelectSubset<T, MemberFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    >
+    findMany<T extends MemberFindManyArgs>(args?: SelectSubset<T, MemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Member.
@@ -3079,21 +2643,9 @@ export namespace Prisma {
      *     // ... data to create a Member
      *   }
      * })
-     *
+     * 
      */
-    create<T extends MemberCreateArgs>(
-      args: SelectSubset<T, MemberCreateArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'create',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    create<T extends MemberCreateArgs>(args: SelectSubset<T, MemberCreateArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Members.
@@ -3105,11 +2657,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends MemberCreateManyArgs>(
-      args?: SelectSubset<T, MemberCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends MemberCreateManyArgs>(args?: SelectSubset<T, MemberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Members and returns the data saved in the database.
@@ -3121,7 +2671,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many Members and only return the `id`
      * const memberWithIdOnly = await prisma.member.createManyAndReturn({
      *   select: { id: true },
@@ -3131,18 +2681,9 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
-    createManyAndReturn<T extends MemberCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, MemberCreateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'createManyAndReturn',
-        GlobalOmitOptions
-      >
-    >
+    createManyAndReturn<T extends MemberCreateManyAndReturnArgs>(args?: SelectSubset<T, MemberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Member.
@@ -3154,21 +2695,9 @@ export namespace Prisma {
      *     // ... filter to delete one Member
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends MemberDeleteArgs>(
-      args: SelectSubset<T, MemberDeleteArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'delete',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    delete<T extends MemberDeleteArgs>(args: SelectSubset<T, MemberDeleteArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Member.
@@ -3183,21 +2712,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends MemberUpdateArgs>(
-      args: SelectSubset<T, MemberUpdateArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'update',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    update<T extends MemberUpdateArgs>(args: SelectSubset<T, MemberUpdateArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Members.
@@ -3209,11 +2726,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends MemberDeleteManyArgs>(
-      args?: SelectSubset<T, MemberDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends MemberDeleteManyArgs>(args?: SelectSubset<T, MemberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Members.
@@ -3230,11 +2745,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends MemberUpdateManyArgs>(
-      args: SelectSubset<T, MemberUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends MemberUpdateManyArgs>(args: SelectSubset<T, MemberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Members and returns the data updated in the database.
@@ -3249,7 +2762,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more Members and only return the `id`
      * const memberWithIdOnly = await prisma.member.updateManyAndReturn({
      *   select: { id: true },
@@ -3262,18 +2775,9 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
-    updateManyAndReturn<T extends MemberUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, MemberUpdateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'updateManyAndReturn',
-        GlobalOmitOptions
-      >
-    >
+    updateManyAndReturn<T extends MemberUpdateManyAndReturnArgs>(args: SelectSubset<T, MemberUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Member.
@@ -3292,19 +2796,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends MemberUpsertArgs>(
-      args: SelectSubset<T, MemberUpsertArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'upsert',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    upsert<T extends MemberUpsertArgs>(args: SelectSubset<T, MemberUpsertArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
 
     /**
      * Count the number of Members.
@@ -3318,9 +2811,9 @@ export namespace Prisma {
      *     // ... the filter for the Members we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends MemberCountArgs>(
-      args?: Subset<T, MemberCountArgs>
+      args?: Subset<T, MemberCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -3352,10 +2845,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends MemberAggregateArgs>(
-      args: Subset<T, MemberAggregateArgs>
-    ): Prisma.PrismaPromise<GetMemberAggregateType<T>>
+    **/
+    aggregate<T extends MemberAggregateArgs>(args: Subset<T, MemberAggregateArgs>): Prisma.PrismaPromise<GetMemberAggregateType<T>>
 
     /**
      * Group by Member.
@@ -3373,8 +2864,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends MemberGroupByArgs,
       HasSelectOrTake extends Or<
@@ -3384,65 +2875,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: MemberGroupByArgs['orderBy'] }
         : { orderBy?: MemberGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-    >(
-      args: SubsetIntersection<T, MemberGroupByArgs, OrderByArg> & InputErrors
-    ): {} extends InputErrors
-      ? GetMemberGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the Member model
-     */
-    readonly fields: MemberFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MemberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMemberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Member model
+   */
+  readonly fields: MemberFieldRefs;
   }
 
   /**
@@ -3451,51 +2936,22 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MemberClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {}
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    workouts<T extends Member$workoutsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Member$workoutsArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$WorkoutPayload<ExtArgs>,
-          T,
-          'findMany',
-          GlobalOmitOptions
-        >
-      | Null
-    >
+  export interface Prisma__MemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workouts<T extends Member$workoutsArgs<ExtArgs> = {}>(args?: Subset<T, Member$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -3505,27 +2961,29 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the Member model
    */
   interface MemberFieldRefs {
-    readonly id: FieldRef<'Member', 'Int'>
-    readonly name: FieldRef<'Member', 'String'>
-    readonly email: FieldRef<'Member', 'String'>
-    readonly password: FieldRef<'Member', 'String'>
-    readonly membership: FieldRef<'Member', 'String'>
-    readonly cpf: FieldRef<'Member', 'String'>
-    readonly createdAt: FieldRef<'Member', 'DateTime'>
-    readonly updatedAt: FieldRef<'Member', 'DateTime'>
+    readonly id: FieldRef<"Member", 'Int'>
+    readonly name: FieldRef<"Member", 'String'>
+    readonly email: FieldRef<"Member", 'String'>
+    readonly password: FieldRef<"Member", 'String'>
+    readonly membership: FieldRef<"Member", 'String'>
+    readonly cpf: FieldRef<"Member", 'String'>
+    readonly createdAt: FieldRef<"Member", 'DateTime'>
+    readonly updatedAt: FieldRef<"Member", 'DateTime'>
   }
+    
 
   // Custom InputTypes
   /**
    * Member findUnique
    */
-  export type MemberFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3547,9 +3005,7 @@ export namespace Prisma {
   /**
    * Member findUniqueOrThrow
    */
-  export type MemberFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3571,9 +3027,7 @@ export namespace Prisma {
   /**
    * Member findFirst
    */
-  export type MemberFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3592,31 +3046,31 @@ export namespace Prisma {
     where?: MemberWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Members to fetch.
      */
     orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Members.
      */
     cursor?: MemberWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Members from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Members.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Members.
      */
     distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
@@ -3625,9 +3079,7 @@ export namespace Prisma {
   /**
    * Member findFirstOrThrow
    */
-  export type MemberFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3646,31 +3098,31 @@ export namespace Prisma {
     where?: MemberWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Members to fetch.
      */
     orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Members.
      */
     cursor?: MemberWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Members from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Members.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Members.
      */
     distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
@@ -3679,9 +3131,7 @@ export namespace Prisma {
   /**
    * Member findMany
    */
-  export type MemberFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3700,25 +3150,25 @@ export namespace Prisma {
     where?: MemberWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Members to fetch.
      */
     orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing Members.
      */
     cursor?: MemberWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Members from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Members.
      */
     skip?: number
@@ -3728,9 +3178,7 @@ export namespace Prisma {
   /**
    * Member create
    */
-  export type MemberCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3752,9 +3200,7 @@ export namespace Prisma {
   /**
    * Member createMany
    */
-  export type MemberCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Members.
      */
@@ -3765,9 +3211,7 @@ export namespace Prisma {
   /**
    * Member createManyAndReturn
    */
-  export type MemberCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3786,9 +3230,7 @@ export namespace Prisma {
   /**
    * Member update
    */
-  export type MemberUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3814,9 +3256,7 @@ export namespace Prisma {
   /**
    * Member updateMany
    */
-  export type MemberUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Members.
      */
@@ -3834,9 +3274,7 @@ export namespace Prisma {
   /**
    * Member updateManyAndReturn
    */
-  export type MemberUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3862,9 +3300,7 @@ export namespace Prisma {
   /**
    * Member upsert
    */
-  export type MemberUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3894,9 +3330,7 @@ export namespace Prisma {
   /**
    * Member delete
    */
-  export type MemberDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3918,9 +3352,7 @@ export namespace Prisma {
   /**
    * Member deleteMany
    */
-  export type MemberDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Members to delete
      */
@@ -3934,9 +3366,7 @@ export namespace Prisma {
   /**
    * Member.workouts
    */
-  export type Member$workoutsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type Member$workoutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -3950,9 +3380,7 @@ export namespace Prisma {
      */
     include?: WorkoutInclude<ExtArgs> | null
     where?: WorkoutWhereInput
-    orderBy?:
-      | WorkoutOrderByWithRelationInput
-      | WorkoutOrderByWithRelationInput[]
+    orderBy?: WorkoutOrderByWithRelationInput | WorkoutOrderByWithRelationInput[]
     cursor?: WorkoutWhereUniqueInput
     take?: number
     skip?: number
@@ -3962,9 +3390,7 @@ export namespace Prisma {
   /**
    * Member without action
    */
-  export type MemberDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type MemberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -3978,6 +3404,7 @@ export namespace Prisma {
      */
     include?: MemberInclude<ExtArgs> | null
   }
+
 
   /**
    * Model Workout
@@ -4035,6 +3462,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type WorkoutAvgAggregateInputType = {
     id?: true
     personalId?: true
@@ -4079,86 +3507,81 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type WorkoutAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Workout to aggregate.
      */
     where?: WorkoutWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Workouts to fetch.
      */
-    orderBy?:
-      | WorkoutOrderByWithRelationInput
-      | WorkoutOrderByWithRelationInput[]
+    orderBy?: WorkoutOrderByWithRelationInput | WorkoutOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: WorkoutWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Workouts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Workouts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned Workouts
-     **/
+    **/
     _count?: true | WorkoutCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
-     **/
+    **/
     _avg?: WorkoutAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
-     **/
+    **/
     _sum?: WorkoutSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: WorkoutMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: WorkoutMaxAggregateInputType
   }
 
   export type GetWorkoutAggregateType<T extends WorkoutAggregateArgs> = {
-    [P in keyof T & keyof AggregateWorkout]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateWorkout]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateWorkout[P]>
       : GetScalarType<T[P], AggregateWorkout[P]>
   }
 
-  export type WorkoutGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+
+
+
+  export type WorkoutGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkoutWhereInput
-    orderBy?:
-      | WorkoutOrderByWithAggregationInput
-      | WorkoutOrderByWithAggregationInput[]
+    orderBy?: WorkoutOrderByWithAggregationInput | WorkoutOrderByWithAggregationInput[]
     by: WorkoutScalarFieldEnum[] | WorkoutScalarFieldEnum
     having?: WorkoutScalarWhereWithAggregatesInput
     take?: number
@@ -4186,11 +3609,11 @@ export namespace Prisma {
     _max: WorkoutMaxAggregateOutputType | null
   }
 
-  type GetWorkoutGroupByPayload<T extends WorkoutGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<WorkoutGroupByOutputType, T['by']> & {
-          [P in keyof T & keyof WorkoutGroupByOutputType]: P extends '_count'
+  type GetWorkoutGroupByPayload<T extends WorkoutGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WorkoutGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WorkoutGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], WorkoutGroupByOutputType[P]>
@@ -4199,59 +3622,45 @@ export namespace Prisma {
       >
     >
 
-  export type WorkoutSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      description?: boolean
-      exercises?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-      personalId?: boolean
-      memberId?: boolean
-      personal?: boolean | Workout$personalArgs<ExtArgs>
-      member?: boolean | Workout$memberArgs<ExtArgs>
-    },
-    ExtArgs['result']['workout']
-  >
 
-  export type WorkoutSelectCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      description?: boolean
-      exercises?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-      personalId?: boolean
-      memberId?: boolean
-      personal?: boolean | Workout$personalArgs<ExtArgs>
-      member?: boolean | Workout$memberArgs<ExtArgs>
-    },
-    ExtArgs['result']['workout']
-  >
+  export type WorkoutSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    exercises?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    personalId?: boolean
+    memberId?: boolean
+    personal?: boolean | Workout$personalArgs<ExtArgs>
+    member?: boolean | Workout$memberArgs<ExtArgs>
+  }, ExtArgs["result"]["workout"]>
 
-  export type WorkoutSelectUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      name?: boolean
-      description?: boolean
-      exercises?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-      personalId?: boolean
-      memberId?: boolean
-      personal?: boolean | Workout$personalArgs<ExtArgs>
-      member?: boolean | Workout$memberArgs<ExtArgs>
-    },
-    ExtArgs['result']['workout']
-  >
+  export type WorkoutSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    exercises?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    personalId?: boolean
+    memberId?: boolean
+    personal?: boolean | Workout$personalArgs<ExtArgs>
+    member?: boolean | Workout$memberArgs<ExtArgs>
+  }, ExtArgs["result"]["workout"]>
+
+  export type WorkoutSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    exercises?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    personalId?: boolean
+    memberId?: boolean
+    personal?: boolean | Workout$personalArgs<ExtArgs>
+    member?: boolean | Workout$memberArgs<ExtArgs>
+  }, ExtArgs["result"]["workout"]>
 
   export type WorkoutSelectScalar = {
     id?: boolean
@@ -4264,80 +3673,48 @@ export namespace Prisma {
     memberId?: boolean
   }
 
-  export type WorkoutOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = $Extensions.GetOmit<
-    | 'id'
-    | 'name'
-    | 'description'
-    | 'exercises'
-    | 'createdAt'
-    | 'updatedAt'
-    | 'personalId'
-    | 'memberId',
-    ExtArgs['result']['workout']
-  >
-  export type WorkoutInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "exercises" | "createdAt" | "updatedAt" | "personalId" | "memberId", ExtArgs["result"]["workout"]>
+  export type WorkoutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     personal?: boolean | Workout$personalArgs<ExtArgs>
     member?: boolean | Workout$memberArgs<ExtArgs>
   }
-  export type WorkoutIncludeCreateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     personal?: boolean | Workout$personalArgs<ExtArgs>
     member?: boolean | Workout$memberArgs<ExtArgs>
   }
-  export type WorkoutIncludeUpdateManyAndReturn<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     personal?: boolean | Workout$personalArgs<ExtArgs>
     member?: boolean | Workout$memberArgs<ExtArgs>
   }
 
-  export type $WorkoutPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
-    name: 'Workout'
+  export type $WorkoutPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Workout"
     objects: {
       personal: Prisma.$EmployeePayload<ExtArgs> | null
       member: Prisma.$MemberPayload<ExtArgs> | null
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: number
-        name: string
-        description: string | null
-        exercises: Prisma.JsonValue
-        createdAt: Date
-        updatedAt: Date
-        personalId: number | null
-        memberId: number | null
-      },
-      ExtArgs['result']['workout']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      description: string | null
+      exercises: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+      personalId: number | null
+      memberId: number | null
+    }, ExtArgs["result"]["workout"]>
     composites: {}
   }
 
-  type WorkoutGetPayload<
-    S extends boolean | null | undefined | WorkoutDefaultArgs
-  > = $Result.GetResult<Prisma.$WorkoutPayload, S>
+  type WorkoutGetPayload<S extends boolean | null | undefined | WorkoutDefaultArgs> = $Result.GetResult<Prisma.$WorkoutPayload, S>
 
-  type WorkoutCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = Omit<WorkoutFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-    select?: WorkoutCountAggregateInputType | true
-  }
-
-  export interface WorkoutDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {}
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['Workout']
-      meta: { name: 'Workout' }
+  type WorkoutCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WorkoutFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WorkoutCountAggregateInputType | true
     }
+
+  export interface WorkoutDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Workout'], meta: { name: 'Workout' } }
     /**
      * Find zero or one Workout that matches the filter.
      * @param {WorkoutFindUniqueArgs} args - Arguments to find a Workout
@@ -4349,19 +3726,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends WorkoutFindUniqueArgs>(
-      args: SelectSubset<T, WorkoutFindUniqueArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'findUnique',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findUnique<T extends WorkoutFindUniqueArgs>(args: SelectSubset<T, WorkoutFindUniqueArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Workout that matches the filter or throw an error with `error.code='P2025'`
@@ -4375,19 +3740,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends WorkoutFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, WorkoutFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findUniqueOrThrow<T extends WorkoutFindUniqueOrThrowArgs>(args: SelectSubset<T, WorkoutFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Workout that matches the filter.
@@ -4402,19 +3755,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends WorkoutFindFirstArgs>(
-      args?: SelectSubset<T, WorkoutFindFirstArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'findFirst',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findFirst<T extends WorkoutFindFirstArgs>(args?: SelectSubset<T, WorkoutFindFirstArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Workout that matches the filter or
@@ -4430,19 +3771,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends WorkoutFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, WorkoutFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    findFirstOrThrow<T extends WorkoutFindFirstOrThrowArgs>(args?: SelectSubset<T, WorkoutFindFirstOrThrowArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Workouts that matches the filter.
@@ -4452,24 +3781,15 @@ export namespace Prisma {
      * @example
      * // Get all Workouts
      * const workouts = await prisma.workout.findMany()
-     *
+     * 
      * // Get first 10 Workouts
      * const workouts = await prisma.workout.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const workoutWithIdOnly = await prisma.workout.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends WorkoutFindManyArgs>(
-      args?: SelectSubset<T, WorkoutFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    >
+    findMany<T extends WorkoutFindManyArgs>(args?: SelectSubset<T, WorkoutFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Workout.
@@ -4481,21 +3801,9 @@ export namespace Prisma {
      *     // ... data to create a Workout
      *   }
      * })
-     *
+     * 
      */
-    create<T extends WorkoutCreateArgs>(
-      args: SelectSubset<T, WorkoutCreateArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'create',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    create<T extends WorkoutCreateArgs>(args: SelectSubset<T, WorkoutCreateArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Workouts.
@@ -4507,11 +3815,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends WorkoutCreateManyArgs>(
-      args?: SelectSubset<T, WorkoutCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends WorkoutCreateManyArgs>(args?: SelectSubset<T, WorkoutCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Workouts and returns the data saved in the database.
@@ -4523,7 +3829,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many Workouts and only return the `id`
      * const workoutWithIdOnly = await prisma.workout.createManyAndReturn({
      *   select: { id: true },
@@ -4533,18 +3839,9 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
-    createManyAndReturn<T extends WorkoutCreateManyAndReturnArgs>(
-      args?: SelectSubset<T, WorkoutCreateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'createManyAndReturn',
-        GlobalOmitOptions
-      >
-    >
+    createManyAndReturn<T extends WorkoutCreateManyAndReturnArgs>(args?: SelectSubset<T, WorkoutCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Workout.
@@ -4556,21 +3853,9 @@ export namespace Prisma {
      *     // ... filter to delete one Workout
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends WorkoutDeleteArgs>(
-      args: SelectSubset<T, WorkoutDeleteArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'delete',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    delete<T extends WorkoutDeleteArgs>(args: SelectSubset<T, WorkoutDeleteArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Workout.
@@ -4585,21 +3870,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends WorkoutUpdateArgs>(
-      args: SelectSubset<T, WorkoutUpdateArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'update',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    update<T extends WorkoutUpdateArgs>(args: SelectSubset<T, WorkoutUpdateArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Workouts.
@@ -4611,11 +3884,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends WorkoutDeleteManyArgs>(
-      args?: SelectSubset<T, WorkoutDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends WorkoutDeleteManyArgs>(args?: SelectSubset<T, WorkoutDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Workouts.
@@ -4632,11 +3903,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends WorkoutUpdateManyArgs>(
-      args: SelectSubset<T, WorkoutUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends WorkoutUpdateManyArgs>(args: SelectSubset<T, WorkoutUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Workouts and returns the data updated in the database.
@@ -4651,7 +3920,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more Workouts and only return the `id`
      * const workoutWithIdOnly = await prisma.workout.updateManyAndReturn({
      *   select: { id: true },
@@ -4664,18 +3933,9 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
-    updateManyAndReturn<T extends WorkoutUpdateManyAndReturnArgs>(
-      args: SelectSubset<T, WorkoutUpdateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'updateManyAndReturn',
-        GlobalOmitOptions
-      >
-    >
+    updateManyAndReturn<T extends WorkoutUpdateManyAndReturnArgs>(args: SelectSubset<T, WorkoutUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Workout.
@@ -4694,19 +3954,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends WorkoutUpsertArgs>(
-      args: SelectSubset<T, WorkoutUpsertArgs<ExtArgs>>
-    ): Prisma__WorkoutClient<
-      $Result.GetResult<
-        Prisma.$WorkoutPayload<ExtArgs>,
-        T,
-        'upsert',
-        GlobalOmitOptions
-      >,
-      never,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+    upsert<T extends WorkoutUpsertArgs>(args: SelectSubset<T, WorkoutUpsertArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
 
     /**
      * Count the number of Workouts.
@@ -4720,9 +3969,9 @@ export namespace Prisma {
      *     // ... the filter for the Workouts we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends WorkoutCountArgs>(
-      args?: Subset<T, WorkoutCountArgs>
+      args?: Subset<T, WorkoutCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -4754,10 +4003,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends WorkoutAggregateArgs>(
-      args: Subset<T, WorkoutAggregateArgs>
-    ): Prisma.PrismaPromise<GetWorkoutAggregateType<T>>
+    **/
+    aggregate<T extends WorkoutAggregateArgs>(args: Subset<T, WorkoutAggregateArgs>): Prisma.PrismaPromise<GetWorkoutAggregateType<T>>
 
     /**
      * Group by Workout.
@@ -4775,8 +4022,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends WorkoutGroupByArgs,
       HasSelectOrTake extends Or<
@@ -4786,65 +4033,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: WorkoutGroupByArgs['orderBy'] }
         : { orderBy?: WorkoutGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-    >(
-      args: SubsetIntersection<T, WorkoutGroupByArgs, OrderByArg> & InputErrors
-    ): {} extends InputErrors
-      ? GetWorkoutGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the Workout model
-     */
-    readonly fields: WorkoutFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WorkoutGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWorkoutGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Workout model
+   */
+  readonly fields: WorkoutFieldRefs;
   }
 
   /**
@@ -4853,66 +4094,23 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__WorkoutClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    GlobalOmitOptions = {}
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    personal<T extends Workout$personalArgs<ExtArgs> = {}>(
-      args?: Subset<T, Workout$personalArgs<ExtArgs>>
-    ): Prisma__EmployeeClient<
-      $Result.GetResult<
-        Prisma.$EmployeePayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
-    member<T extends Workout$memberArgs<ExtArgs> = {}>(
-      args?: Subset<T, Workout$memberArgs<ExtArgs>>
-    ): Prisma__MemberClient<
-      $Result.GetResult<
-        Prisma.$MemberPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        GlobalOmitOptions
-      > | null,
-      null,
-      ExtArgs,
-      GlobalOmitOptions
-    >
+  export interface Prisma__WorkoutClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    personal<T extends Workout$personalArgs<ExtArgs> = {}>(args?: Subset<T, Workout$personalArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    member<T extends Workout$memberArgs<ExtArgs> = {}>(args?: Subset<T, Workout$memberArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -4922,27 +4120,29 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the Workout model
    */
   interface WorkoutFieldRefs {
-    readonly id: FieldRef<'Workout', 'Int'>
-    readonly name: FieldRef<'Workout', 'String'>
-    readonly description: FieldRef<'Workout', 'String'>
-    readonly exercises: FieldRef<'Workout', 'Json'>
-    readonly createdAt: FieldRef<'Workout', 'DateTime'>
-    readonly updatedAt: FieldRef<'Workout', 'DateTime'>
-    readonly personalId: FieldRef<'Workout', 'Int'>
-    readonly memberId: FieldRef<'Workout', 'Int'>
+    readonly id: FieldRef<"Workout", 'Int'>
+    readonly name: FieldRef<"Workout", 'String'>
+    readonly description: FieldRef<"Workout", 'String'>
+    readonly exercises: FieldRef<"Workout", 'Json'>
+    readonly createdAt: FieldRef<"Workout", 'DateTime'>
+    readonly updatedAt: FieldRef<"Workout", 'DateTime'>
+    readonly personalId: FieldRef<"Workout", 'Int'>
+    readonly memberId: FieldRef<"Workout", 'Int'>
   }
+    
 
   // Custom InputTypes
   /**
    * Workout findUnique
    */
-  export type WorkoutFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -4964,9 +4164,7 @@ export namespace Prisma {
   /**
    * Workout findUniqueOrThrow
    */
-  export type WorkoutFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -4988,9 +4186,7 @@ export namespace Prisma {
   /**
    * Workout findFirst
    */
-  export type WorkoutFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5009,33 +4205,31 @@ export namespace Prisma {
     where?: WorkoutWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Workouts to fetch.
      */
-    orderBy?:
-      | WorkoutOrderByWithRelationInput
-      | WorkoutOrderByWithRelationInput[]
+    orderBy?: WorkoutOrderByWithRelationInput | WorkoutOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Workouts.
      */
     cursor?: WorkoutWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Workouts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Workouts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Workouts.
      */
     distinct?: WorkoutScalarFieldEnum | WorkoutScalarFieldEnum[]
@@ -5044,9 +4238,7 @@ export namespace Prisma {
   /**
    * Workout findFirstOrThrow
    */
-  export type WorkoutFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5065,33 +4257,31 @@ export namespace Prisma {
     where?: WorkoutWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Workouts to fetch.
      */
-    orderBy?:
-      | WorkoutOrderByWithRelationInput
-      | WorkoutOrderByWithRelationInput[]
+    orderBy?: WorkoutOrderByWithRelationInput | WorkoutOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Workouts.
      */
     cursor?: WorkoutWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Workouts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Workouts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Workouts.
      */
     distinct?: WorkoutScalarFieldEnum | WorkoutScalarFieldEnum[]
@@ -5100,9 +4290,7 @@ export namespace Prisma {
   /**
    * Workout findMany
    */
-  export type WorkoutFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5121,27 +4309,25 @@ export namespace Prisma {
     where?: WorkoutWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Workouts to fetch.
      */
-    orderBy?:
-      | WorkoutOrderByWithRelationInput
-      | WorkoutOrderByWithRelationInput[]
+    orderBy?: WorkoutOrderByWithRelationInput | WorkoutOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing Workouts.
      */
     cursor?: WorkoutWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Workouts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Workouts.
      */
     skip?: number
@@ -5151,9 +4337,7 @@ export namespace Prisma {
   /**
    * Workout create
    */
-  export type WorkoutCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5175,9 +4359,7 @@ export namespace Prisma {
   /**
    * Workout createMany
    */
-  export type WorkoutCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Workouts.
      */
@@ -5188,9 +4370,7 @@ export namespace Prisma {
   /**
    * Workout createManyAndReturn
    */
-  export type WorkoutCreateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5213,9 +4393,7 @@ export namespace Prisma {
   /**
    * Workout update
    */
-  export type WorkoutUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5241,9 +4419,7 @@ export namespace Prisma {
   /**
    * Workout updateMany
    */
-  export type WorkoutUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Workouts.
      */
@@ -5261,9 +4437,7 @@ export namespace Prisma {
   /**
    * Workout updateManyAndReturn
    */
-  export type WorkoutUpdateManyAndReturnArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5293,9 +4467,7 @@ export namespace Prisma {
   /**
    * Workout upsert
    */
-  export type WorkoutUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5325,9 +4497,7 @@ export namespace Prisma {
   /**
    * Workout delete
    */
-  export type WorkoutDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5349,9 +4519,7 @@ export namespace Prisma {
   /**
    * Workout deleteMany
    */
-  export type WorkoutDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Workouts to delete
      */
@@ -5365,9 +4533,7 @@ export namespace Prisma {
   /**
    * Workout.personal
    */
-  export type Workout$personalArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type Workout$personalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Employee
      */
@@ -5386,9 +4552,7 @@ export namespace Prisma {
   /**
    * Workout.member
    */
-  export type Workout$memberArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type Workout$memberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Member
      */
@@ -5407,9 +4571,7 @@ export namespace Prisma {
   /**
    * Workout without action
    */
-  export type WorkoutDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
-  > = {
+  export type WorkoutDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Workout
      */
@@ -5424,201 +4586,195 @@ export namespace Prisma {
     include?: WorkoutInclude<ExtArgs> | null
   }
 
+
   /**
    * Enums
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted'
-    ReadCommitted: 'ReadCommitted'
-    RepeatableRead: 'RepeatableRead'
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
     Serializable: 'Serializable'
-  }
+  };
 
-  export type TransactionIsolationLevel =
-    (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
 
   export const EmployeeScalarFieldEnum: {
-    id: 'id'
-    name: 'name'
-    email: 'email'
-    password: 'password'
-    role: 'role'
-    cpf: 'cpf'
-    wage: 'wage'
-    createdAt: 'createdAt'
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    password: 'password',
+    role: 'role',
+    cpf: 'cpf',
+    wage: 'wage',
+    createdAt: 'createdAt',
     updatedAt: 'updatedAt'
-  }
+  };
 
-  export type EmployeeScalarFieldEnum =
-    (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+  export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
 
   export const MemberScalarFieldEnum: {
-    id: 'id'
-    name: 'name'
-    email: 'email'
-    password: 'password'
-    membership: 'membership'
-    cpf: 'cpf'
-    createdAt: 'createdAt'
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    password: 'password',
+    membership: 'membership',
+    cpf: 'cpf',
+    createdAt: 'createdAt',
     updatedAt: 'updatedAt'
-  }
+  };
 
-  export type MemberScalarFieldEnum =
-    (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+  export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
 
   export const WorkoutScalarFieldEnum: {
-    id: 'id'
-    name: 'name'
-    description: 'description'
-    exercises: 'exercises'
-    createdAt: 'createdAt'
-    updatedAt: 'updatedAt'
-    personalId: 'personalId'
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    exercises: 'exercises',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    personalId: 'personalId',
     memberId: 'memberId'
-  }
+  };
 
-  export type WorkoutScalarFieldEnum =
-    (typeof WorkoutScalarFieldEnum)[keyof typeof WorkoutScalarFieldEnum]
+  export type WorkoutScalarFieldEnum = (typeof WorkoutScalarFieldEnum)[keyof typeof WorkoutScalarFieldEnum]
+
 
   export const SortOrder: {
-    asc: 'asc'
+    asc: 'asc',
     desc: 'desc'
-  }
+  };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
+
   export const JsonNullValueInput: {
     JsonNull: typeof JsonNull
-  }
+  };
 
-  export type JsonNullValueInput =
-    (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
 
   export const QueryMode: {
-    default: 'default'
+    default: 'default',
     insensitive: 'insensitive'
-  }
+  };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull
-    JsonNull: typeof JsonNull
-    AnyNull: typeof AnyNull
-  }
 
-  export type JsonNullValueFilter =
-    (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
 
   export const NullsOrder: {
-    first: 'first'
+    first: 'first',
     last: 'last'
-  }
+  };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
 
   /**
    * Field references
    */
 
+
   /**
    * Reference to a field of type 'Int'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Int'
-  >
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
 
   /**
    * Reference to a field of type 'Int[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Int[]'
-  >
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
 
   /**
    * Reference to a field of type 'String'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'String'
-  >
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
 
   /**
    * Reference to a field of type 'String[]'
    */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'String[]'
-  >
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
 
   /**
    * Reference to a field of type 'Float'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Float'
-  >
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
 
   /**
    * Reference to a field of type 'Float[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Float[]'
-  >
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
 
   /**
    * Reference to a field of type 'DateTime'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'DateTime'
-  >
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'DateTime[]'
-  >
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
 
   /**
    * Reference to a field of type 'Json'
    */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Json'
-  >
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
 
   /**
    * Reference to a field of type 'QueryMode'
    */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'QueryMode'
-  >
-
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
   /**
    * Deep Input Types
    */
+
 
   export type EmployeeWhereInput = {
     AND?: EmployeeWhereInput | EmployeeWhereInput[]
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
-    id?: IntFilter<'Employee'> | number
-    name?: StringFilter<'Employee'> | string
-    email?: StringFilter<'Employee'> | string
-    password?: StringFilter<'Employee'> | string
-    role?: StringFilter<'Employee'> | string
-    cpf?: StringFilter<'Employee'> | string
-    wage?: FloatFilter<'Employee'> | number
-    createdAt?: DateTimeFilter<'Employee'> | Date | string
-    updatedAt?: DateTimeFilter<'Employee'> | Date | string
+    id?: IntFilter<"Employee"> | number
+    name?: StringFilter<"Employee"> | string
+    email?: StringFilter<"Employee"> | string
+    password?: StringFilter<"Employee"> | string
+    role?: StringFilter<"Employee"> | string
+    cpf?: StringFilter<"Employee"> | string
+    wage?: FloatFilter<"Employee"> | number
+    createdAt?: DateTimeFilter<"Employee"> | Date | string
+    updatedAt?: DateTimeFilter<"Employee"> | Date | string
     workouts?: WorkoutListRelationFilter
   }
 
@@ -5635,24 +4791,21 @@ export namespace Prisma {
     workouts?: WorkoutOrderByRelationAggregateInput
   }
 
-  export type EmployeeWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: number
-      email?: string
-      cpf?: string
-      AND?: EmployeeWhereInput | EmployeeWhereInput[]
-      OR?: EmployeeWhereInput[]
-      NOT?: EmployeeWhereInput | EmployeeWhereInput[]
-      name?: StringFilter<'Employee'> | string
-      password?: StringFilter<'Employee'> | string
-      role?: StringFilter<'Employee'> | string
-      wage?: FloatFilter<'Employee'> | number
-      createdAt?: DateTimeFilter<'Employee'> | Date | string
-      updatedAt?: DateTimeFilter<'Employee'> | Date | string
-      workouts?: WorkoutListRelationFilter
-    },
-    'id' | 'email' | 'cpf'
-  >
+  export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    cpf?: string
+    AND?: EmployeeWhereInput | EmployeeWhereInput[]
+    OR?: EmployeeWhereInput[]
+    NOT?: EmployeeWhereInput | EmployeeWhereInput[]
+    name?: StringFilter<"Employee"> | string
+    password?: StringFilter<"Employee"> | string
+    role?: StringFilter<"Employee"> | string
+    wage?: FloatFilter<"Employee"> | number
+    createdAt?: DateTimeFilter<"Employee"> | Date | string
+    updatedAt?: DateTimeFilter<"Employee"> | Date | string
+    workouts?: WorkoutListRelationFilter
+  }, "id" | "email" | "cpf">
 
   export type EmployeeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5672,36 +4825,32 @@ export namespace Prisma {
   }
 
   export type EmployeeScalarWhereWithAggregatesInput = {
-    AND?:
-      | EmployeeScalarWhereWithAggregatesInput
-      | EmployeeScalarWhereWithAggregatesInput[]
+    AND?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
     OR?: EmployeeScalarWhereWithAggregatesInput[]
-    NOT?:
-      | EmployeeScalarWhereWithAggregatesInput
-      | EmployeeScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<'Employee'> | number
-    name?: StringWithAggregatesFilter<'Employee'> | string
-    email?: StringWithAggregatesFilter<'Employee'> | string
-    password?: StringWithAggregatesFilter<'Employee'> | string
-    role?: StringWithAggregatesFilter<'Employee'> | string
-    cpf?: StringWithAggregatesFilter<'Employee'> | string
-    wage?: FloatWithAggregatesFilter<'Employee'> | number
-    createdAt?: DateTimeWithAggregatesFilter<'Employee'> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<'Employee'> | Date | string
+    NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Employee"> | number
+    name?: StringWithAggregatesFilter<"Employee"> | string
+    email?: StringWithAggregatesFilter<"Employee"> | string
+    password?: StringWithAggregatesFilter<"Employee"> | string
+    role?: StringWithAggregatesFilter<"Employee"> | string
+    cpf?: StringWithAggregatesFilter<"Employee"> | string
+    wage?: FloatWithAggregatesFilter<"Employee"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
   }
 
   export type MemberWhereInput = {
     AND?: MemberWhereInput | MemberWhereInput[]
     OR?: MemberWhereInput[]
     NOT?: MemberWhereInput | MemberWhereInput[]
-    id?: IntFilter<'Member'> | number
-    name?: StringFilter<'Member'> | string
-    email?: StringFilter<'Member'> | string
-    password?: StringFilter<'Member'> | string
-    membership?: StringFilter<'Member'> | string
-    cpf?: StringFilter<'Member'> | string
-    createdAt?: DateTimeFilter<'Member'> | Date | string
-    updatedAt?: DateTimeFilter<'Member'> | Date | string
+    id?: IntFilter<"Member"> | number
+    name?: StringFilter<"Member"> | string
+    email?: StringFilter<"Member"> | string
+    password?: StringFilter<"Member"> | string
+    membership?: StringFilter<"Member"> | string
+    cpf?: StringFilter<"Member"> | string
+    createdAt?: DateTimeFilter<"Member"> | Date | string
+    updatedAt?: DateTimeFilter<"Member"> | Date | string
     workouts?: WorkoutListRelationFilter
   }
 
@@ -5717,23 +4866,20 @@ export namespace Prisma {
     workouts?: WorkoutOrderByRelationAggregateInput
   }
 
-  export type MemberWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: number
-      email?: string
-      cpf?: string
-      AND?: MemberWhereInput | MemberWhereInput[]
-      OR?: MemberWhereInput[]
-      NOT?: MemberWhereInput | MemberWhereInput[]
-      name?: StringFilter<'Member'> | string
-      password?: StringFilter<'Member'> | string
-      membership?: StringFilter<'Member'> | string
-      createdAt?: DateTimeFilter<'Member'> | Date | string
-      updatedAt?: DateTimeFilter<'Member'> | Date | string
-      workouts?: WorkoutListRelationFilter
-    },
-    'id' | 'email' | 'cpf'
-  >
+  export type MemberWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    cpf?: string
+    AND?: MemberWhereInput | MemberWhereInput[]
+    OR?: MemberWhereInput[]
+    NOT?: MemberWhereInput | MemberWhereInput[]
+    name?: StringFilter<"Member"> | string
+    password?: StringFilter<"Member"> | string
+    membership?: StringFilter<"Member"> | string
+    createdAt?: DateTimeFilter<"Member"> | Date | string
+    updatedAt?: DateTimeFilter<"Member"> | Date | string
+    workouts?: WorkoutListRelationFilter
+  }, "id" | "email" | "cpf">
 
   export type MemberOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5752,39 +4898,32 @@ export namespace Prisma {
   }
 
   export type MemberScalarWhereWithAggregatesInput = {
-    AND?:
-      | MemberScalarWhereWithAggregatesInput
-      | MemberScalarWhereWithAggregatesInput[]
+    AND?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
     OR?: MemberScalarWhereWithAggregatesInput[]
-    NOT?:
-      | MemberScalarWhereWithAggregatesInput
-      | MemberScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<'Member'> | number
-    name?: StringWithAggregatesFilter<'Member'> | string
-    email?: StringWithAggregatesFilter<'Member'> | string
-    password?: StringWithAggregatesFilter<'Member'> | string
-    membership?: StringWithAggregatesFilter<'Member'> | string
-    cpf?: StringWithAggregatesFilter<'Member'> | string
-    createdAt?: DateTimeWithAggregatesFilter<'Member'> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<'Member'> | Date | string
+    NOT?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Member"> | number
+    name?: StringWithAggregatesFilter<"Member"> | string
+    email?: StringWithAggregatesFilter<"Member"> | string
+    password?: StringWithAggregatesFilter<"Member"> | string
+    membership?: StringWithAggregatesFilter<"Member"> | string
+    cpf?: StringWithAggregatesFilter<"Member"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
   }
 
   export type WorkoutWhereInput = {
     AND?: WorkoutWhereInput | WorkoutWhereInput[]
     OR?: WorkoutWhereInput[]
     NOT?: WorkoutWhereInput | WorkoutWhereInput[]
-    id?: IntFilter<'Workout'> | number
-    name?: StringFilter<'Workout'> | string
-    description?: StringNullableFilter<'Workout'> | string | null
-    exercises?: JsonFilter<'Workout'>
-    createdAt?: DateTimeFilter<'Workout'> | Date | string
-    updatedAt?: DateTimeFilter<'Workout'> | Date | string
-    personalId?: IntNullableFilter<'Workout'> | number | null
-    memberId?: IntNullableFilter<'Workout'> | number | null
-    personal?: XOR<
-      EmployeeNullableScalarRelationFilter,
-      EmployeeWhereInput
-    > | null
+    id?: IntFilter<"Workout"> | number
+    name?: StringFilter<"Workout"> | string
+    description?: StringNullableFilter<"Workout"> | string | null
+    exercises?: JsonFilter<"Workout">
+    createdAt?: DateTimeFilter<"Workout"> | Date | string
+    updatedAt?: DateTimeFilter<"Workout"> | Date | string
+    personalId?: IntNullableFilter<"Workout"> | number | null
+    memberId?: IntNullableFilter<"Workout"> | number | null
+    personal?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
     member?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
   }
 
@@ -5801,27 +4940,21 @@ export namespace Prisma {
     member?: MemberOrderByWithRelationInput
   }
 
-  export type WorkoutWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: number
-      AND?: WorkoutWhereInput | WorkoutWhereInput[]
-      OR?: WorkoutWhereInput[]
-      NOT?: WorkoutWhereInput | WorkoutWhereInput[]
-      name?: StringFilter<'Workout'> | string
-      description?: StringNullableFilter<'Workout'> | string | null
-      exercises?: JsonFilter<'Workout'>
-      createdAt?: DateTimeFilter<'Workout'> | Date | string
-      updatedAt?: DateTimeFilter<'Workout'> | Date | string
-      personalId?: IntNullableFilter<'Workout'> | number | null
-      memberId?: IntNullableFilter<'Workout'> | number | null
-      personal?: XOR<
-        EmployeeNullableScalarRelationFilter,
-        EmployeeWhereInput
-      > | null
-      member?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
-    },
-    'id'
-  >
+  export type WorkoutWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: WorkoutWhereInput | WorkoutWhereInput[]
+    OR?: WorkoutWhereInput[]
+    NOT?: WorkoutWhereInput | WorkoutWhereInput[]
+    name?: StringFilter<"Workout"> | string
+    description?: StringNullableFilter<"Workout"> | string | null
+    exercises?: JsonFilter<"Workout">
+    createdAt?: DateTimeFilter<"Workout"> | Date | string
+    updatedAt?: DateTimeFilter<"Workout"> | Date | string
+    personalId?: IntNullableFilter<"Workout"> | number | null
+    memberId?: IntNullableFilter<"Workout"> | number | null
+    personal?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    member?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
+  }, "id">
 
   export type WorkoutOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5840,21 +4973,17 @@ export namespace Prisma {
   }
 
   export type WorkoutScalarWhereWithAggregatesInput = {
-    AND?:
-      | WorkoutScalarWhereWithAggregatesInput
-      | WorkoutScalarWhereWithAggregatesInput[]
+    AND?: WorkoutScalarWhereWithAggregatesInput | WorkoutScalarWhereWithAggregatesInput[]
     OR?: WorkoutScalarWhereWithAggregatesInput[]
-    NOT?:
-      | WorkoutScalarWhereWithAggregatesInput
-      | WorkoutScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<'Workout'> | number
-    name?: StringWithAggregatesFilter<'Workout'> | string
-    description?: StringNullableWithAggregatesFilter<'Workout'> | string | null
-    exercises?: JsonWithAggregatesFilter<'Workout'>
-    createdAt?: DateTimeWithAggregatesFilter<'Workout'> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<'Workout'> | Date | string
-    personalId?: IntNullableWithAggregatesFilter<'Workout'> | number | null
-    memberId?: IntNullableWithAggregatesFilter<'Workout'> | number | null
+    NOT?: WorkoutScalarWhereWithAggregatesInput | WorkoutScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Workout"> | number
+    name?: StringWithAggregatesFilter<"Workout"> | string
+    description?: StringNullableWithAggregatesFilter<"Workout"> | string | null
+    exercises?: JsonWithAggregatesFilter<"Workout">
+    createdAt?: DateTimeWithAggregatesFilter<"Workout"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Workout"> | Date | string
+    personalId?: IntNullableWithAggregatesFilter<"Workout"> | number | null
+    memberId?: IntNullableWithAggregatesFilter<"Workout"> | number | null
   }
 
   export type EmployeeCreateInput = {
@@ -6317,19 +5446,13 @@ export namespace Prisma {
   }
   export type JsonFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<
-          Required<JsonFilterBase<$PrismaModel>>,
-          Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>
-        >,
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
         Required<JsonFilterBase<$PrismaModel>>
       >
     | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
 
   export type JsonFilterBase<$PrismaModel = never> = {
-    equals?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
     string_contains?: string | StringFieldRefInput<$PrismaModel>
@@ -6433,24 +5556,13 @@ export namespace Prisma {
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<
-          Required<JsonWithAggregatesFilterBase<$PrismaModel>>,
-          Exclude<
-            keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>,
-            'path'
-          >
-        >,
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
         Required<JsonWithAggregatesFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<
-        Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>
-      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
 
   export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
     string_contains?: string | StringFieldRefInput<$PrismaModel>
@@ -6486,31 +5598,15 @@ export namespace Prisma {
   }
 
   export type WorkoutCreateNestedManyWithoutPersonalInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutPersonalInput,
-          WorkoutUncheckedCreateWithoutPersonalInput
-        >
-      | WorkoutCreateWithoutPersonalInput[]
-      | WorkoutUncheckedCreateWithoutPersonalInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutPersonalInput
-      | WorkoutCreateOrConnectWithoutPersonalInput[]
+    create?: XOR<WorkoutCreateWithoutPersonalInput, WorkoutUncheckedCreateWithoutPersonalInput> | WorkoutCreateWithoutPersonalInput[] | WorkoutUncheckedCreateWithoutPersonalInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutPersonalInput | WorkoutCreateOrConnectWithoutPersonalInput[]
     createMany?: WorkoutCreateManyPersonalInputEnvelope
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
   }
 
   export type WorkoutUncheckedCreateNestedManyWithoutPersonalInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutPersonalInput,
-          WorkoutUncheckedCreateWithoutPersonalInput
-        >
-      | WorkoutCreateWithoutPersonalInput[]
-      | WorkoutUncheckedCreateWithoutPersonalInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutPersonalInput
-      | WorkoutCreateOrConnectWithoutPersonalInput[]
+    create?: XOR<WorkoutCreateWithoutPersonalInput, WorkoutUncheckedCreateWithoutPersonalInput> | WorkoutCreateWithoutPersonalInput[] | WorkoutUncheckedCreateWithoutPersonalInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutPersonalInput | WorkoutCreateOrConnectWithoutPersonalInput[]
     createMany?: WorkoutCreateManyPersonalInputEnvelope
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
   }
@@ -6532,30 +5628,16 @@ export namespace Prisma {
   }
 
   export type WorkoutUpdateManyWithoutPersonalNestedInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutPersonalInput,
-          WorkoutUncheckedCreateWithoutPersonalInput
-        >
-      | WorkoutCreateWithoutPersonalInput[]
-      | WorkoutUncheckedCreateWithoutPersonalInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutPersonalInput
-      | WorkoutCreateOrConnectWithoutPersonalInput[]
-    upsert?:
-      | WorkoutUpsertWithWhereUniqueWithoutPersonalInput
-      | WorkoutUpsertWithWhereUniqueWithoutPersonalInput[]
+    create?: XOR<WorkoutCreateWithoutPersonalInput, WorkoutUncheckedCreateWithoutPersonalInput> | WorkoutCreateWithoutPersonalInput[] | WorkoutUncheckedCreateWithoutPersonalInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutPersonalInput | WorkoutCreateOrConnectWithoutPersonalInput[]
+    upsert?: WorkoutUpsertWithWhereUniqueWithoutPersonalInput | WorkoutUpsertWithWhereUniqueWithoutPersonalInput[]
     createMany?: WorkoutCreateManyPersonalInputEnvelope
     set?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     disconnect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     delete?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
-    update?:
-      | WorkoutUpdateWithWhereUniqueWithoutPersonalInput
-      | WorkoutUpdateWithWhereUniqueWithoutPersonalInput[]
-    updateMany?:
-      | WorkoutUpdateManyWithWhereWithoutPersonalInput
-      | WorkoutUpdateManyWithWhereWithoutPersonalInput[]
+    update?: WorkoutUpdateWithWhereUniqueWithoutPersonalInput | WorkoutUpdateWithWhereUniqueWithoutPersonalInput[]
+    updateMany?: WorkoutUpdateManyWithWhereWithoutPersonalInput | WorkoutUpdateManyWithWhereWithoutPersonalInput[]
     deleteMany?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
   }
 
@@ -6568,133 +5650,69 @@ export namespace Prisma {
   }
 
   export type WorkoutUncheckedUpdateManyWithoutPersonalNestedInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutPersonalInput,
-          WorkoutUncheckedCreateWithoutPersonalInput
-        >
-      | WorkoutCreateWithoutPersonalInput[]
-      | WorkoutUncheckedCreateWithoutPersonalInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutPersonalInput
-      | WorkoutCreateOrConnectWithoutPersonalInput[]
-    upsert?:
-      | WorkoutUpsertWithWhereUniqueWithoutPersonalInput
-      | WorkoutUpsertWithWhereUniqueWithoutPersonalInput[]
+    create?: XOR<WorkoutCreateWithoutPersonalInput, WorkoutUncheckedCreateWithoutPersonalInput> | WorkoutCreateWithoutPersonalInput[] | WorkoutUncheckedCreateWithoutPersonalInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutPersonalInput | WorkoutCreateOrConnectWithoutPersonalInput[]
+    upsert?: WorkoutUpsertWithWhereUniqueWithoutPersonalInput | WorkoutUpsertWithWhereUniqueWithoutPersonalInput[]
     createMany?: WorkoutCreateManyPersonalInputEnvelope
     set?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     disconnect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     delete?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
-    update?:
-      | WorkoutUpdateWithWhereUniqueWithoutPersonalInput
-      | WorkoutUpdateWithWhereUniqueWithoutPersonalInput[]
-    updateMany?:
-      | WorkoutUpdateManyWithWhereWithoutPersonalInput
-      | WorkoutUpdateManyWithWhereWithoutPersonalInput[]
+    update?: WorkoutUpdateWithWhereUniqueWithoutPersonalInput | WorkoutUpdateWithWhereUniqueWithoutPersonalInput[]
+    updateMany?: WorkoutUpdateManyWithWhereWithoutPersonalInput | WorkoutUpdateManyWithWhereWithoutPersonalInput[]
     deleteMany?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
   }
 
   export type WorkoutCreateNestedManyWithoutMemberInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutMemberInput,
-          WorkoutUncheckedCreateWithoutMemberInput
-        >
-      | WorkoutCreateWithoutMemberInput[]
-      | WorkoutUncheckedCreateWithoutMemberInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutMemberInput
-      | WorkoutCreateOrConnectWithoutMemberInput[]
+    create?: XOR<WorkoutCreateWithoutMemberInput, WorkoutUncheckedCreateWithoutMemberInput> | WorkoutCreateWithoutMemberInput[] | WorkoutUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutMemberInput | WorkoutCreateOrConnectWithoutMemberInput[]
     createMany?: WorkoutCreateManyMemberInputEnvelope
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
   }
 
   export type WorkoutUncheckedCreateNestedManyWithoutMemberInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutMemberInput,
-          WorkoutUncheckedCreateWithoutMemberInput
-        >
-      | WorkoutCreateWithoutMemberInput[]
-      | WorkoutUncheckedCreateWithoutMemberInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutMemberInput
-      | WorkoutCreateOrConnectWithoutMemberInput[]
+    create?: XOR<WorkoutCreateWithoutMemberInput, WorkoutUncheckedCreateWithoutMemberInput> | WorkoutCreateWithoutMemberInput[] | WorkoutUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutMemberInput | WorkoutCreateOrConnectWithoutMemberInput[]
     createMany?: WorkoutCreateManyMemberInputEnvelope
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
   }
 
   export type WorkoutUpdateManyWithoutMemberNestedInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutMemberInput,
-          WorkoutUncheckedCreateWithoutMemberInput
-        >
-      | WorkoutCreateWithoutMemberInput[]
-      | WorkoutUncheckedCreateWithoutMemberInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutMemberInput
-      | WorkoutCreateOrConnectWithoutMemberInput[]
-    upsert?:
-      | WorkoutUpsertWithWhereUniqueWithoutMemberInput
-      | WorkoutUpsertWithWhereUniqueWithoutMemberInput[]
+    create?: XOR<WorkoutCreateWithoutMemberInput, WorkoutUncheckedCreateWithoutMemberInput> | WorkoutCreateWithoutMemberInput[] | WorkoutUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutMemberInput | WorkoutCreateOrConnectWithoutMemberInput[]
+    upsert?: WorkoutUpsertWithWhereUniqueWithoutMemberInput | WorkoutUpsertWithWhereUniqueWithoutMemberInput[]
     createMany?: WorkoutCreateManyMemberInputEnvelope
     set?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     disconnect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     delete?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
-    update?:
-      | WorkoutUpdateWithWhereUniqueWithoutMemberInput
-      | WorkoutUpdateWithWhereUniqueWithoutMemberInput[]
-    updateMany?:
-      | WorkoutUpdateManyWithWhereWithoutMemberInput
-      | WorkoutUpdateManyWithWhereWithoutMemberInput[]
+    update?: WorkoutUpdateWithWhereUniqueWithoutMemberInput | WorkoutUpdateWithWhereUniqueWithoutMemberInput[]
+    updateMany?: WorkoutUpdateManyWithWhereWithoutMemberInput | WorkoutUpdateManyWithWhereWithoutMemberInput[]
     deleteMany?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
   }
 
   export type WorkoutUncheckedUpdateManyWithoutMemberNestedInput = {
-    create?:
-      | XOR<
-          WorkoutCreateWithoutMemberInput,
-          WorkoutUncheckedCreateWithoutMemberInput
-        >
-      | WorkoutCreateWithoutMemberInput[]
-      | WorkoutUncheckedCreateWithoutMemberInput[]
-    connectOrCreate?:
-      | WorkoutCreateOrConnectWithoutMemberInput
-      | WorkoutCreateOrConnectWithoutMemberInput[]
-    upsert?:
-      | WorkoutUpsertWithWhereUniqueWithoutMemberInput
-      | WorkoutUpsertWithWhereUniqueWithoutMemberInput[]
+    create?: XOR<WorkoutCreateWithoutMemberInput, WorkoutUncheckedCreateWithoutMemberInput> | WorkoutCreateWithoutMemberInput[] | WorkoutUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: WorkoutCreateOrConnectWithoutMemberInput | WorkoutCreateOrConnectWithoutMemberInput[]
+    upsert?: WorkoutUpsertWithWhereUniqueWithoutMemberInput | WorkoutUpsertWithWhereUniqueWithoutMemberInput[]
     createMany?: WorkoutCreateManyMemberInputEnvelope
     set?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     disconnect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     delete?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
-    update?:
-      | WorkoutUpdateWithWhereUniqueWithoutMemberInput
-      | WorkoutUpdateWithWhereUniqueWithoutMemberInput[]
-    updateMany?:
-      | WorkoutUpdateManyWithWhereWithoutMemberInput
-      | WorkoutUpdateManyWithWhereWithoutMemberInput[]
+    update?: WorkoutUpdateWithWhereUniqueWithoutMemberInput | WorkoutUpdateWithWhereUniqueWithoutMemberInput[]
+    updateMany?: WorkoutUpdateManyWithWhereWithoutMemberInput | WorkoutUpdateManyWithWhereWithoutMemberInput[]
     deleteMany?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
   }
 
   export type EmployeeCreateNestedOneWithoutWorkoutsInput = {
-    create?: XOR<
-      EmployeeCreateWithoutWorkoutsInput,
-      EmployeeUncheckedCreateWithoutWorkoutsInput
-    >
+    create?: XOR<EmployeeCreateWithoutWorkoutsInput, EmployeeUncheckedCreateWithoutWorkoutsInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutWorkoutsInput
     connect?: EmployeeWhereUniqueInput
   }
 
   export type MemberCreateNestedOneWithoutWorkoutsInput = {
-    create?: XOR<
-      MemberCreateWithoutWorkoutsInput,
-      MemberUncheckedCreateWithoutWorkoutsInput
-    >
+    create?: XOR<MemberCreateWithoutWorkoutsInput, MemberUncheckedCreateWithoutWorkoutsInput>
     connectOrCreate?: MemberCreateOrConnectWithoutWorkoutsInput
     connect?: MemberWhereUniqueInput
   }
@@ -6704,41 +5722,23 @@ export namespace Prisma {
   }
 
   export type EmployeeUpdateOneWithoutWorkoutsNestedInput = {
-    create?: XOR<
-      EmployeeCreateWithoutWorkoutsInput,
-      EmployeeUncheckedCreateWithoutWorkoutsInput
-    >
+    create?: XOR<EmployeeCreateWithoutWorkoutsInput, EmployeeUncheckedCreateWithoutWorkoutsInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutWorkoutsInput
     upsert?: EmployeeUpsertWithoutWorkoutsInput
     disconnect?: EmployeeWhereInput | boolean
     delete?: EmployeeWhereInput | boolean
     connect?: EmployeeWhereUniqueInput
-    update?: XOR<
-      XOR<
-        EmployeeUpdateToOneWithWhereWithoutWorkoutsInput,
-        EmployeeUpdateWithoutWorkoutsInput
-      >,
-      EmployeeUncheckedUpdateWithoutWorkoutsInput
-    >
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutWorkoutsInput, EmployeeUpdateWithoutWorkoutsInput>, EmployeeUncheckedUpdateWithoutWorkoutsInput>
   }
 
   export type MemberUpdateOneWithoutWorkoutsNestedInput = {
-    create?: XOR<
-      MemberCreateWithoutWorkoutsInput,
-      MemberUncheckedCreateWithoutWorkoutsInput
-    >
+    create?: XOR<MemberCreateWithoutWorkoutsInput, MemberUncheckedCreateWithoutWorkoutsInput>
     connectOrCreate?: MemberCreateOrConnectWithoutWorkoutsInput
     upsert?: MemberUpsertWithoutWorkoutsInput
     disconnect?: MemberWhereInput | boolean
     delete?: MemberWhereInput | boolean
     connect?: MemberWhereUniqueInput
-    update?: XOR<
-      XOR<
-        MemberUpdateToOneWithWhereWithoutWorkoutsInput,
-        MemberUpdateWithoutWorkoutsInput
-      >,
-      MemberUncheckedUpdateWithoutWorkoutsInput
-    >
+    update?: XOR<XOR<MemberUpdateToOneWithWhereWithoutWorkoutsInput, MemberUpdateWithoutWorkoutsInput>, MemberUncheckedUpdateWithoutWorkoutsInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -6902,19 +5902,13 @@ export namespace Prisma {
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<
-          Required<NestedJsonFilterBase<$PrismaModel>>,
-          Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>
-        >,
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
         Required<NestedJsonFilterBase<$PrismaModel>>
       >
     | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
   export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?:
-      | InputJsonValue
-      | JsonFieldRefInput<$PrismaModel>
-      | JsonNullValueFilter
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
     string_contains?: string | StringFieldRefInput<$PrismaModel>
@@ -6978,10 +5972,7 @@ export namespace Prisma {
 
   export type WorkoutCreateOrConnectWithoutPersonalInput = {
     where: WorkoutWhereUniqueInput
-    create: XOR<
-      WorkoutCreateWithoutPersonalInput,
-      WorkoutUncheckedCreateWithoutPersonalInput
-    >
+    create: XOR<WorkoutCreateWithoutPersonalInput, WorkoutUncheckedCreateWithoutPersonalInput>
   }
 
   export type WorkoutCreateManyPersonalInputEnvelope = {
@@ -6991,44 +5982,32 @@ export namespace Prisma {
 
   export type WorkoutUpsertWithWhereUniqueWithoutPersonalInput = {
     where: WorkoutWhereUniqueInput
-    update: XOR<
-      WorkoutUpdateWithoutPersonalInput,
-      WorkoutUncheckedUpdateWithoutPersonalInput
-    >
-    create: XOR<
-      WorkoutCreateWithoutPersonalInput,
-      WorkoutUncheckedCreateWithoutPersonalInput
-    >
+    update: XOR<WorkoutUpdateWithoutPersonalInput, WorkoutUncheckedUpdateWithoutPersonalInput>
+    create: XOR<WorkoutCreateWithoutPersonalInput, WorkoutUncheckedCreateWithoutPersonalInput>
   }
 
   export type WorkoutUpdateWithWhereUniqueWithoutPersonalInput = {
     where: WorkoutWhereUniqueInput
-    data: XOR<
-      WorkoutUpdateWithoutPersonalInput,
-      WorkoutUncheckedUpdateWithoutPersonalInput
-    >
+    data: XOR<WorkoutUpdateWithoutPersonalInput, WorkoutUncheckedUpdateWithoutPersonalInput>
   }
 
   export type WorkoutUpdateManyWithWhereWithoutPersonalInput = {
     where: WorkoutScalarWhereInput
-    data: XOR<
-      WorkoutUpdateManyMutationInput,
-      WorkoutUncheckedUpdateManyWithoutPersonalInput
-    >
+    data: XOR<WorkoutUpdateManyMutationInput, WorkoutUncheckedUpdateManyWithoutPersonalInput>
   }
 
   export type WorkoutScalarWhereInput = {
     AND?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
     OR?: WorkoutScalarWhereInput[]
     NOT?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
-    id?: IntFilter<'Workout'> | number
-    name?: StringFilter<'Workout'> | string
-    description?: StringNullableFilter<'Workout'> | string | null
-    exercises?: JsonFilter<'Workout'>
-    createdAt?: DateTimeFilter<'Workout'> | Date | string
-    updatedAt?: DateTimeFilter<'Workout'> | Date | string
-    personalId?: IntNullableFilter<'Workout'> | number | null
-    memberId?: IntNullableFilter<'Workout'> | number | null
+    id?: IntFilter<"Workout"> | number
+    name?: StringFilter<"Workout"> | string
+    description?: StringNullableFilter<"Workout"> | string | null
+    exercises?: JsonFilter<"Workout">
+    createdAt?: DateTimeFilter<"Workout"> | Date | string
+    updatedAt?: DateTimeFilter<"Workout"> | Date | string
+    personalId?: IntNullableFilter<"Workout"> | number | null
+    memberId?: IntNullableFilter<"Workout"> | number | null
   }
 
   export type WorkoutCreateWithoutMemberInput = {
@@ -7052,10 +6031,7 @@ export namespace Prisma {
 
   export type WorkoutCreateOrConnectWithoutMemberInput = {
     where: WorkoutWhereUniqueInput
-    create: XOR<
-      WorkoutCreateWithoutMemberInput,
-      WorkoutUncheckedCreateWithoutMemberInput
-    >
+    create: XOR<WorkoutCreateWithoutMemberInput, WorkoutUncheckedCreateWithoutMemberInput>
   }
 
   export type WorkoutCreateManyMemberInputEnvelope = {
@@ -7065,30 +6041,18 @@ export namespace Prisma {
 
   export type WorkoutUpsertWithWhereUniqueWithoutMemberInput = {
     where: WorkoutWhereUniqueInput
-    update: XOR<
-      WorkoutUpdateWithoutMemberInput,
-      WorkoutUncheckedUpdateWithoutMemberInput
-    >
-    create: XOR<
-      WorkoutCreateWithoutMemberInput,
-      WorkoutUncheckedCreateWithoutMemberInput
-    >
+    update: XOR<WorkoutUpdateWithoutMemberInput, WorkoutUncheckedUpdateWithoutMemberInput>
+    create: XOR<WorkoutCreateWithoutMemberInput, WorkoutUncheckedCreateWithoutMemberInput>
   }
 
   export type WorkoutUpdateWithWhereUniqueWithoutMemberInput = {
     where: WorkoutWhereUniqueInput
-    data: XOR<
-      WorkoutUpdateWithoutMemberInput,
-      WorkoutUncheckedUpdateWithoutMemberInput
-    >
+    data: XOR<WorkoutUpdateWithoutMemberInput, WorkoutUncheckedUpdateWithoutMemberInput>
   }
 
   export type WorkoutUpdateManyWithWhereWithoutMemberInput = {
     where: WorkoutScalarWhereInput
-    data: XOR<
-      WorkoutUpdateManyMutationInput,
-      WorkoutUncheckedUpdateManyWithoutMemberInput
-    >
+    data: XOR<WorkoutUpdateManyMutationInput, WorkoutUncheckedUpdateManyWithoutMemberInput>
   }
 
   export type EmployeeCreateWithoutWorkoutsInput = {
@@ -7116,10 +6080,7 @@ export namespace Prisma {
 
   export type EmployeeCreateOrConnectWithoutWorkoutsInput = {
     where: EmployeeWhereUniqueInput
-    create: XOR<
-      EmployeeCreateWithoutWorkoutsInput,
-      EmployeeUncheckedCreateWithoutWorkoutsInput
-    >
+    create: XOR<EmployeeCreateWithoutWorkoutsInput, EmployeeUncheckedCreateWithoutWorkoutsInput>
   }
 
   export type MemberCreateWithoutWorkoutsInput = {
@@ -7145,30 +6106,18 @@ export namespace Prisma {
 
   export type MemberCreateOrConnectWithoutWorkoutsInput = {
     where: MemberWhereUniqueInput
-    create: XOR<
-      MemberCreateWithoutWorkoutsInput,
-      MemberUncheckedCreateWithoutWorkoutsInput
-    >
+    create: XOR<MemberCreateWithoutWorkoutsInput, MemberUncheckedCreateWithoutWorkoutsInput>
   }
 
   export type EmployeeUpsertWithoutWorkoutsInput = {
-    update: XOR<
-      EmployeeUpdateWithoutWorkoutsInput,
-      EmployeeUncheckedUpdateWithoutWorkoutsInput
-    >
-    create: XOR<
-      EmployeeCreateWithoutWorkoutsInput,
-      EmployeeUncheckedCreateWithoutWorkoutsInput
-    >
+    update: XOR<EmployeeUpdateWithoutWorkoutsInput, EmployeeUncheckedUpdateWithoutWorkoutsInput>
+    create: XOR<EmployeeCreateWithoutWorkoutsInput, EmployeeUncheckedCreateWithoutWorkoutsInput>
     where?: EmployeeWhereInput
   }
 
   export type EmployeeUpdateToOneWithWhereWithoutWorkoutsInput = {
     where?: EmployeeWhereInput
-    data: XOR<
-      EmployeeUpdateWithoutWorkoutsInput,
-      EmployeeUncheckedUpdateWithoutWorkoutsInput
-    >
+    data: XOR<EmployeeUpdateWithoutWorkoutsInput, EmployeeUncheckedUpdateWithoutWorkoutsInput>
   }
 
   export type EmployeeUpdateWithoutWorkoutsInput = {
@@ -7195,23 +6144,14 @@ export namespace Prisma {
   }
 
   export type MemberUpsertWithoutWorkoutsInput = {
-    update: XOR<
-      MemberUpdateWithoutWorkoutsInput,
-      MemberUncheckedUpdateWithoutWorkoutsInput
-    >
-    create: XOR<
-      MemberCreateWithoutWorkoutsInput,
-      MemberUncheckedCreateWithoutWorkoutsInput
-    >
+    update: XOR<MemberUpdateWithoutWorkoutsInput, MemberUncheckedUpdateWithoutWorkoutsInput>
+    create: XOR<MemberCreateWithoutWorkoutsInput, MemberUncheckedCreateWithoutWorkoutsInput>
     where?: MemberWhereInput
   }
 
   export type MemberUpdateToOneWithWhereWithoutWorkoutsInput = {
     where?: MemberWhereInput
-    data: XOR<
-      MemberUpdateWithoutWorkoutsInput,
-      MemberUncheckedUpdateWithoutWorkoutsInput
-    >
+    data: XOR<MemberUpdateWithoutWorkoutsInput, MemberUncheckedUpdateWithoutWorkoutsInput>
   }
 
   export type MemberUpdateWithoutWorkoutsInput = {
@@ -7312,6 +6252,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     personalId?: NullableIntFieldUpdateOperationsInput | number | null
   }
+
+
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
