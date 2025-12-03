@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { API_ENDPOINTS } from '../config/api'
 
-export const getEmployee = async () => {
+export const getEmployees = async () => {
   const response = await axios.get(`${API_ENDPOINTS.EMPLOYEES}`)
   return response.data
 }

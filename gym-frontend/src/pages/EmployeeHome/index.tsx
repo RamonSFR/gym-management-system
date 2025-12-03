@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom'
+import { BounceLoader } from 'react-spinners'
 
 import { getEmployeeById } from '../../services/employeeService'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../Contexts/AuthProvider'
-import { BounceLoader } from 'react-spinners'
+import Aside from '../../components/Aside'
 
 const EmployeeHome = () => {
   const navigate = useNavigate()
@@ -60,11 +61,11 @@ const EmployeeHome = () => {
 
     if (!employee) return null
 
-    if (isLoading) return <BounceLoader color="#36d7b7" />
+    if (isLoading) return <BounceLoader />
 
     return (
         <div>
-            <h1>Hello {employee.name}</h1>
+            <Aside name={employee.name} role={employee.role} />
         </div>
     )
 }
