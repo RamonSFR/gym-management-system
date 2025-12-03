@@ -86,6 +86,10 @@ export const FormGrid = styled.div`
     outline: none;
     font-size: 16px;
   }
+
+  input.isError {
+    border-color: #ff4d4f;
+  }
 `
 
 export const ButtonRow = styled.div`

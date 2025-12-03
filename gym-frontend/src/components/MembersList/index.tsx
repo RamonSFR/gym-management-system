@@ -4,13 +4,17 @@ import Button from '../Button'
 import SearchBar from '../SearchBar'
 import Modal from '../Modal'
 
-
 import {
   getMembers,
   createMember,
   updateMember,
   deleteMember
 } from '../../services/memberService'
+import {
+  validateCreateMember,
+  validateUpdateMember
+} from '../../schemas/validation'
+import Alert from '../Alert'
 
 import * as S from './styles'
 
@@ -19,6 +23,10 @@ const MembersList = () => {
   const [query, setQuery] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editing, setEditing] = useState<Member | null>(null)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [alerts, setAlerts] = useState<
+    Array<{ type: 'success' | 'error'; message: string }>
+  >([])
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -51,6 +59,7 @@ const MembersList = () => {
       membership: 'silver',
       password: ''
     })
+  setErrors({})
     setIsModalOpen(true)
   }
 
@@ -63,6 +72,7 @@ const MembersList = () => {
       membership: m.membership,
       password: ''
     })
+  setErrors({})
     setIsModalOpen(true)
   }
 
@@ -72,6 +82,22 @@ const MembersList = () => {
   const handleSave = async () => {
     try {
       if (editing) {
+        // validate update payload with zod
+        const payload = {
+          id: editing.id,
+          name: form.name,
+          email: form.email,
+          cpf: form.cpf,
+          membership: form.membership
+        }
+        const validation = validateUpdateMember(payload)
+        if (!validation.success) {
+          setErrors(validation.errors)
+          const firstKey = Object.keys(validation.errors)[0]
+          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          return
+        }
+
         const updated = await updateMember(editing.id, {
           name: form.name,
           email: form.email,
@@ -84,24 +110,34 @@ const MembersList = () => {
             : [updated]
         )
       } else {
-        const created = await createMember({
+        const createPayload = {
           name: form.name,
           email: form.email,
           password: form.password,
           membership: form.membership,
           cpf: form.cpf
-        })
+        }
+        const validation = validateCreateMember(createPayload)
+        if (!validation.success) {
+          setErrors(validation.errors)
+          const firstKey = Object.keys(validation.errors)[0]
+          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          return
+        }
+
+        const created = await createMember(createPayload)
         setMembers((prev) => (prev ? [created, ...prev] : [created]))
       }
+      setErrors({})
       setIsModalOpen(false)
     } catch (err) {
       console.error('Save failed', err)
-      window.alert(
+      const msg =
         (err &&
           (err as { response?: { data?: { message?: string } } }).response?.data
             ?.message) ||
-          'Failed'
-      )
+        'Failed'
+      setAlerts((prev) => [...prev, { type: 'error', message: String(msg) }])
     }
   }
 
@@ -112,7 +148,10 @@ const MembersList = () => {
       setMembers((prev) => (prev ? prev.filter((m) => m.id !== id) : null))
     } catch (e) {
       console.error('Delete failed', e)
-      window.alert('Delete failed')
+      setAlerts((prev) => [
+        ...prev,
+        { type: 'error', message: 'Delete failed' }
+      ])
     }
   }
 
@@ -128,6 +167,11 @@ const MembersList = () => {
 
   return (
     <S.Container>
+      {alerts.map((alert, i) => (
+        <Alert key={i} type={alert.type}>
+          {alert.message}
+        </Alert>
+      ))}
       <h2>Members List:</h2>
       <SearchBar
         placeholder="Search members..."
@@ -181,23 +225,27 @@ const MembersList = () => {
           <S.FormGrid>
             <input
               placeholder="Name"
+              className={errors.name ? 'isError' : ''}
               value={form.name}
               onChange={(e) => handleChange('name', e.target.value)}
             />
             <input
               placeholder="Email"
+              className={errors.email ? 'isError' : ''}
               value={form.email}
               onChange={(e) => handleChange('email', e.target.value)}
             />
             {!editing && (
               <input
                 placeholder="Password"
+                className={errors.password ? 'isError' : ''}
                 value={form.password}
                 onChange={(e) => handleChange('password', e.target.value)}
               />
             )}
             <input
               placeholder="CPF (numbers only)"
+              className={errors.cpf ? 'isError' : ''}
               value={form.cpf}
               onChange={(e) => handleChange('cpf', e.target.value)}
             />

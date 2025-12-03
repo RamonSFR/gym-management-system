@@ -87,12 +87,20 @@ export const FormGrid = styled.div`
     font-size: 16px;
   }
 
+  input.isError {
+    border-color: #ff4d4f;
+  }
+
   select {
     padding: 8px 16px;
     border: 2px solid ${c.darkPurple};
     border-radius: 8px;
     outline: none;
     font-size: 16px;
+  }
+
+  select.isError {
+    border-color: #ff4d4f;
   }
 `
 

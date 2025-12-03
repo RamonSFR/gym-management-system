@@ -38,6 +38,10 @@ export const Input = styled.input`
   padding: 8px 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
+
+  &.isError {
+    border-color: #ff4d4f;
+  }
 `
 
 export const ReadonlyValue = styled.div`

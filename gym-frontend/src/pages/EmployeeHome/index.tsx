@@ -1,15 +1,16 @@
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BounceLoader } from 'react-spinners'
 
 import { getEmployeeById, updateEmployee } from '../../services/employeeService'
-import { useEffect, useState } from 'react'
 import { useAuth } from '../../Contexts/AuthProvider'
 import Aside from '../../components/Aside'
 import MembersList from '../../components/MembersList'
 import EmployeesList from '../../components/EmployeesList'
 
 import * as S from './styles'
-import Button from '../../components/Button'
+import { validateUpdateEmployee } from '../../schemas/validation'
+import Alert from '../../components/Alert'
 
 const EmployeeHome = () => {
   const navigate = useNavigate()
@@ -67,7 +68,10 @@ const EmployeeHome = () => {
 
   const [form, setForm] = useState({ name: '', email: '', cpf: '' })
   const [isSaving, setIsSaving] = useState(false)
-  const [editing, setEditing] = useState(false)
+  const [alerts, setAlerts] = useState<
+    Array<{ type: 'success' | 'error'; message: string }>
+  >([])
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
   useEffect(() => {
     if (!employee) return
@@ -90,6 +94,23 @@ const EmployeeHome = () => {
     if (!employee) return
     setIsSaving(true)
     try {
+      const payload = {
+        id: employee.id,
+        name: form.name,
+        email: form.email,
+        cpf: form.cpf,
+        role: employee.role,
+        wage: employee.wage
+      }
+      const validation = validateUpdateEmployee(payload)
+      if (!validation.success) {
+  setErrors(validation.errors)
+  const firstKey = Object.keys(validation.errors)[0]
+  setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+        setIsSaving(false)
+        return
+      }
+
       const updated = await updateEmployee(employee.id, {
         name: form.name,
         email: form.email,
@@ -102,8 +123,31 @@ const EmployeeHome = () => {
       if (asAuthUser && Number(asAuthUser.id) === updated.id) {
         signin({ ...asAuthUser, ...updated } as Employee)
       }
+      setAlerts((prev) => [
+        ...prev,
+        { type: 'success', message: 'Account updated' }
+      ])
+      setErrors({})
     } catch (err: unknown) {
       console.error('Failed to update employee', err)
+      let msg = 'Failed to update'
+      try {
+        // try to read known shape safely
+        const cast = err as unknown as {
+          response?: { data?: { message?: string } }
+        }
+        if (
+          cast &&
+          cast.response &&
+          cast.response.data &&
+          cast.response.data.message
+        ) {
+          msg = cast.response.data.message
+        }
+      } catch {
+        // ignore and keep default
+      }
+      setAlerts((prev) => [...prev, { type: 'error', message: String(msg) }])
     } finally {
       setIsSaving(false)
     }
@@ -118,6 +162,11 @@ const EmployeeHome = () => {
         onNavigate={setView}
       />
       <S.ContentArea>
+        {alerts.map((a, i) => (
+          <Alert key={i} type={a.type}>
+            {a.message}
+          </Alert>
+        ))}
         {view === 'members' && <MembersList />}
         {view === 'employees' && <EmployeesList />}
         {view === 'info' && (
@@ -126,38 +175,29 @@ const EmployeeHome = () => {
 
             <S.FieldRow>
               <S.Label>Name</S.Label>
-              {editing ? (
-                <S.Input
-                  value={form.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                />
-              ) : (
-                <S.ReadonlyValue>{employee.name}</S.ReadonlyValue>
-              )}
+              <S.Input
+                className={errors.name ? 'isError' : ''}
+                value={form.name}
+                onChange={(e) => handleChange('name', e.target.value)}
+              />
             </S.FieldRow>
 
             <S.FieldRow>
               <S.Label>Email</S.Label>
-              {editing ? (
-                <S.Input
-                  value={form.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
-                />
-              ) : (
-                <S.ReadonlyValue>{employee.email}</S.ReadonlyValue>
-              )}
+              <S.Input
+                className={errors.email ? 'isError' : ''}
+                value={form.email}
+                onChange={(e) => handleChange('email', e.target.value)}
+              />
             </S.FieldRow>
 
             <S.FieldRow>
               <S.Label>CPF</S.Label>
-              {editing ? (
-                <S.Input
-                  value={form.cpf}
-                  onChange={(e) => handleChange('cpf', e.target.value)}
-                />
-              ) : (
-                <S.ReadonlyValue>{employee.cpf}</S.ReadonlyValue>
-              )}
+              <S.Input
+                className={errors.cpf ? 'isError' : ''}
+                value={form.cpf}
+                onChange={(e) => handleChange('cpf', e.target.value)}
+              />
             </S.FieldRow>
 
             <S.FieldRow>
@@ -171,34 +211,21 @@ const EmployeeHome = () => {
             </S.FieldRow>
 
             <S.ButtonRow>
-              {!editing ? (
-                <Button onClick={() => setEditing(true)}>Edit</Button>
-              ) : (
-                <>
-                  <Button
-                    onClick={() => {
-                      setEditing(false)
-                      setForm({
-                        name: employee.name,
-                        email: employee.email,
-                        cpf: employee.cpf
-                      })
-                    }}
-                    disabled={isSaving}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={async () => {
-                      await handleSave()
-                      setEditing(false)
-                    }}
-                    disabled={isSaving}
-                  >
-                    {isSaving ? 'Saving...' : 'Save'}
-                  </Button>
-                </>
-              )}
+              <button
+                onClick={() =>
+                  setForm({
+                    name: employee.name,
+                    email: employee.email,
+                    cpf: employee.cpf
+                  })
+                }
+                disabled={isSaving}
+              >
+                Cancel
+              </button>
+              <button onClick={handleSave} disabled={isSaving}>
+                {isSaving ? 'Saving...' : 'Save'}
+              </button>
             </S.ButtonRow>
           </S.AccountContainer>
         )}

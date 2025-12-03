@@ -21,6 +21,7 @@ export const AlertContainer = styled.div<Props>`
     }
   }
 
+  z-index: 10001;
   position: absolute;
   top: 64px;
   right: 64px;

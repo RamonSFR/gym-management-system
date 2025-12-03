@@ -13,6 +13,11 @@ import {
   updateEmployee,
   deleteEmployee
 } from '../../services/employeeService'
+import {
+  validateCreateEmployee,
+  validateUpdateEmployee
+} from '../../schemas/validation'
+import Alert from '../Alert'
 
 const EmployeesList = () => {
   const [employees, setEmployees] = useState<Employee[] | null>(null)
@@ -28,6 +33,8 @@ const EmployeesList = () => {
     wage: 0,
     password: ''
   })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [alerts, setAlerts] = useState<Array<{ type: 'success' | 'error'; message: string }>>([])
   type AuthUser = Partial<Employee> & Partial<Member> & { role?: string }
   const asAuthUser = user as AuthUser | null
 
@@ -56,6 +63,7 @@ const EmployeesList = () => {
       wage: 0,
       password: ''
     })
+  setErrors({})
     setIsModalOpen(true)
   }
 
@@ -71,6 +79,7 @@ const EmployeesList = () => {
       wage: m.wage,
       password: ''
     })
+  setErrors({})
     setIsModalOpen(true)
   }
 
@@ -80,6 +89,22 @@ const EmployeesList = () => {
   const handleSave = async () => {
     try {
       if (editing) {
+        const payload = {
+          id: editing.id,
+          name: form.name,
+          email: form.email,
+          role: form.role,
+          cpf: form.cpf,
+          wage: Number(form.wage)
+        }
+        const validation = validateUpdateEmployee(payload)
+        if (!validation.success) {
+          setErrors(validation.errors)
+          const firstKey = Object.keys(validation.errors)[0]
+          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          return
+        }
+
         const updated = await updateEmployee(editing.id, {
           name: form.name,
           email: form.email,
@@ -93,22 +118,32 @@ const EmployeesList = () => {
             : [updated]
         )
       } else {
-        const created = await createEmployee({
+        const createPayload = {
           name: form.name,
           email: form.email,
           password: form.password,
           role: form.role,
           cpf: form.cpf,
           wage: Number(form.wage)
-        })
+        }
+        const validation = validateCreateEmployee(createPayload)
+        if (!validation.success) {
+          setErrors(validation.errors)
+          const firstKey = Object.keys(validation.errors)[0]
+          setAlerts((prev) => [...prev, { type: 'error', message: validation.errors[firstKey] }])
+          return
+        }
+
+        const created = await createEmployee(createPayload)
         setEmployees((prev) => (prev ? [created, ...prev] : [created]))
       }
-      setIsModalOpen(false)
+  setErrors({})
+  setIsModalOpen(false)
     } catch (err) {
       console.error('Save failed', err)
       type ErrResp = { response?: { data?: { message?: string } } }
       const msg = (err as ErrResp).response?.data?.message ?? 'Failed'
-      window.alert(msg)
+      setAlerts((prev) => [...prev, { type: 'error', message: String(msg) }])
     }
   }
 
@@ -119,7 +154,10 @@ const EmployeesList = () => {
       setEmployees((prev) => (prev ? prev.filter((m) => m.id !== id) : null))
     } catch (e) {
       console.error('Delete failed', e)
-      window.alert('Delete failed')
+      setAlerts((prev) => [
+        ...prev,
+        { type: 'error', message: 'Delete failed' }
+      ])
     }
   }
 
@@ -140,6 +178,11 @@ const EmployeesList = () => {
 
   return (
     <S.Container>
+      {alerts.map((alert, i) => (
+        <Alert key={i} type={alert.type}>
+          {alert.message}
+        </Alert>
+      ))}
       <h2>Employees List:</h2>
       <SearchBar
         value={query}
@@ -193,34 +236,40 @@ const EmployeesList = () => {
           <S.FormGrid>
             <input
               placeholder="Name"
+              className={errors.name ? 'isError' : ''}
               value={form.name}
               onChange={(e) => handleChange('name', e.target.value)}
             />
             <input
               placeholder="Email"
+              className={errors.email ? 'isError' : ''}
               value={form.email}
               onChange={(e) => handleChange('email', e.target.value)}
             />
             {!editing && (
               <input
                 placeholder="Password"
+                className={errors.password ? 'isError' : ''}
                 value={form.password}
                 onChange={(e) => handleChange('password', e.target.value)}
               />
             )}
             <input
               placeholder="CPF (numbers only)"
+              className={errors.cpf ? 'isError' : ''}
               value={form.cpf}
               onChange={(e) => handleChange('cpf', e.target.value)}
             />
             <input
               placeholder="Role"
+              className={errors.role ? 'isError' : ''}
               value={form.role}
               onChange={(e) => handleChange('role', e.target.value)}
             />
             <input
               placeholder="Wage"
               type="number"
+              className={errors.wage ? 'isError' : ''}
               value={Number(form.wage ?? 0)}
               onChange={(e) => handleChange('wage', Number(e.target.value))}
             />
