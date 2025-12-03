@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import * as S from './styles'
+import { useState } from 'react'
 
 interface Props {
   name: string
@@ -17,51 +18,63 @@ interface Props {
 }
 
 const Aside = (props: Props) => {
-  const go = (v: 'members' | 'employees' | 'info' | 'workouts') =>
+  const [open, setOpen] = useState(false)
+  const go = (v: 'members' | 'employees' | 'info' | 'workouts') => {
     props.onNavigate?.(v)
+    setOpen(false)
+  }
   const cur = props.current
   return (
-    <S.AsideContainer>
-      <div className="user-info">
-        <FontAwesomeIcon
-          className="user-icon"
-          icon={faCircleUser}
-          color="#e4e4e4"
-        />
-        <h2>{props.name}</h2>
-        <h3>{props.role}</h3>
-      </div>
-      <S.Nav>
-        <button
-          className={cur === 'members' ? 'isActive' : ''}
-          onClick={() => go('members')}
-        >
-          <FontAwesomeIcon icon={faList} />
-          Members List
-        </button>
-        <button
-          className={cur === 'employees' ? 'isActive' : ''}
-          onClick={() => go('employees')}
-        >
-          <FontAwesomeIcon icon={faAddressBook} />
-          Employees List
-        </button>
-        <button
-          className={cur === 'workouts' ? 'isActive' : ''}
-          onClick={() => go('workouts')}
-        >
-          <FontAwesomeIcon icon={faDumbbell} />
-          Workouts
-        </button>
-        <button
-          className={cur === 'info' ? 'isActive' : ''}
-          onClick={() => go('info')}
-        >
-          <FontAwesomeIcon icon={faCircleInfo} />
-          Account Info
-        </button>
-      </S.Nav>
-    </S.AsideContainer>
+    <>
+      <S.Hamburger onClick={() => setOpen((s) => !s)} aria-label="menu">
+        <div className={open ? 'open' : ''} />
+      </S.Hamburger>
+      <S.AsideContainer className={open ? 'open' : ''} role="navigation">
+        <div className="user-info">
+          <FontAwesomeIcon
+            className="user-icon"
+            icon={faCircleUser}
+            color="#e4e4e4"
+          />
+          <h2>{props.name}</h2>
+          <h3>{props.role}</h3>
+        </div>
+        <S.Nav>
+          <button
+            className={cur === 'members' ? 'isActive' : ''}
+            onClick={() => go('members')}
+          >
+            <FontAwesomeIcon icon={faList} />
+            Members List
+          </button>
+          <button
+            className={cur === 'employees' ? 'isActive' : ''}
+            onClick={() => go('employees')}
+          >
+            <FontAwesomeIcon icon={faAddressBook} />
+            Employees List
+          </button>
+          <button
+            className={cur === 'workouts' ? 'isActive' : ''}
+            onClick={() => go('workouts')}
+          >
+            <FontAwesomeIcon icon={faDumbbell} />
+            Workouts
+          </button>
+          <button
+            className={cur === 'info' ? 'isActive' : ''}
+            onClick={() => go('info')}
+          >
+            <FontAwesomeIcon icon={faCircleInfo} />
+            Account Info
+          </button>
+        </S.Nav>
+      </S.AsideContainer>
+      <S.Overlay
+        className={open ? 'visible' : ''}
+        onClick={() => setOpen(false)}
+      />
+    </>
   )
 }
 

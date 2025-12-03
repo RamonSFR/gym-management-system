@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { colors as c } from '../../Styles/GlobalStyles'
+import { colors as c, breakpoints } from '../../Styles/GlobalStyles'
 
 export const Container = styled.div`
   width: 100%;
@@ -31,6 +31,11 @@ export const labels = styled.ul`
   li p {
     margin: 0;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
 `
 
 export const MembersContainer = styled.div`
@@ -45,6 +50,11 @@ export const MembersContainer = styled.div`
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    max-height: calc(100vh - 200px);
+    padding: 8px 0;
   }
 `
 
@@ -64,6 +74,14 @@ export const MemberCard = styled.div`
   p {
     margin: 0;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    ul li {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+  }
 `
 
 export const Actions = styled.div`
@@ -80,6 +98,11 @@ export const ModalWrapper = styled.div`
   h3 {
     color: ${c.darkPurple};
     margin-bottom: 16px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: calc(100vw - 32px);
+    padding: 12px;
   }
 `
 

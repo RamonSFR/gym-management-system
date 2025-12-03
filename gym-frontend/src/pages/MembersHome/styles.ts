@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { colors as c } from '../../Styles/GlobalStyles'
+import { colors as c, breakpoints } from '../../Styles/GlobalStyles'
 
 export const Container = styled.div`
   display: flex;
@@ -15,6 +15,12 @@ export const Container = styled.div`
   span {
     color: ${c.lightPurple};
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 12px;
+    margin-top: 60px;
+    gap: 16px;
+  }
 `
 
 export const CardContainer = styled.div`
@@ -28,6 +34,12 @@ export const CardContainer = styled.div`
     color: #e4e4e4e4;
     font-weight: 900;
     font-size: 1.5rem;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `
 export const LoaderWrapper = styled.div`
@@ -98,6 +110,11 @@ export const ModalContent = styled.div`
     gap: 16px;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: ${breakpoints.mobile}) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .exercise-card {

@@ -149,8 +149,8 @@ const EmployeeHome = () => {
         ) {
           msg = cast.response.data.message
         }
-      } catch {
-        // ignore
+      } catch(err) {
+        console.error(`Error: ${err}`)
       }
       setAlerts((prev) => [...prev, { type: 'error', message: String(msg) }])
     } finally {

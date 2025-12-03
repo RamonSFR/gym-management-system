@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { colors as c } from '../../Styles/GlobalStyles'
+import { colors as c, breakpoints } from '../../Styles/GlobalStyles'
 export const Container = styled.div`
   display: flex;
 `
@@ -8,6 +8,9 @@ export const Container = styled.div`
 export const ContentArea = styled.div`
   padding: 32px;
   width: 100%;
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 12px;
+  }
 `
 
 export const AccountContainer = styled.div`

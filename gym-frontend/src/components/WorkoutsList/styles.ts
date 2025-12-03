@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors as c } from '../../Styles/GlobalStyles'
+import { colors as c, breakpoints } from '../../Styles/GlobalStyles'
 
 export const Container = styled.div`
   width: 100%;
@@ -18,14 +18,23 @@ export const Container = styled.div`
 export const layout = styled.div`
   display: flex;
   gap: 16px;
+  @media (max-width: ${breakpoints.mobile}) {
+    flex-direction: column;
+  }
 `
 
 export const Left = styled.div`
   width: 50%;
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+  }
 `
 
 export const Right = styled.div`
   flex: 1;
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+  }
 `
 
 export const labels = styled.ul`
@@ -101,6 +110,11 @@ export const ModalWrapper = styled.div`
   padding: 16px;
   background: #fff;
   border-radius: 8px;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: calc(100vw - 32px);
+    padding: 12px;
+  }
 `
 
 export const FormGrid = styled.div`

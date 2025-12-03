@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { colors as c } from '../../Styles/GlobalStyles'
+import { colors as c, breakpoints } from '../../Styles/GlobalStyles'
 
 export const Container = styled.div`
   width: 100%;
@@ -45,6 +45,11 @@ export const MembersContainer = styled.div`
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    max-height: calc(100vh - 220px);
+    padding: 8px 0;
   }
 `
 
