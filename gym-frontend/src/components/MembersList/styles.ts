@@ -34,6 +34,8 @@ export const labels = styled.ul`
 `
 
 export const MembersContainer = styled.div`
+  max-height: 55vh;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   gap: 8px;
