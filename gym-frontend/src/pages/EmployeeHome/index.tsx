@@ -58,17 +58,15 @@ const EmployeeHome = () => {
       .finally(() => setTimeout(() => setIsLoading(false), 0))
   }, [id, navigate, user])
 
-  if (!employee) return null
+    if (!employee) return null
 
-  if (isLoading) {
+    if (isLoading) return <BounceLoader color="#36d7b7" />
+
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}>
-        <BounceLoader color="#36d7b7" />
-      </div>
+        <div>
+            <h1>Hello {employee.name}</h1>
+        </div>
     )
-  }
-
-  return <h1>Hello {employee.name}</h1>
 }
 
 export default EmployeeHome

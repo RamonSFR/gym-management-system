@@ -42,9 +42,24 @@ const MembersHome: React.FC = () => {
       return
     }
 
-    const isEmployee = !!(user as Employee).role
-    if (!isEmployee) {
-      const loggedMemberId = Number((user as Member).id)
+    type AuthUser = Partial<Employee> & Partial<Member> & { role?: string }
+    const asAuthUser = user as AuthUser | null
+    if (!asAuthUser) {
+      navigate('/')
+      return
+    }
+
+    const isEmployeeUser = typeof asAuthUser.role !== 'undefined'
+    if (isEmployeeUser) {
+      // only admin employees can view arbitrary members
+      const role = String(asAuthUser.role || '')
+      const isAdmin = role.toLowerCase() === 'admin'
+      if (!isAdmin) {
+        navigate('/')
+        return
+      }
+    } else {
+      const loggedMemberId = Number(asAuthUser.id)
       if (Number.isNaN(loggedMemberId) || loggedMemberId !== mid) {
         navigate('/')
         return
@@ -59,9 +74,22 @@ const MembersHome: React.FC = () => {
           return
         }
 
-        const isEmpNow = !!(user as Employee).role
-        if (!isEmpNow) {
-          const loggedId = Number((user as Member).id)
+        const asAuthUserNow = user as AuthUser | null
+        if (!asAuthUserNow) {
+          navigate('/')
+          return
+        }
+
+        const isEmployeeNow = typeof asAuthUserNow.role !== 'undefined'
+        if (isEmployeeNow) {
+          const role = String(asAuthUserNow.role || '')
+          const isAdmin = role.toLowerCase() === 'admin'
+          if (!isAdmin) {
+            navigate('/')
+            return
+          }
+        } else {
+          const loggedId = Number(asAuthUserNow.id)
           if (Number.isNaN(loggedId) || loggedId !== (m as Member).id) {
             navigate('/')
             return

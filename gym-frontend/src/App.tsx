@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 
-import GlobalStyles from './pages/Styles/GlobalStyles'
+import GlobalStyles from './Styles/GlobalStyles'
 import AppRoutes from './routes'
 import AuthProvider from './Contexts/AuthProvider'
 
