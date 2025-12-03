@@ -5,6 +5,9 @@ import { getEmployeeById } from '../../services/employeeService'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../Contexts/AuthProvider'
 import Aside from '../../components/Aside'
+import MembersList from '../../components/MembersList'
+
+import * as S from './styles'
 
 const EmployeeHome = () => {
   const navigate = useNavigate()
@@ -64,9 +67,12 @@ const EmployeeHome = () => {
     if (isLoading) return <BounceLoader />
 
     return (
-        <div>
+        <S.Container>
             <Aside name={employee.name} role={employee.role} />
-        </div>
+            <S.ContentArea>
+                <MembersList />
+            </S.ContentArea>
+        </S.Container>
     )
 }
 
