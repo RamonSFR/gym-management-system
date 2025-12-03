@@ -20,26 +20,37 @@ export const labels = styled.ul`
   width: 100%;
   margin-bottom: 16px;
   font-weight: 700;
-
-  display: flex;
-  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  display: grid;
+  grid-template-columns: 60px 2fr 160px 2fr 140px 140px;
+  align-items: center;
+  gap: 12px;
+  color: ${c.darkPurple};
+  li p {
+    margin: 0;
+  }
 `
 
 export const MembersContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 16px;
 `
 
 export const MemberCard = styled.div`
-  padding: 16px;
+  padding: 8px;
   background-color: #fff;
   border: 2px solid ${c.darkPurple};
   border-radius: 8px;
 
   ul li {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 60px 2fr 160px 2fr 140px 140px;
+    align-items: center;
+    gap: 12px;
   }
 
   p {
