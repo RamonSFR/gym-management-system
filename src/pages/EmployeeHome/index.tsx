@@ -149,7 +149,7 @@ const EmployeeHome = () => {
         ) {
           msg = cast.response.data.message
         }
-      } catch(err) {
+      } catch (err) {
         console.error(`Error: ${err}`)
       }
       setAlerts((prev) => [...prev, { type: 'error', message: String(msg) }])
